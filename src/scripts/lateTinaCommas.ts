@@ -1,4 +1,5 @@
 import {
+    Filename,
     Io,
     ioSettings,
     isEmpty,
@@ -7,6 +8,7 @@ import {
     Max,
     Prime,
     saveLog,
+    setupScriptAndIo,
     Sopfr,
     stringify,
     time,
@@ -24,6 +26,7 @@ import {applySharedJiPitchScriptSetup} from "./shared"
 
 // Per http://forum.sagittal.org/viewtopic.php?p=2395#p2395
 
+setupScriptAndIo("lateTinaCommas" as Filename)
 applySharedJiPitchScriptSetup()
 
 ioSettings.logTargets[LogTarget.ERROR] = true

@@ -1,6 +1,5 @@
-import {Scamon} from "@sagittal/general"
+import {program, Scamon} from "@sagittal/general"
 import {ArmId, Compatible, computeAccidental, HeadId} from "@sagittal/system"
-import {program} from "commander"
 import {parseJiPitch, readJiPitchIoAndFormat} from "../../../../src/io"
 
 describe("parseJiPitch", (): void => {

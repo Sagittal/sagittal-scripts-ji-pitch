@@ -4,10 +4,10 @@ import {
     formatPitch,
     Io,
     isScamonRational,
+    program,
     Scamon,
 } from "@sagittal/general"
 import {computeJiPitchFromAccidental} from "@sagittal/system"
-import {program} from "commander"
 import {parsePitch} from "./pitch"
 import {PitchFormat} from "./types"
 

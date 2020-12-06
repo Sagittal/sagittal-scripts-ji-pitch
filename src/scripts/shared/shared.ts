@@ -1,6 +1,5 @@
-import {Filename, Io, Scamon, ScriptFlag, setupScriptAndIo} from "@sagittal/general"
+import {Io, program, Scamon, ScriptFlag} from "@sagittal/general"
 import {FactoringMode} from "@sagittal/system"
-import {program} from "commander"
 import {jiPitchScriptGroupSettings} from "../../globals"
 import {parsePitch} from "../../io"
 import {JiPitchScriptGroupField} from "../../types"
@@ -45,8 +44,6 @@ const applySharedJiPitchScriptSetup = (): void => {
             "specify exact ordered set of fields",
             (orderedFieldsIo: string): JiPitchScriptGroupField[] => parseFields(orderedFieldsIo as Io),
         )
-
-    setupScriptAndIo("jiPitch" as Filename)
 
     if (program.sortBy) jiPitchScriptGroupSettings.sortBy = program.sortBy
     if (program.excludedFields) jiPitchScriptGroupSettings.excludedFields = program.excludedFields

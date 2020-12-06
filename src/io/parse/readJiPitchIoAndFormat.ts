@@ -1,5 +1,4 @@
-import {Io} from "@sagittal/general"
-import {program} from "commander"
+import {Io, program} from "@sagittal/general"
 import {PitchFormat} from "./types"
 
 const readJiPitchIoAndFormat = (): [Io, PitchFormat] => {

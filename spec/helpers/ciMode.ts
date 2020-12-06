@@ -1,5 +1,4 @@
-// tslint:disable-next-line no-implicit-dependencies
-import {program} from "commander"
+import {program} from "@sagittal/general"
 
 program.allowUnknownOption()
 

@@ -6,6 +6,7 @@ import {
     parseInteger,
     parseMonzo,
     parseQuotient,
+    program,
     Quotient,
     ScriptFlag,
 } from "@sagittal/general"
@@ -16,7 +17,6 @@ import {
     parseAccidental,
     parseCommaName,
 } from "@sagittal/system"
-import {program} from "commander"
 
 const readAnalyzeJiPitchOptions = (): void => {
     program

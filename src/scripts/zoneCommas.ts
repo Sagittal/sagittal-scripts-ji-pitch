@@ -1,4 +1,16 @@
-import {Comma, ioSettings, isUndefined, LogTarget, saveLog, ScriptFlag, stringify, time} from "@sagittal/general"
+import {
+    Comma,
+    Filename,
+    ioSettings,
+    isUndefined,
+    LogTarget,
+    program,
+    saveLog,
+    ScriptFlag,
+    setupScriptAndIo,
+    stringify,
+    time,
+} from "@sagittal/general"
 import {
     CommaClassId,
     computeJiNotationCaptureZone,
@@ -7,7 +19,6 @@ import {
     JiNotationLevelId,
     JI_NOTATION,
 } from "@sagittal/system"
-import {program} from "commander"
 import {computeFindCommasOptions, findCommas, FindCommasOptions} from "../findCommas"
 import {jiPitchScriptGroupSettings} from "../globals"
 import {applySharedJiPitchScriptSetup} from "./shared"
@@ -15,6 +26,7 @@ import {applySharedJiPitchScriptSetup} from "./shared"
 program
     .option(`-${ScriptFlag.SECONDARY_COMMA_ZONES}, --secondary-comma-zones`, "use commas in each comma's secondary comma zone, rather than the default behavior of its capture zone in the Extreme precision level notation")
 
+setupScriptAndIo("zoneCommas" as Filename)
 applySharedJiPitchScriptSetup()
 
 const findCommasOptions = computeFindCommasOptions()
