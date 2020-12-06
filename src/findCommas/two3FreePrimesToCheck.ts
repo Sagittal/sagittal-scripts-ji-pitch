@@ -1,10 +1,10 @@
 import {
     computePrimeCount,
+    computePrimes,
     indexOfFinalElement,
     isUndefined,
     min,
     Prime,
-    PRIMES,
     ZERO_ONE_INDEX_DIFF,
 } from "@sagittal/general"
 import {Two3FreePrimesToCheckOptions} from "./types"
@@ -35,7 +35,7 @@ const compute23FreePrimesToCheck = (options: Two3FreePrimesToCheckOptions): Prim
         indexOfMaxPrimeByN2D3P9,
     )
 
-    return PRIMES.slice(2, indexOfMaxPrime + 1)
+    return computePrimes().slice(2, indexOfMaxPrime + 1)
 }
 
 export {

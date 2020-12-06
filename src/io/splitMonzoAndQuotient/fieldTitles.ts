@@ -1,5 +1,6 @@
 import {
     BLANK,
+    computePrimes,
     Count,
     Exponent,
     formatIntegerDecimal,
@@ -8,7 +9,6 @@ import {
     Max,
     MERGED_CELL_INDICATOR,
     Prime,
-    PRIMES,
     TableFormat,
     TWO_3_FREE_CLASS_SIGN,
 } from "@sagittal/general"
@@ -38,11 +38,13 @@ const splitMonzoAndQuotientFieldTitles = (
         || ioSettings.tableFormat === TableFormat.FORUM_WITH_SPLIT_QUOTIENTS
     ) ? `${MERGED_CELL_INDICATOR} ` : BLANK
 
+    const primes = computePrimes()
+
     fieldTitles.forEach((fieldTitle: Io): void => {
         if (fieldTitle === JI_PITCH_FIELD_TITLES[JiPitchField.MONZO]) {
             splitFieldTitles.push(
                 `monzo ${INVISIBLE_MONZO_OPENING_SQUARE_BRACKET_COLUMN_TITLE}` as Io,
-                ...PRIMES.slice(0, maxMonzoLength).map((prime: Prime): string => `${maybeMerge}${formatIntegerDecimal(prime)}`) as Io[],
+                ...primes.slice(0, maxMonzoLength).map((prime: Prime): string => `${maybeMerge}${formatIntegerDecimal(prime)}`) as Io[],
                 `${maybeMerge}${INVISIBLE_MONZO_CLOSING_ANGLE_BRACKET_COLUMN_TITLE}`,
             )
         } else if (ioSettings.tableFormat !== TableFormat.FORUM) {
