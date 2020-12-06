@@ -1,20 +1,10 @@
-import {
-    clearLogFiles,
-    DEFAULT_IO_SETTINGS,
-    Filename,
-    ioSettings,
-    LogTarget,
-    setAllPropertiesOfObjectOnAnother,
-} from "@sagittal/general"
-
-clearLogFiles("spec" as Filename)
+import {DEFAULT_IO_SETTINGS, ioSettings, LogTarget, setAllPropertiesOfObjectOnAnother} from "@sagittal/general"
 
 beforeEach((): void => {
     setAllPropertiesOfObjectOnAnother({
         objectToChange: ioSettings,
         objectWithProperties: {
             ...DEFAULT_IO_SETTINGS,
-            scriptGroup: "spec",
             logTargets: {[LogTarget.SPEC]: true},
         },
     })
