@@ -3,3 +3,6 @@ node_js:
   - 14
 script:
   - npm run test-ci
+
+# Necessary for the `npm run analyze-ji-pitch -- --accidental` ASCII and Smiley tests to pass.
+os: windows
