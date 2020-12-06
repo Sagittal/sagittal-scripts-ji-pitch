@@ -4,8 +4,7 @@ import {computePotentiallyCommaAnalyses} from "../analyzeJiPitches"
 import {computeJiPitchesOutput} from "../io"
 import {applySharedJiPitchScriptSetup} from "./shared"
 
-setupScriptAndIo("analyzeJiPitches" as Filename)
-applySharedJiPitchScriptSetup()
+applySharedJiPitchScriptSetup("analyzeJiPitches" as Filename)
 
 const potentiallyCommaAnalyses = computePotentiallyCommaAnalyses()
 const maybeCommaClassIds: Array<Maybe<CommaClassId>> = potentiallyCommaAnalyses

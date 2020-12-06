@@ -7,7 +7,6 @@ import {
     program,
     saveLog,
     ScriptFlag,
-    setupScriptAndIo,
     stringify,
     time,
 } from "@sagittal/general"
@@ -26,8 +25,7 @@ import {applySharedJiPitchScriptSetup} from "./shared"
 program
     .option(`-${ScriptFlag.SECONDARY_COMMA_ZONES}, --secondary-comma-zones`, "use commas in each comma's secondary comma zone, rather than the default behavior of its capture zone in the Extreme precision level notation")
 
-setupScriptAndIo("zoneCommas" as Filename)
-applySharedJiPitchScriptSetup()
+applySharedJiPitchScriptSetup("zoneCommas" as Filename)
 
 const findCommasOptions = computeFindCommasOptions()
 

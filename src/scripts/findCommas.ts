@@ -1,4 +1,4 @@
-import {Filename, Io, LogTarget, Maybe, saveLog, setupScriptAndIo} from "@sagittal/general"
+import {Filename, Io, LogTarget, Maybe, saveLog} from "@sagittal/general"
 import {CommaAnalysis, CommaClassId, computeMaybeCommaClassId} from "@sagittal/system"
 import {DEFAULT_ANALYZE_JI_PITCH_AND_FIND_COMMAS_SORT_KEY} from "../constants"
 import {computeFindCommasOptions, findCommaAnalyses} from "../findCommas"
@@ -7,8 +7,7 @@ import {computeFindCommasOutput} from "../io"
 import {applySharedJiPitchScriptSetup} from "./shared"
 
 jiPitchScriptGroupSettings.sortBy = DEFAULT_ANALYZE_JI_PITCH_AND_FIND_COMMAS_SORT_KEY
-setupScriptAndIo("findCommas" as Filename)
-applySharedJiPitchScriptSetup()
+applySharedJiPitchScriptSetup("findCommas" as Filename)
 
 const findCommasOptions = computeFindCommasOptions()
 const commaAnalyses: CommaAnalysis[] = findCommaAnalyses(findCommasOptions)
