@@ -4,7 +4,7 @@ import {MAX_PRIME_LIMIT_OF_ANY_SEMITINA_BUCKET_BEST_COMMA} from "./constants"
 
 const computeAllCommasLessThanHalfApotome = (): Comma[] => {
     const TWO_3_FREE_MONZOS_WITH_N2D3P9_LOWER_THAN_5298 = JSON.parse(
-        readLines("src/scripts/jiPitch/input/two3FreeRationalMonzosWithN2D3P9LowerThan5298.txt" as Filename)
+        readLines("src/input/two3FreeRationalMonzosWithN2D3P9LowerThan5298.txt" as Filename)
             .join(BLANK),
     ) as Array<Monzo<{rational: true, rough: 5}>>
 

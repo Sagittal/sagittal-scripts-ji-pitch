@@ -4,8 +4,8 @@ import {jiPitchScriptGroupSettings} from "../globals"
 import {parsePitch} from "../io"
 
 const computePotentiallyCommaAnalyses = (): PotentiallyCommaAnalysis[] => {
-    const jiPitchIos = readLines("src/scripts/jiPitch/input/jiPitches.txt" as Filename) as Io[]
-    if (isEmpty(jiPitchIos)) throw new Error("No JI pitches found in src/scripts/jiPitch/input/jiPitches.txt to analyze.")
+    const jiPitchIos = readLines("src/input/jiPitches.txt" as Filename) as Io[]
+    if (isEmpty(jiPitchIos)) throw new Error("No JI pitches found in src/input/jiPitches.txt to analyze.")
     const jiPitches: Array<Scamon<{rational: true}>> = jiPitchIos.map((jiPitchIo: Io): Scamon<{rational: true}> => {
         return parsePitch(jiPitchIo) as Scamon<{rational: true}>
     })

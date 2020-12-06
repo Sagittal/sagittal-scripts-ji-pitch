@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "noEmit": true,
     "downlevelIteration": true,
     "lib": [
       "esnext",
@@ -18,5 +17,12 @@
     "noImplicitAny": true,
     "pretty": true,
     "esModuleInterop": true,
-  }
+    "declaration": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "target": "es5"
+  },
+  "include": [
+    "src"
+  ]
 }
