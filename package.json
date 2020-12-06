@@ -1,0 +1,40 @@
+{
+  "name": "sagittal-scripts-ji-pitch",
+  "version": "1.0.0",
+  "description": "collection of scripts for finding and analyzing JI pitches according to Sagittal needs and properties",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sagittal/sagittal-scripts-ji-pitch.git"
+  },
+  "scripts": {
+    "profile": "node --prof -r ts-node/register/transpile-only --max-old-space-size=131072 [[script.ts]] && node --prof-process isolate-*.log > processed.txt && rm isolate-*.log",
+    "lint": "tslint \"src/**/*.ts\" --fix && tslint \"spec/**/*.ts\" --fix",
+    "test": "node -r ts-node/register/transpile-only node_modules/jasmine/bin/jasmine",
+    "test-names": "node -r ts-node/register/transpile-only node_modules/jasmine/bin/jasmine --names=true",
+    "test-ci": "node -r ts-node/register node_modules/jasmine/bin/jasmine --ci=true",
+    "tmp": "node -r ts-node/register/transpile-only --max-old-space-size=131072 spec/helpers/tmp/tmp.ts",
+    "find-commas": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/jiPitch/scripts/findCommas.ts",
+    "analyze-ji-pitch": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/jiPitch/scripts/analyzeJiPitch.ts",
+    "analyze-ji-pitches": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/jiPitch/scripts/analyzeJiPitches.ts",
+    "zone-commas": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/jiPitch/scripts/zoneCommas.ts",
+    "late-tina-commas": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/jiPitch/scripts/lateTinaCommas.ts",
+    "semitina-occams": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/jiPitch/scripts/semitinaOccams.ts"
+  },
+  "devDependencies": {
+    "@sagittal/general": "^1.0.3",
+    "@sagittal/system": "^1.0.4",
+    "@types/jasmine": "^3.6.2",
+    "@types/node": "^14.14.10",
+    "colors": "^1.4.0",
+    "commander": "^5.1.0",
+    "jasmine": "^3.6.3",
+    "jasmine-spec-reporter": "^5.0.2",
+    "ts-loader": "^8.0.11",
+    "ts-node": "^8.10.2",
+    "tslint": "^6.1.3",
+    "typescript": "^4.1.2"
+  },
+  "engines": {
+    "node": ">14"
+  }
+}
