@@ -1,6 +1,4 @@
-import {Io} from "@sagittal/general"
-import {onlyRunInCi} from "../../helpers/shared/onlyRunInCi"
-import {runScriptAndGetConsoleOutput} from "../../helpers/shared/scripts/runScriptAndGetConsoleOutput"
+import {Io, onlyRunInCi, runScriptAndGetConsoleOutput} from "@sagittal/general"
 
 describe("late-tina-commas", (): void => {
     it("finds LATE commas for tinas", (): void => {

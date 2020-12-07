@@ -1,6 +1,4 @@
-import {Io} from "@sagittal/general"
-import {onlyRunInCi} from "../../helpers/shared/onlyRunInCi"
-import {runScriptAndGetConsoleOutput} from "../../helpers/shared/scripts/runScriptAndGetConsoleOutput"
+import {Io, onlyRunInCi, runScriptAndGetConsoleOutput} from "@sagittal/general"
 
 describe("analyze-ji-pitches", (): void => {
     it("takes in the list of JI pitches in the input file and outputs a table of their analyses", (): void => {

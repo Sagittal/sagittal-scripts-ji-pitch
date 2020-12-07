@@ -1,6 +1,4 @@
-import {Io} from "@sagittal/general"
-import {onlyRunInCi} from "../../helpers/shared/onlyRunInCi"
-import {runScriptAndGetConsoleOutput} from "../../helpers/shared/scripts/runScriptAndGetConsoleOutput"
+import {Io, onlyRunInCi, runScriptAndGetConsoleOutput} from "@sagittal/general"
 import {
     OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS,
     OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS,

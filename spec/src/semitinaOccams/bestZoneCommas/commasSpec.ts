@@ -1,5 +1,5 @@
+import {onlyRunInCi} from "@sagittal/general"
 import {computeAllCommasLessThanHalfApotome} from "../../../../src/semitinaOccams/bestZoneCommas"
-import {onlyRunInCi} from "../../../helpers/shared/onlyRunInCi"
 
 describe("computeAllCommasLessThanHalfApotome", (): void => {
     it("finds the correct count of commas", (): void => {
