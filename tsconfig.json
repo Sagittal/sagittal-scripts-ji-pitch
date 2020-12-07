@@ -7,7 +7,9 @@
       "dom"
     ],
     "types": [
-      "node", "jasmine", "./spec"
+      "node",
+      "jasmine",
+      "./spec"
     ],
     "moduleResolution": "node",
     "noImplicitReturns": true,
@@ -17,11 +19,6 @@
     "noImplicitAny": true,
     "pretty": true,
     "esModuleInterop": true,
-    "declaration": true,
-    "outDir": "dist",
-    "target": "es5"
-  },
-  "include": [
-    "src"
-  ]
+    "noEmit": true
+  }
 }
