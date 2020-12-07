@@ -1,4 +1,4 @@
-import {Abs, Exclusive, Extrema, Max, Min, Prime, program, Scamon} from "@sagittal/general"
+import {Abs, Copfr, Exclusive, Extrema, Max, Min, Prime, program, Scamon, Sopfr} from "@sagittal/general"
 import {ApotomeSlope, Ate, JiPitchAnalysis, N2D3P9} from "@sagittal/system"
 import {DEFAULT_FIND_COMMAS_OPTIONS} from "./constants"
 import {FindCommasOptions} from "./types"
@@ -50,9 +50,18 @@ const computeFindNotatingCommasOptions = ({ate, aas, two3FreeClassAnalysis}: JiP
         findCommasOptions.maxAte = ate as Max<Ate>
     }
 
-    const {n2d3p9} = two3FreeClassAnalysis
+    const {n2d3p9, two3FreePrimeLimit, two3FreeCopfr, two3FreeSopfr} = two3FreeClassAnalysis
     if (n2d3p9 > findCommasOptions.maxN2D3P9) {
         findCommasOptions.maxN2D3P9 = n2d3p9 as Max<N2D3P9>
+    }
+    if (two3FreePrimeLimit > findCommasOptions.maxPrimeLimit) {
+        findCommasOptions.maxPrimeLimit = two3FreePrimeLimit as Max<Max<Prime>>
+    }
+    if (two3FreeCopfr > findCommasOptions.max23FreeCopfr) {
+        findCommasOptions.max23FreeCopfr = two3FreeCopfr as Max<Copfr<{rough: 5}>>
+    }
+    if (two3FreeSopfr > findCommasOptions.max23FreeSopfr) {
+        findCommasOptions.max23FreeSopfr = two3FreeSopfr as Max<Sopfr<{rough: 5}>>
     }
 
     return findCommasOptions
