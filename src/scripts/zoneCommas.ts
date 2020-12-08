@@ -16,7 +16,7 @@ import {
     computeSecondaryCommaZone,
     formatCommaClass,
     JiNotationLevelId,
-    JI_NOTATION,
+    JI_NOTATION_COMMA_CLASS_IDS,
 } from "@sagittal/system"
 import {computeFindCommasOptions, findCommas, FindCommasOptions} from "../findCommas"
 import {jiPitchScriptGroupSettings} from "../globals"
@@ -29,7 +29,7 @@ applySharedJiPitchScriptSetup("zoneCommas" as Filename)
 
 const findCommasOptions = computeFindCommasOptions()
 
-const zoneCommas = JI_NOTATION.reduce(
+const zoneCommas = JI_NOTATION_COMMA_CLASS_IDS.reduce(
     (
         zoneCommas: Record<CommaClassId, Comma[]>,
         commaClassId: CommaClassId,
