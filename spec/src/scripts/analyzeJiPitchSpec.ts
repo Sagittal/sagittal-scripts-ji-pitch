@@ -165,9 +165,6 @@ describe("analyze-ji-pitch", (): void => {
         expect(actual).toEqual(expected)
     })
 
-    // TODO: the solution to fix this test was that I had to add an extra space in the monzo columns
-    //  Which had negative three-digit numbers. I really think that align number should prevent that
-    //  I.e. still output 7 chars in that case
     it("sorts size category correctly (notice that it hasn't sorted by cents, as in the middle of the S size category, it has one that's out of order, but is still in the correct category)", (): void => {
         onlyRunInCi()
 
@@ -178,9 +175,9 @@ describe("analyze-ji-pitch", (): void => {
         const expected = [
             "   --- JI pitch ---",
             "",
-            "        quotient\t \t                \tmonzo\t        \t       \t \t               \tapotome\t       \t       ",
-            "               n\t/\td               \t     \t  2     \t  3    \t \tcents          \tslope  \tAAS    \tATE    ",
-            "(too big for JS)\t/\t(too big for JS)\t    [\t-271    \t171    \t⟩\t        34.305¢\t168.888\t168.888\t171    ",
+            "        quotient\t \t                \tmonzo\t       \t       \t \t               \tapotome\t       \t       ",
+            "               n\t/\td               \t     \t  2    \t  3    \t \tcents          \tslope  \tAAS    \tATE    ",
+            "(too big for JS)\t/\t(too big for JS)\t    [\t-271   \t171    \t⟩\t        34.305¢\t168.888\t168.888\t171    ",
             "",
             "   --- 2,3-free class ---",
             "",
@@ -190,25 +187,25 @@ describe("analyze-ji-pitch", (): void => {
             "",
             "   --- notating commas ---",
             "",
-            "comma   \t      \t        quotient\t \t                \tmonzo\t        \t        \t \t               \tapotome \t       \t       ",
-            "class   \tname  \t               n\t/\td               \t     \t  2     \t  3     \t \tcents          \tslope   \tAAS    \tATE    ",
-            " (|//|) \t1u    \t               1\t/\t1               \t    [\t        \t        \t⟩\t         0.000¢\t  0.000 \t  0.000\t  0    ",
-            "        \t3s    \t(too big for JS)\t/\t(too big for JS)\t    [\t-84     \t 53     \t⟩\t         3.615¢\t 52.777 \t 52.777\t 53    ",
-            "        \t3k    \t(too big for JS)\t/\t(too big for JS)\t    [\t-168    \t106     \t⟩\t         7.230¢\t105.555 \t105.555\t106    ",
-            "        \t159e3k\t(too big for JS)\t/\t(too big for JS)\t    [\t-252    \t159     \t⟩\t        10.845¢\t158.332 \t158.332\t159    ",
-            "        \t147e3C\t(too big for JS)\t/\t(too big for JS)\t    [\t233     \t-147    \t⟩\t        12.615¢\t-147.777\t147.777\t147    ",
-            "        \t94e3C \t(too big for JS)\t/\t(too big for JS)\t    [\t149     \t-94     \t⟩\t        16.230¢\t-94.999 \t 94.999\t 94    ",
-            "        \t41e3C \t(too big for JS)\t/\t(too big for JS)\t    [\t 65     \t-41     \t⟩\t        19.845¢\t-42.222 \t 42.222\t 41    ",
-            "   '/|  \t3C    \t          531441\t/\t524288          \t    [\t-19     \t 12     \t⟩\t        23.460¢\t 10.555 \t 10.555\t 12    ",
-            "        \t65e3C \t(too big for JS)\t/\t(too big for JS)\t    [\t-103    \t 65     \t⟩\t        27.075¢\t 63.333 \t 63.333\t 65    ",
-            "        \t118e3C\t(too big for JS)\t/\t(too big for JS)\t    [\t-187    \t118     \t⟩\t        30.690¢\t116.110 \t116.110\t118    ",
-            "        \t135e3S\t(too big for JS)\t/\t(too big for JS)\t    [\t214     \t-135    \t⟩\t        36.075¢\t-137.221\t137.221\t135    ",
-            "        \t82e3S \t(too big for JS)\t/\t(too big for JS)\t    [\t130     \t-82     \t⟩\t        39.690¢\t-84.444 \t 84.444\t 82    ",
-            "        \t3S    \t  70368744177664\t/\t68630377364883  \t    [\t 46     \t-29     \t⟩\t        43.305¢\t-31.666 \t 31.666\t 29    ",
-            "        \t171e3S\t(too big for JS)\t/\t(too big for JS)\t    [\t-271    \t171     \t⟩\t        34.305¢\t168.888 \t168.888\t171    ",
-            "        \t3M    \t    282429536481\t/\t274877906944    \t    [\t-38     \t 24     \t⟩\t        46.920¢\t 21.111 \t 21.111\t 24    ",
-            "        \t77e3M \t(too big for JS)\t/\t(too big for JS)\t    [\t-122    \t 77     \t⟩\t        50.535¢\t 73.888 \t 73.888\t 77    ",
-            "        \t130e3M\t(too big for JS)\t/\t(too big for JS)\t    [\t-206    \t130     \t⟩\t        54.150¢\t126.666 \t126.666\t130    ",
+            "comma   \t      \t        quotient\t \t                \tmonzo\t       \t       \t \t               \tapotome \t       \t       ",
+            "class   \tname  \t               n\t/\td               \t     \t  2    \t  3    \t \tcents          \tslope   \tAAS    \tATE    ",
+            " (|//|) \t1u    \t               1\t/\t1               \t    [\t       \t       \t⟩\t         0.000¢\t  0.000 \t  0.000\t  0    ",
+            "        \t3s    \t(too big for JS)\t/\t(too big for JS)\t    [\t-84    \t 53    \t⟩\t         3.615¢\t 52.777 \t 52.777\t 53    ",
+            "        \t3k    \t(too big for JS)\t/\t(too big for JS)\t    [\t-168   \t106    \t⟩\t         7.230¢\t105.555 \t105.555\t106    ",
+            "        \t159e3k\t(too big for JS)\t/\t(too big for JS)\t    [\t-252   \t159    \t⟩\t        10.845¢\t158.332 \t158.332\t159    ",
+            "        \t147e3C\t(too big for JS)\t/\t(too big for JS)\t    [\t233    \t-147   \t⟩\t        12.615¢\t-147.777\t147.777\t147    ",
+            "        \t94e3C \t(too big for JS)\t/\t(too big for JS)\t    [\t149    \t-94    \t⟩\t        16.230¢\t-94.999 \t 94.999\t 94    ",
+            "        \t41e3C \t(too big for JS)\t/\t(too big for JS)\t    [\t 65    \t-41    \t⟩\t        19.845¢\t-42.222 \t 42.222\t 41    ",
+            "   '/|  \t3C    \t          531441\t/\t524288          \t    [\t-19    \t 12    \t⟩\t        23.460¢\t 10.555 \t 10.555\t 12    ",
+            "        \t65e3C \t(too big for JS)\t/\t(too big for JS)\t    [\t-103   \t 65    \t⟩\t        27.075¢\t 63.333 \t 63.333\t 65    ",
+            "        \t118e3C\t(too big for JS)\t/\t(too big for JS)\t    [\t-187   \t118    \t⟩\t        30.690¢\t116.110 \t116.110\t118    ",
+            "        \t135e3S\t(too big for JS)\t/\t(too big for JS)\t    [\t214    \t-135   \t⟩\t        36.075¢\t-137.221\t137.221\t135    ",
+            "        \t82e3S \t(too big for JS)\t/\t(too big for JS)\t    [\t130    \t-82    \t⟩\t        39.690¢\t-84.444 \t 84.444\t 82    ",
+            "        \t3S    \t  70368744177664\t/\t68630377364883  \t    [\t 46    \t-29    \t⟩\t        43.305¢\t-31.666 \t 31.666\t 29    ",
+            "        \t171e3S\t(too big for JS)\t/\t(too big for JS)\t    [\t-271   \t171    \t⟩\t        34.305¢\t168.888 \t168.888\t171    ",
+            "        \t3M    \t    282429536481\t/\t274877906944    \t    [\t-38    \t 24    \t⟩\t        46.920¢\t 21.111 \t 21.111\t 24    ",
+            "        \t77e3M \t(too big for JS)\t/\t(too big for JS)\t    [\t-122   \t 77    \t⟩\t        50.535¢\t 73.888 \t 73.888\t 77    ",
+            "        \t130e3M\t(too big for JS)\t/\t(too big for JS)\t    [\t-206   \t130    \t⟩\t        54.150¢\t126.666 \t126.666\t130    ",
             "",
         ] as Io[]
         expect(actual).toEqual(expected)
