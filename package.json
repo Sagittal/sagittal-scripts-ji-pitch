@@ -23,8 +23,8 @@
     "semitina-occams": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/semitinaOccams.ts"
   },
   "devDependencies": {
-    "@sagittal/general": "^1.0.24",
-    "@sagittal/system": "^1.0.13",
+    "@sagittal/general": "^1.0.25",
+    "@sagittal/system": "^1.0.15",
     "@types/jasmine": "^3.6.2",
     "@types/node": "^14.14.10",
     "jasmine": "^3.6.3",
