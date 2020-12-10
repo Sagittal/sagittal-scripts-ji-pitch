@@ -50,7 +50,7 @@ describe("parsePitch", (): void => {
         expect(actual).toEqual(expected)
     })
 
-    it("works when given as a irrational (non-JI) decimal, returning a non-JI pitch", (): void => {
+    it("works when given as an irrational (non-JI) decimal, returning a non-JI pitch", (): void => {
         const pitchText = "3.437838" as Io
 
         const actual = parsePitch(pitchText)
