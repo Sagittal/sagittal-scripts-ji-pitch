@@ -24,6 +24,7 @@ const parseExclusive = (exclusiveIo: boolean | Io): Exclusive => {
 
 const FIELD_TO_KEY_PATH_MAP: Record<JiPitchScriptGroupField, KeyPath> = {
     [JiPitchesOrFindCommasField.QUOTIENT]: computeKeyPath("quotient"),
+    // TODO: can I sort by monzo 2-term? I'd like that ability, or any specific term
     [JiPitchesOrFindCommasField.MONZO]: computeKeyPath("monzo"),
     [JiPitchesOrFindCommasField.CENTS]: computeKeyPath("cents"),
     [JiPitchesOrFindCommasField.APOTOME_SLOPE]: computeKeyPath("apotomeSlope"),
