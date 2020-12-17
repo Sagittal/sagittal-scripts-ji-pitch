@@ -1,12 +1,12 @@
 import {
     Comma,
     Filename,
-    ioSettings,
     isUndefined,
     LogTarget,
     program,
     saveLog,
     ScriptFlag,
+    scriptSettings,
     stringify,
     time,
 } from "@sagittal/general"
@@ -60,4 +60,4 @@ const zoneCommas = JI_NOTATION_COMMA_CLASS_IDS.reduce(
 
 saveLog(stringify(zoneCommas, {multiline: true}), LogTarget.FINAL)
 
-if (ioSettings.time) saveLog(`\nFINDING ZONE COMMAS TOOK ${time()}`, LogTarget.FINAL)
+if (scriptSettings.time) saveLog(`\nFINDING ZONE COMMAS TOOK ${time()}`, LogTarget.FINAL)

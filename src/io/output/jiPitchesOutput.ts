@@ -1,4 +1,4 @@
-import {count, formatTable, Io, isUndefined, Maybe, Row, Table} from "@sagittal/general"
+import {count, formatTableFromScript, Io, isUndefined, Maybe, Row, Table} from "@sagittal/general"
 import {CommaClassId, JiPitchAnalysis, PotentiallyCommaAnalysis} from "@sagittal/system"
 import {jiPitchScriptGroupSettings} from "../../globals"
 import {JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES} from "../fieldTitles"
@@ -40,7 +40,7 @@ const computeJiPitchesOutput = (
         tableAlignment = orderedTableAlignment
     }
 
-    return formatTable(jiPitchesTable, {headerRowCount, tableAlignment})
+    return formatTableFromScript(jiPitchesTable, {headerRowCount, tableAlignment})
 }
 
 export {

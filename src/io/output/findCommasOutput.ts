@@ -1,4 +1,4 @@
-import {count, formatTable, Io, isEmpty, isUndefined, Maybe, Row, sumTexts, Table} from "@sagittal/general"
+import {count, formatTableFromScript, Io, isEmpty, isUndefined, Maybe, Row, sumTexts, Table} from "@sagittal/general"
 import {CommaAnalysis, CommaClassId} from "@sagittal/system"
 import {DEFAULT_FIND_COMMAS_OPTIONS, FindCommasOptions} from "../../findCommas"
 import {jiPitchScriptGroupSettings} from "../../globals"
@@ -45,7 +45,7 @@ const computeFindCommasOutput = (
 
     return sumTexts(
         tableTitle,
-        formatTable(findCommasTable, {headerRowCount, tableAlignment}),
+        formatTableFromScript(findCommasTable, {headerRowCount, tableAlignment}),
     )
 }
 

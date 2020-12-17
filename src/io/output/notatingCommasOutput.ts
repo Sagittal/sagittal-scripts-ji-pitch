@@ -2,7 +2,7 @@ import {
     BLANK,
     computeExampleElement,
     count,
-    formatTable,
+    formatTableFromScript,
     Io,
     isEmpty,
     isUndefined,
@@ -55,7 +55,7 @@ const computeNotatingCommasOutput = (
 
     return sumTexts(
         NOTATING_COMMAS_TABLE_TITLE,
-        formatTable(notatingCommasTable, {headerRowCount, tableAlignment}),
+        formatTableFromScript(notatingCommasTable, {headerRowCount, tableAlignment}),
     )
 }
 

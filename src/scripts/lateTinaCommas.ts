@@ -1,13 +1,13 @@
 import {
     Filename,
     Io,
-    ioSettings,
     isEmpty,
     isUndefined,
     LogTarget,
     Max,
     Prime,
     saveLog,
+    scriptSettings,
     Sopfr,
     stringify,
     time,
@@ -27,7 +27,7 @@ import {applySharedJiPitchScriptSetup} from "./shared"
 
 applySharedJiPitchScriptSetup("lateTinaCommas" as Filename)
 
-ioSettings.logTargets[LogTarget.ERROR] = true
+scriptSettings.logTargets[LogTarget.ERROR] = true
 
 const MAX_POSSIBLE_2_3_FREE_SOPFR_WITHOUT_CRASHING = 127 as Max<Sopfr<{rough: 5}>>
 const MAX_POSSIBLE_PRIME_LIMIT_GIVEN_MAX_POSSIBLE_SOPFR =
@@ -69,4 +69,4 @@ commaAnalysesSortedByTinaEntries.forEach(([tina, tinaCommaAnalyses]: [string, Co
     }
 })
 
-if (ioSettings.time) saveLog(`\ntook ${time()}`, LogTarget.FINAL)
+if (scriptSettings.time) saveLog(`\ntook ${time()}`, LogTarget.FINAL)

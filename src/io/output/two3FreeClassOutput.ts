@@ -2,7 +2,7 @@ import {
     BLANK,
     computeExampleElement,
     count,
-    formatTable,
+    formatTableFromScript,
     Io,
     isEmpty,
     isUndefined,
@@ -46,7 +46,7 @@ const compute23FreeClassOutput = (
 
     return sumTexts(
         TWO_3_FREE_CLASS_TABLE_TITLE,
-        formatTable(two3FreeClassTable, {headerRowCount, tableAlignment}),
+        formatTableFromScript(two3FreeClassTable, {headerRowCount, tableAlignment}),
     )
 }
 

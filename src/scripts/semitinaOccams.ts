@@ -1,4 +1,4 @@
-import {Filename, ioSettings, LogTarget, program, saveLog, ScriptFlag, setupScriptAndIo, time} from "@sagittal/general"
+import {Filename, LogTarget, program, saveLog, ScriptFlag, scriptSettings, setupScriptAndIo, time} from "@sagittal/general"
 import {computeBestCommaPerSemitinaZone, computeMetacommasAndBucketSortAndLogOccams} from "../semitinaOccams"
 
 program
@@ -13,4 +13,4 @@ const bestCommaPerSemitinaZone = computeBestCommaPerSemitinaZone(!!program.compl
 
 computeMetacommasAndBucketSortAndLogOccams(bestCommaPerSemitinaZone)
 
-if (ioSettings.time) saveLog(`\n\nTOOK ${time()}`, LogTarget.FINAL)
+if (scriptSettings.time) saveLog(`\n\nTOOK ${time()}`, LogTarget.FINAL)

@@ -2,7 +2,7 @@ import {
     BLANK,
     computeExampleElement,
     count,
-    formatTable,
+    formatTableFromScript,
     Io,
     isEmpty,
     isUndefined,
@@ -47,7 +47,7 @@ const computeJiPitchOutput = (
 
     return sumTexts(
         JI_PITCH_TABLE_TITLE,
-        formatTable(jiPitchTable, {headerRowCount, tableAlignment}),
+        formatTableFromScript(jiPitchTable, {headerRowCount, tableAlignment}),
     )
 }
 
