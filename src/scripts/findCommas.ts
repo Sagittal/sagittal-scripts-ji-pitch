@@ -6,7 +6,8 @@ import {jiPitchScriptGroupSettings} from "../globals"
 import {computeFindCommasOutput} from "../io"
 import {applySharedJiPitchScriptSetup} from "./shared"
 
-// TODO: it occurs to me ... why limit to comma search?
+// TODO: FIND JI PITCHES
+//  It occurs to me ... why limit to comma search?
 //  Maybe all JI pitches should become the relatively new "potentially comma analysis" type, with maybes for comma props
 //  And just eliminate the old JiPitchAnalysis type and use the "potentially" instead
 //  Because... why wouldn't you just want to search all JI pitches per these types of criteria?
