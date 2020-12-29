@@ -8,7 +8,6 @@ import {
     parseQuotient,
     program,
     Quotient,
-    ScriptFlag,
 } from "@sagittal/general"
 import {
     Accidental,
@@ -17,33 +16,34 @@ import {
     parseAccidental,
     parseCommaName,
 } from "@sagittal/system"
+import {JiPitchScriptFlag} from "./types"
 
 const readAnalyzeJiPitchOptions = (): void => {
     program
         .option(
-            `-${ScriptFlag.MONZO}, --monzo <monzo>`,
+            `-${JiPitchScriptFlag.MONZO}, --monzo <monzo>`,
             "monzo",
             (monzoText: string): Monzo => parseMonzo(monzoText as Io),
         )
         .option(
-            `-${ScriptFlag.QUOTIENT}, --quotient <quotient>`,
+            `-${JiPitchScriptFlag.QUOTIENT}, --quotient <quotient>`,
             "quotient",
             (quotientText: string): Quotient => parseQuotient(quotientText as Io),
         )
         .option(
-            `-${ScriptFlag.COMMA_NAME}, --comma-name <commaName>`,
+            `-${JiPitchScriptFlag.COMMA_NAME}, --comma-name <commaName>`,
             "comma name",
             (commaNameText: string): Comma => {
                 return computeCommaFromCommaNameQuotientAndSizeCategory(parseCommaName(commaNameText as Io))
             },
         )
         .option(
-            `-${ScriptFlag.ACCIDENTAL}, --accidental <symbol>`,
+            `-${JiPitchScriptFlag.ACCIDENTAL}, --accidental <symbol>`,
             "accidental",
             (accidentalText: string): Accidental => parseAccidental(accidentalText as Ascii),
         )
         .option(
-            `-${ScriptFlag.INTEGER}, --integer <integer>`,
+            `-${JiPitchScriptFlag.INTEGER}, --integer <integer>`,
             "integer",
             (integerText: string): Decimal<{integer: true}> => parseInteger(integerText as Io),
         )

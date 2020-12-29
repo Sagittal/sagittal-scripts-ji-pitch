@@ -8,6 +8,15 @@ enum PitchFormat {
     UNKNOWN = "unknown",
 }
 
+enum JiPitchScriptFlag {
+    MONZO = "m",
+    QUOTIENT = "q",
+    COMMA_NAME = "n",
+    ACCIDENTAL = "a",
+    INTEGER = "i",
+}
+
 export {
     PitchFormat,
+    JiPitchScriptFlag,
 }

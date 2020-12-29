@@ -5,7 +5,6 @@ import {
     LogTarget,
     program,
     saveLog,
-    ScriptFlag,
     scriptSettings,
     stringify,
     time,
@@ -15,15 +14,15 @@ import {
     computeJiNotationCaptureZone,
     computeSecondaryCommaZone,
     formatCommaClass,
-    JiNotationLevelId,
     JI_NOTATION_COMMA_CLASS_IDS,
+    JiNotationLevelId,
 } from "@sagittal/system"
 import {computeFindCommasOptions, findCommas, FindCommasOptions} from "../findCommas"
 import {jiPitchScriptGroupSettings} from "../globals"
 import {applySharedJiPitchScriptSetup} from "./shared"
 
 program
-    .option(`-${ScriptFlag.SECONDARY_COMMA_ZONES}, --secondary-comma-zones`, "use commas in each comma's secondary comma zone, rather than the default behavior of its capture zone in the Extreme precision level notation")
+    .option(`--secondary-comma-zones`, "use commas in each comma's secondary comma zone, rather than the default behavior of its capture zone in the Extreme precision level notation")
 
 applySharedJiPitchScriptSetup("zoneCommas" as Filename)
 
