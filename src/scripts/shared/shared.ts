@@ -1,4 +1,4 @@
-import {BLANK, Filename, Io, program, Scamon, ScriptFlag, setupScriptAndIo} from "@sagittal/general"
+import {Filename, Io, program, Scamon, ScriptFlag, setupScriptAndIo} from "@sagittal/general"
 import {FactoringMode} from "@sagittal/system"
 import {jiPitchScriptGroupSettings} from "../../globals"
 import {parsePitch} from "../../io"
@@ -34,6 +34,7 @@ const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
         .option(`-${ScriptFlag.UNDIRECTED_COMMA_NAME}, --undirected`, "undirected comma name")
         .option(`-${ScriptFlag.FACTORING_MODE}, --factoring-mode <factoringMode>`, "factoring mode (always, never, or threshold)")
         .option(`-${ScriptFlag.UNABBREVIATED_COMMA_NAME}, --unabbreviated`, "unabbreviated comma name")
+        .option(`-${ScriptFlag.ASCII_COMMA_NAME}, --ascii`, "ascii comma name")
         .option(
             `-${ScriptFlag.EXCLUDED_FIELDS}, --excluded-fields <excludedFields>`,
             "exclude fields",
@@ -61,6 +62,7 @@ const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
         directed: !program.undirected,
         factoringMode: program.factoringMode || FactoringMode.THRESHOLD,
         abbreviated: !program.unabbreviated,
+        ascii: program.ascii,
     }
 }
 
