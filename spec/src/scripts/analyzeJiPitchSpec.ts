@@ -1,7 +1,6 @@
 // tslint:disable max-line-length
 
 import {Io, onlyRunInCi, runScriptAndGetConsoleOutput} from "@sagittal/general"
-import * as cp from "child_process"
 import {
     OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS,
     OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS,
@@ -129,7 +128,7 @@ describe("analyze-ji-pitch", (): void => {
         const script = "npm run analyze-ji-pitch" as Io
 
         expect((): void => {
-            cp.execSync(script, {stdio: [undefined, undefined, undefined]})
+            runScriptAndGetConsoleOutput(script)
         }).toThrowError(/Unable to read JI pitch/)
     })
 
