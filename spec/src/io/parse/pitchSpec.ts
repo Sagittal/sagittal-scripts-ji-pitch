@@ -74,6 +74,15 @@ describe("parsePitch", (): void => {
         expect(actual).toBeCloseToObject(expected)
     })
 
+    it("whoa did I just find an edge case? yes I did, but the fix was in @sagittal/general", (): void => {
+        const pitchText = "Y/" as Io
+
+        const actual = parsePitch(pitchText)
+
+        const expected = {monzo: [18, -10, -1]} as Scamon<{rational: false}>
+        expect(actual).toBeCloseToObject(expected)
+    })
+
     it("another accidental example (just trying to use all the chars that might be used in other formats, to prove it works at distinguishing accidentals)", (): void => {
         const pitchText = "`.!(>#"
 
