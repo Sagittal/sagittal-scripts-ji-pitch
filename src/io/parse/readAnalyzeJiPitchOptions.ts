@@ -12,7 +12,7 @@ import {
 import {
     Accidental,
     Ascii,
-    computeCommaFromCommaNameQuotientAndSizeCategory,
+    computeCommaFromCommaName,
     parseAccidental,
     parseCommaName,
 } from "@sagittal/system"
@@ -34,7 +34,7 @@ const readAnalyzeJiPitchOptions = (): void => {
             `-${JiPitchScriptFlag.COMMA_NAME}, --comma-name <commaName>`,
             "comma name",
             (commaNameText: string): Comma => {
-                return computeCommaFromCommaNameQuotientAndSizeCategory(parseCommaName(commaNameText as Io))
+                return computeCommaFromCommaName(parseCommaName(commaNameText as Io))
             },
         )
         .option(
