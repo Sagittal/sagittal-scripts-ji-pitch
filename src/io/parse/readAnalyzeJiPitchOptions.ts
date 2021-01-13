@@ -1,21 +1,5 @@
-import {
-    Comma,
-    Decimal,
-    Io,
-    Monzo,
-    parseInteger,
-    parseMonzo,
-    parseQuotient,
-    program,
-    Quotient,
-} from "@sagittal/general"
-import {
-    Accidental,
-    Ascii,
-    computeCommaFromCommaName,
-    parseAccidental,
-    parseCommaName,
-} from "@sagittal/system"
+import {Comma, Decimal, Io, Monzo, parseInteger, parseMonzo, parseQuotient, program, Quotient} from "@sagittal/general"
+import {Accidental, Ascii, computeCommaFromCommaName, parseAccidental, parseCommaName} from "@sagittal/system"
 import {JiPitchScriptFlag} from "./types"
 
 const readAnalyzeJiPitchOptions = (): void => {

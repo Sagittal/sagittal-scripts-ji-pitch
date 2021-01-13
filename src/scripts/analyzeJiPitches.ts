@@ -1,4 +1,4 @@
-import {Filename, Io, LogTarget, Maybe, saveLog, setupScriptAndIo} from "@sagittal/general"
+import {Filename, Io, LogTarget, Maybe, saveLog} from "@sagittal/general"
 import {CommaClassId, computeMaybeCommaClassId, PotentiallyCommaAnalysis} from "@sagittal/system"
 import {computePotentiallyCommaAnalyses} from "../analyzeJiPitches"
 import {computeJiPitchesOutput} from "../io"

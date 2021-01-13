@@ -14,8 +14,8 @@ import {
 } from "@sagittal/general"
 import {JiPitchesOrFindCommasField, JiPitchField, Two3FreeClassField} from "../../types"
 import {
-    JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES,
     JI_PITCH_FIELD_TITLES,
+    JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES,
     TWO_3_FREE_CLASS_FIELD_TITLES,
 } from "../fieldTitles"
 import {

@@ -3,8 +3,8 @@ import {CommaAnalysis, JiPitchAnalysis, Two3FreeClassAnalysis} from "@sagittal/s
 import {excludeFields} from "./excludeFields"
 import {
     COMMA_FIELD_TITLES,
-    JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES,
     JI_PITCH_FIELD_TITLES,
+    JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES,
     TWO_3_FREE_CLASS_FIELD_TITLES,
 } from "./fieldTitles"
 import {formatPrimeHeaders, splitMonzoAndQuotientFieldTitles} from "./splitMonzoAndQuotient"

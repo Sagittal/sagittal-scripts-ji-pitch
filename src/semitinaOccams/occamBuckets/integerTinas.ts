@@ -19,8 +19,8 @@ import {
     computeCommaName,
     formatComma,
     getCommaClass,
-    JiNotationLevelId,
     JI_NOTATION_LEVELS_COMMA_CLASS_IDS,
+    JiNotationLevelId,
 } from "@sagittal/system"
 import {metacommaNameToMetacommaMap} from "../../globals"
 import {SEMITINA_CENTS} from "../constants"
