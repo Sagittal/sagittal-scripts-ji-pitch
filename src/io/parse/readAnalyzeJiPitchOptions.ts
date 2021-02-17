@@ -1,5 +1,5 @@
 import {Comma, Decimal, Io, Monzo, parseInteger, parseMonzo, parseQuotient, program, Quotient} from "@sagittal/general"
-import {Accidental, Ascii, computeCommaFromCommaName, parseAccidental, parseCommaName} from "@sagittal/system"
+import {Accidental, Sagitype, computeCommaFromCommaName, parseAccidental, parseCommaName} from "@sagittal/system"
 import {JiPitchScriptFlag} from "./types"
 
 const readAnalyzeJiPitchOptions = (): void => {
@@ -24,7 +24,7 @@ const readAnalyzeJiPitchOptions = (): void => {
         .option(
             `-${JiPitchScriptFlag.ACCIDENTAL}, --accidental <symbol>`,
             "accidental",
-            (accidentalText: string): Accidental => parseAccidental(accidentalText as Ascii),
+            (accidentalText: string): Accidental => parseAccidental(accidentalText as Sagitype),
         )
         .option(
             `-${JiPitchScriptFlag.INTEGER}, --integer <integer>`,
