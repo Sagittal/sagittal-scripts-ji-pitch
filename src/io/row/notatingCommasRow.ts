@@ -13,7 +13,7 @@ import {computeJiPitchRow} from "./jiPitchRow"
 const computeNotatingCommasRow = (
     commaAnalysis: CommaAnalysis | PotentiallyCommaAnalysis,
     maybeCommaClassId: Maybe<CommaClassId>,
-    maxMonzoLength: Max<Count<Exponent<Prime>>>,
+    maxPevLength: Max<Count<Exponent<Prime>>>,
 ): Row<{of: CommaAnalysis}> => {
     const row = []
 
@@ -32,7 +32,7 @@ const computeNotatingCommasRow = (
 
     return [
         ...row,
-        ...computeJiPitchRow(commaAnalysis, maxMonzoLength),
+        ...computeJiPitchRow(commaAnalysis, maxPevLength),
     ] as Row<{of: CommaAnalysis}>
 }
 

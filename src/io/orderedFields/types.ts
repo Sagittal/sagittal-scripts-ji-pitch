@@ -7,7 +7,7 @@ interface OrderableTableInformation<T> {
 }
 
 type SharedOrderedFieldsOptions = Partial<{
-    maxMonzoLength: Max<Count<Exponent<Prime>>>,
+    maxPevLength: Max<Count<Exponent<Prime>>>,
     recognizeNameTitleAsBeingFor23FreeClass: boolean,
 }>
 

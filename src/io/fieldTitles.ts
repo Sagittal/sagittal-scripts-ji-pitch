@@ -3,7 +3,7 @@ import {CommaField, JiPitchesOrFindCommasField, JiPitchField, Two3FreeClassField
 
 const JI_PITCH_FIELD_TITLES: Record<JiPitchField, Io> = {
     [JiPitchField.QUOTIENT]: "quotient" as Io,
-    [JiPitchField.MONZO]: "monzo" as Io,
+    [JiPitchField.PEV]: "pev" as Io,
     [JiPitchField.CENTS]: "cents" as Io,
     [JiPitchField.APOTOME_SLOPE]: "apotome slope" as Io,
     [JiPitchField.AAS]: "AAS" as Io,

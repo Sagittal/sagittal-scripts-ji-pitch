@@ -1,6 +1,6 @@
 // tslint:disable max-line-length
 
-import {Abs, BLANK, Cents, Io, ioSettings, Monzo, NEWLINE, Quotient, TableFormat} from "@sagittal/general"
+import {Abs, BLANK, Cents, Io, ioSettings, Pev, NEWLINE, Quotient, TableFormat} from "@sagittal/general"
 import {ApotomeSlope, Ate, JiPitchAnalysis} from "@sagittal/system"
 import {jiPitchScriptGroupSettings} from "../../../../src/globals"
 import {computeJiPitchOutput} from "../../../../src/io"
@@ -11,7 +11,7 @@ describe("computeJiPitchOutput", (): void => {
     const jiPitchAnalysis: JiPitchAnalysis = {
         ...jiPitchAnalysisFixture,
         cents: 11.2 as Cents,
-        monzo: [0, -1, 1] as Monzo<{rational: true}>,
+        pev: [0, -1, 1] as Pev<{rational: true}>,
         quotient: [5, 4] as Quotient<{rational: true}>,
         apotomeSlope: 8.2 as ApotomeSlope,
         aas: 8.2 as Abs<ApotomeSlope>,
@@ -25,9 +25,9 @@ describe("computeJiPitchOutput", (): void => {
         const expected =
             "   --- JI pitch ---" + NEWLINE +
             "" + NEWLINE +
-            "quotient\t \t \tmonzo\t       \t       \t       \t \t               \tapotome\t       \t       " + NEWLINE +
-            "       n\t/\td\t     \t  2    \t  3    \t  5    \t \tcents          \tslope  \tAAS    \tATE    ".underline + NEWLINE +
-            "       5\t/\t4\t    [\t  0    \t -1    \t  1    \t⟩\t        11.200¢\t  8.200\t  8.200\t  1    " + NEWLINE as Io
+            "quotient\t \t \tpev\t       \t       \t       \t \t               \tapotome\t       \t       " + NEWLINE +
+            "       n\t/\td\t   \t  2    \t  3    \t  5    \t \tcents          \tslope  \tAAS    \tATE    ".underline + NEWLINE +
+            "       5\t/\t4\t  [\t  0    \t -1    \t  1    \t⟩\t        11.200¢\t  8.200\t  8.200\t  1    " + NEWLINE as Io
         expect(actual).toEqual(expected)
     })
 
@@ -38,14 +38,14 @@ describe("computeJiPitchOutput", (): void => {
         const expected =
             "   --- JI pitch ---" + NEWLINE +
             "" + NEWLINE +
-            "quotient\t\t\tmonzo\t\t\t\t\t\tapotome\t\t" + NEWLINE +
+            "quotient\t\t\tpev\t\t\t\t\t\tapotome\t\t" + NEWLINE +
             "n\t/\td\t \t2\t3\t5\t \tcents\tslope\tAAS\tATE".underline + NEWLINE +
             "5\t/\t4\t[\t0\t-1\t1\t⟩\t11.200¢\t8.200\t8.200\t1" + NEWLINE as Io
         expect(actual).toEqual(expected)
     })
 
     it("can reorder fields", (): void => {
-        jiPitchScriptGroupSettings.orderedFields = ["cents", "quotient", "monzo", "aas"] as JiPitchScriptGroupField[]
+        jiPitchScriptGroupSettings.orderedFields = ["cents", "quotient", "pev", "aas"] as JiPitchScriptGroupField[]
         jiPitchScriptGroupSettings.excludedFields = [] // This happens automatically when ordering fields
 
         const actual = computeJiPitchOutput(jiPitchAnalysis)
@@ -53,16 +53,16 @@ describe("computeJiPitchOutput", (): void => {
         const expected =
             "   --- JI pitch ---" + NEWLINE +
             "" + NEWLINE +
-            "               \tquotient\t \t \tmonzo\t       \t       \t       \t \t       " + NEWLINE +
-            "cents          \t       n\t/\td\t     \t  2    \t  3    \t  5    \t \tAAS    ".underline + NEWLINE +
-            "        11.200¢\t       5\t/\t4\t    [\t  0    \t -1    \t  1    \t⟩\t  8.200" + NEWLINE as Io
+            "               \tquotient\t \t \tpev\t       \t       \t       \t \t       " + NEWLINE +
+            "cents          \t       n\t/\td\t   \t  2    \t  3    \t  5    \t \tAAS    ".underline + NEWLINE +
+            "        11.200¢\t       5\t/\t4\t  [\t  0    \t -1    \t  1    \t⟩\t  8.200" + NEWLINE as Io
         expect(actual).toEqual(expected)
     })
 
     it("returns blank (not the title) when all columns are excluded", (): void => {
         jiPitchScriptGroupSettings.excludedFields = [
             "quotient",
-            "monzo",
+            "pev",
             "cents",
             "apotomeSlope",
             "aas",

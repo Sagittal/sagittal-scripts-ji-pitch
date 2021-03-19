@@ -15,7 +15,7 @@ import {JiPitchesOrFindCommasField, JiPitchField, Two3FreeClassField} from "../.
 import {
     ADDITIONAL_COLUMNS_FOR_SPLIT_2_3_FREE_CLASS_FIELD,
     ADDITIONAL_COLUMNS_FOR_SPLIT_QUOTIENT_FIELD,
-    computeAdditionalColumnCountForSplitMonzoField,
+    computeAdditionalColumnCountForSplitPevField,
 } from "./additionalColumnsForSplitFields"
 import {
     AppendAdditionalColumnIndicesForSplitFieldOptions,
@@ -35,19 +35,19 @@ const appendAdditionalColumnIndicesForSplitField = (
         })
 }
 
-// Note the strong parallelism between this method and splitMonzoAndQuotientFieldTitles
+// Note the strong parallelism between this method and splitPevAndQuotientFieldTitles
 const maybeAppendAdditionalColumnIndicesForSplitField = (
     orderedColumnIndices: Array<Index<Column>>,
     options: MaybeAppendAdditionalColumnIndicesForSplitFieldOptions,
 ): void => {
-    const {orderedField, maxMonzoLength, columnIndex, recognizeNameTitleAsBeingFor23FreeClass} = options
+    const {orderedField, maxPevLength, columnIndex, recognizeNameTitleAsBeingFor23FreeClass} = options
 
-    if (orderedField === JiPitchField.MONZO) {
+    if (orderedField === JiPitchField.PEV) {
         appendAdditionalColumnIndicesForSplitField(
             orderedColumnIndices,
             {
                 columnIndex,
-                additionalColumnCount: computeAdditionalColumnCountForSplitMonzoField(maxMonzoLength),
+                additionalColumnCount: computeAdditionalColumnCountForSplitPevField(maxPevLength),
             },
         )
     } else if (ioSettings.tableFormat !== TableFormat.FORUM) {

@@ -11,7 +11,7 @@ const computeOrderedTableAndAlignment = <T>(
     {table, tableAlignment}: OrderableTableInformation<T>,
     options: OrderedTableAndAlignmentOptions,
 ): OrderableTableInformation<T> => {
-    const {maxMonzoLength, recognizeNameTitleAsBeingFor23FreeClass, fieldTitles} = options
+    const {maxPevLength, recognizeNameTitleAsBeingFor23FreeClass, fieldTitles} = options
 
     const orderedFields = jiPitchScriptGroupSettings.orderedFields!
         .filter((orderedField: JiPitchScriptGroupField): boolean => {
@@ -26,7 +26,7 @@ const computeOrderedTableAndAlignment = <T>(
             {
                 columnIndex,
                 orderedField,
-                maxMonzoLength,
+                maxPevLength,
                 recognizeNameTitleAsBeingFor23FreeClass,
             },
         )

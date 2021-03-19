@@ -1,19 +1,19 @@
 import {
-    computeRationalMonzoCopfr,
-    computeRationalMonzoFromRationalQuotient,
-    computeRationalMonzoSmoothness,
-    computeRationalMonzoSopfr,
-    EMPTY_MONZO,
-    invertMonzo,
+    computeRationalPevCopfr,
+    computeRationalPevFromRationalQuotient,
+    computeRationalPevSmoothness,
+    computeRationalPevSopfr,
+    EMPTY_PEV,
+    invertPev,
     isUndefined,
-    Monzo,
+    Pev,
 } from "@sagittal/general"
 import {computeKnownRationalQuotients, MAX_N2D3P9_FOR_WHICH_POSSIBLE_NUMERATORS_ARE_KNOWN} from "@sagittal/system"
 import {FindCommasOptions} from "./types"
 
-const compute23FreeRationalMonzosToCheckFromKnownLowN2D3P9Numerators = (
+const compute23FreeRationalPevsToCheckFromKnownLowN2D3P9Numerators = (
     options: Partial<FindCommasOptions> = {},
-): Array<Monzo<{rational: true, rough: 5}>> => {
+): Array<Pev<{rational: true, rough: 5}>> => {
     const {
         maxPrimeLimit,
         max23FreeSopfr,
@@ -21,27 +21,27 @@ const compute23FreeRationalMonzosToCheckFromKnownLowN2D3P9Numerators = (
         maxN2D3P9 = MAX_N2D3P9_FOR_WHICH_POSSIBLE_NUMERATORS_ARE_KNOWN,
     } = options
 
-    const monzosToCheck: Array<Monzo<{rational: true, rough: 5}>> = [
-        EMPTY_MONZO as Monzo<{rational: true, rough: 5}>,
-    ] as Array<Monzo<{rational: true, rough: 5}>>
+    const pevsToCheck: Array<Pev<{rational: true, rough: 5}>> = [
+        EMPTY_PEV as Pev<{rational: true, rough: 5}>,
+    ] as Array<Pev<{rational: true, rough: 5}>>
     computeKnownRationalQuotients(maxN2D3P9)
-        .map(computeRationalMonzoFromRationalQuotient)
-        .forEach((rationalMonzo: Monzo<{rational: true, rough: 5}>): void => {
-            monzosToCheck.push(rationalMonzo)
-            monzosToCheck.push(invertMonzo(rationalMonzo))
+        .map(computeRationalPevFromRationalQuotient)
+        .forEach((rationalPev: Pev<{rational: true, rough: 5}>): void => {
+            pevsToCheck.push(rationalPev)
+            pevsToCheck.push(invertPev(rationalPev))
         })
 
-    return monzosToCheck.filter((monzoToCheck: Monzo<{rational: true, rough: 5}>): boolean => {
-        if (!isUndefined(max23FreeSopfr) && computeRationalMonzoSopfr(monzoToCheck) > max23FreeSopfr) {
+    return pevsToCheck.filter((pevToCheck: Pev<{rational: true, rough: 5}>): boolean => {
+        if (!isUndefined(max23FreeSopfr) && computeRationalPevSopfr(pevToCheck) > max23FreeSopfr) {
             return false
         }
-        if (!isUndefined(max23FreeCopfr) && computeRationalMonzoCopfr(monzoToCheck) > max23FreeCopfr) {
+        if (!isUndefined(max23FreeCopfr) && computeRationalPevCopfr(pevToCheck) > max23FreeCopfr) {
             return false
         }
-        return !(!isUndefined(maxPrimeLimit) && computeRationalMonzoSmoothness(monzoToCheck) > maxPrimeLimit)
+        return !(!isUndefined(maxPrimeLimit) && computeRationalPevSmoothness(pevToCheck) > maxPrimeLimit)
     })
 }
 
 export {
-    compute23FreeRationalMonzosToCheckFromKnownLowN2D3P9Numerators,
+    compute23FreeRationalPevsToCheckFromKnownLowN2D3P9Numerators,
 }

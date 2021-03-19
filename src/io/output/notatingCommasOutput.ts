@@ -16,7 +16,7 @@ import {COMMA_FIELD_TITLES} from "../fieldTitles"
 import {computeNotatingCommasHeaderRows} from "../headerRows"
 import {computeOrderedTableAndAlignment} from "../orderedFields"
 import {computeNotatingCommasRow} from "../row"
-import {computeMaxMonzoLength, computeSplitMonzoAndQuotientTableAlignment} from "../splitMonzoAndQuotient"
+import {computeMaxPevLength, computeSplitPevAndQuotientTableAlignment} from "../splitPevAndQuotient"
 import {NOTATING_COMMAS_TABLE_TITLE} from "../tableTitles"
 import {NO_RESULTS} from "./constants"
 
@@ -26,16 +26,16 @@ const computeNotatingCommasOutput = (
 ): Io => {
     if (isEmpty(notatingCommaAnalyses)) return sumTexts(NOTATING_COMMAS_TABLE_TITLE, NO_RESULTS)
 
-    const maxMonzoLength = computeMaxMonzoLength(notatingCommaAnalyses)
-    const notatingCommasHeaderRows = computeNotatingCommasHeaderRows(maxMonzoLength)
+    const maxPevLength = computeMaxPevLength(notatingCommaAnalyses)
+    const notatingCommasHeaderRows = computeNotatingCommasHeaderRows(maxPevLength)
     const headerRowCount = count(notatingCommasHeaderRows)
-    let tableAlignment = computeSplitMonzoAndQuotientTableAlignment(notatingCommasHeaderRows)
+    let tableAlignment = computeSplitPevAndQuotientTableAlignment(notatingCommasHeaderRows)
 
     let notatingCommasTable = [
         ...notatingCommasHeaderRows,
         ...notatingCommaAnalyses
             .map((notatingCommaAnalysis: CommaAnalysis, index: number): Row<{of: CommaAnalysis}> => {
-                return computeNotatingCommasRow(notatingCommaAnalysis, maybeCommaClassIds[index], maxMonzoLength)
+                return computeNotatingCommasRow(notatingCommaAnalysis, maybeCommaClassIds[index], maxPevLength)
             }),
     ]
 
@@ -45,7 +45,7 @@ const computeNotatingCommasOutput = (
             tableAlignment: orderedTableAlignment,
         } = computeOrderedTableAndAlignment(
             {table: notatingCommasTable, tableAlignment},
-            {maxMonzoLength, fieldTitles: COMMA_FIELD_TITLES},
+            {maxPevLength, fieldTitles: COMMA_FIELD_TITLES},
         )
         notatingCommasTable = orderedNotatingCommasTable
         tableAlignment = orderedTableAlignment

@@ -1,4 +1,4 @@
-import {BLANK, Copfr, Io, Max, Monzo, NEWLINE, Prime, Sopfr, Two3FreeClass} from "@sagittal/general"
+import {BLANK, Copfr, Io, Max, Pev, NEWLINE, Prime, Sopfr, Two3FreeClass} from "@sagittal/general"
 import {N2D3P9} from "@sagittal/system"
 import {jiPitchScriptGroupSettings} from "../../../../src/globals"
 import {compute23FreeClassOutput} from "../../../../src/io"
@@ -9,7 +9,7 @@ describe("compute23FreeClassOutput", (): void => {
     const two3FreeClassAnalysis = {
         ...two3FreeClassAnalysisFixture,
         two3FreeClass: {
-            monzo: [0, 0, 1] as Monzo<{rational: true}>,
+            pev: [0, 0, 1] as Pev<{rational: true}>,
         } as Two3FreeClass,
         two3FreePrimeLimit: 14 as Max<Prime<{rough: 5}>>,
         two3FreeCopfr: 2 as Copfr<{rough: 5}>,

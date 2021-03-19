@@ -7,46 +7,46 @@ import {
     JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES,
     TWO_3_FREE_CLASS_FIELD_TITLES,
 } from "./fieldTitles"
-import {formatPrimeHeaders, splitMonzoAndQuotientFieldTitles} from "./splitMonzoAndQuotient"
+import {formatPrimeHeaders, splitPevAndQuotientFieldTitles} from "./splitPevAndQuotient"
 
 const computeJiPitchHeaderRows = (
-    maxMonzoLength: Max<Count<Exponent<Prime>>>,
+    maxPevLength: Max<Count<Exponent<Prime>>>,
 ): Array<Row<{of: JiPitchAnalysis, header: true}>> =>
     formatPrimeHeaders(
         splitFieldTitlesIntoRowsBySpaces(
-            splitMonzoAndQuotientFieldTitles(
+            splitPevAndQuotientFieldTitles(
                 excludeFields(JI_PITCH_FIELD_TITLES),
-                {maxMonzoLength},
+                {maxPevLength},
             ),
         ),
     )
 
 const compute23FreeClassHeaderRows = (): Array<Row<{of: Two3FreeClassAnalysis, header: true}>> =>
     splitFieldTitlesIntoRowsBySpaces(
-        splitMonzoAndQuotientFieldTitles(
+        splitPevAndQuotientFieldTitles(
             excludeFields(TWO_3_FREE_CLASS_FIELD_TITLES),
             {recognizeNameTitleAsBeingFor23FreeClass: true},
         ),
     )
 
 const computeNotatingCommasHeaderRows =
-    (maxMonzoLength: Max<Count<Exponent<Prime>>>): Array<Row<{of: CommaAnalysis, header: true}>> =>
+    (maxPevLength: Max<Count<Exponent<Prime>>>): Array<Row<{of: CommaAnalysis, header: true}>> =>
         formatPrimeHeaders(
             splitFieldTitlesIntoRowsBySpaces(
-                splitMonzoAndQuotientFieldTitles(
+                splitPevAndQuotientFieldTitles(
                     excludeFields(COMMA_FIELD_TITLES),
-                    {maxMonzoLength},
+                    {maxPevLength},
                 ),
             ),
         )
 
 const computeJiPitchesOrFindCommasHeaderRows =
-    (maxMonzoLength: Max<Count<Exponent<Prime>>>): Array<Row<{of: CommaAnalysis, header: true}>> =>
+    (maxPevLength: Max<Count<Exponent<Prime>>>): Array<Row<{of: CommaAnalysis, header: true}>> =>
         formatPrimeHeaders(
             splitFieldTitlesIntoRowsBySpaces(
-                splitMonzoAndQuotientFieldTitles(
+                splitPevAndQuotientFieldTitles(
                     excludeFields(JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES),
-                    {maxMonzoLength},
+                    {maxPevLength},
                 ),
             ),
         )

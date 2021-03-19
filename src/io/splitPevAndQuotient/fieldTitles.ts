@@ -19,17 +19,17 @@ import {
     TWO_3_FREE_CLASS_FIELD_TITLES,
 } from "../fieldTitles"
 import {
-    INVISIBLE_MONZO_CLOSING_ANGLE_BRACKET_COLUMN_TITLE,
-    INVISIBLE_MONZO_OPENING_SQUARE_BRACKET_COLUMN_TITLE,
+    INVISIBLE_PEV_CLOSING_ANGLE_BRACKET_COLUMN_TITLE,
+    INVISIBLE_PEV_OPENING_SQUARE_BRACKET_COLUMN_TITLE,
 } from "./constants"
 
 // Note the strong parallelism between this method and maybeAppendAdditionalColumnIndicesForSplitField
-const splitMonzoAndQuotientFieldTitles = (
+const splitPevAndQuotientFieldTitles = (
     fieldTitles: Io[],
     {
         recognizeNameTitleAsBeingFor23FreeClass = false,
-        maxMonzoLength = 0 as Max<Count<Exponent<Prime>>>,
-    }: {maxMonzoLength?: Max<Count<Exponent<Prime>>>, recognizeNameTitleAsBeingFor23FreeClass?: boolean},
+        maxPevLength = 0 as Max<Count<Exponent<Prime>>>,
+    }: {maxPevLength?: Max<Count<Exponent<Prime>>>, recognizeNameTitleAsBeingFor23FreeClass?: boolean},
 ): Io[] => {
     const splitFieldTitles = [] as Io[]
 
@@ -41,11 +41,11 @@ const splitMonzoAndQuotientFieldTitles = (
     const primes = computePrimes()
 
     fieldTitles.forEach((fieldTitle: Io): void => {
-        if (fieldTitle === JI_PITCH_FIELD_TITLES[JiPitchField.MONZO]) {
+        if (fieldTitle === JI_PITCH_FIELD_TITLES[JiPitchField.PEV]) {
             splitFieldTitles.push(
-                `monzo ${INVISIBLE_MONZO_OPENING_SQUARE_BRACKET_COLUMN_TITLE}` as Io,
-                ...primes.slice(0, maxMonzoLength).map((prime: Prime): string => `${maybeMerge}${formatIntegerDecimal(prime)}`) as Io[],
-                `${maybeMerge}${INVISIBLE_MONZO_CLOSING_ANGLE_BRACKET_COLUMN_TITLE}`,
+                `pev ${INVISIBLE_PEV_OPENING_SQUARE_BRACKET_COLUMN_TITLE}` as Io,
+                ...primes.slice(0, maxPevLength).map((prime: Prime): string => `${maybeMerge}${formatIntegerDecimal(prime)}`) as Io[],
+                `${maybeMerge}${INVISIBLE_PEV_CLOSING_ANGLE_BRACKET_COLUMN_TITLE}`,
             )
         } else if (ioSettings.tableFormat !== TableFormat.FORUM) {
             if (fieldTitle === JI_PITCH_FIELD_TITLES[JiPitchField.QUOTIENT]) {
@@ -78,5 +78,5 @@ const splitMonzoAndQuotientFieldTitles = (
 }
 
 export {
-    splitMonzoAndQuotientFieldTitles,
+    splitPevAndQuotientFieldTitles,
 }

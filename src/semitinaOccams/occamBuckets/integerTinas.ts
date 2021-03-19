@@ -3,7 +3,7 @@ import {
     abs,
     Comma,
     computeCentsFromPitch,
-    computeSuperScamon,
+    computeSuperSpev,
     Count,
     Index,
     isEven,
@@ -12,7 +12,7 @@ import {
     RecordKey,
     round,
     saveLog,
-    subtractRationalScamons,
+    subtractRationalSpevs,
 } from "@sagittal/general"
 import {
     CommaClassId,
@@ -48,7 +48,7 @@ const computeIntegerTinaOccamBuckets = (
 
         bestCommaPerSemitinaZone.forEach(([semitinaZone, bestComma]: [Index<Semitina>, Comma]): void => {
             const metacomma =
-                computeSuperScamon(subtractRationalScamons(ultraComma, bestComma)) as unknown as Comma
+                computeSuperSpev(subtractRationalSpevs(ultraComma, bestComma)) as unknown as Comma
             const metacommaName = computeCommaName(metacomma)
 
             const ultraCommaSemitinaZone = round(computeCentsFromPitch(ultraComma) / SEMITINA_CENTS) as Index<Semitina>

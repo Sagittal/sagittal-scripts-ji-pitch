@@ -1,4 +1,4 @@
-import {Comma, computeScamonFromDecimal, Max, Min, Monzo, Prime, Scamon, Sopfr} from "@sagittal/general"
+import {Comma, computeSpevFromDecimal, Max, Min, Pev, Prime, Spev, Sopfr} from "@sagittal/general"
 import {findCommas} from "../../../src/findCommas"
 
 describe("findCommas", (): void => {
@@ -10,8 +10,8 @@ describe("findCommas", (): void => {
                 max23FreeSopfr,
                 zone: {
                     extrema: [
-                        computeScamonFromDecimal(1.02930223664) as Min<Scamon>,
-                        computeScamonFromDecimal(1.00579294107) as Max<Scamon>,
+                        computeSpevFromDecimal(1.02930223664) as Min<Spev>,
+                        computeSpevFromDecimal(1.00579294107) as Max<Spev>,
                     ],
                 },
             })
@@ -21,8 +21,8 @@ describe("findCommas", (): void => {
                 max23FreeSopfr,
                 zone: {
                     extrema: [
-                        computeScamonFromDecimal(1.02930223664) as Min<Scamon>,
-                        computeScamonFromDecimal(1.02930223664) as Max<Scamon>,
+                        computeSpevFromDecimal(1.02930223664) as Min<Spev>,
+                        computeSpevFromDecimal(1.02930223664) as Max<Spev>,
                     ],
                 },
             })
@@ -35,7 +35,7 @@ describe("findCommas", (): void => {
                 max23FreeSopfr,
                 zone: {
                     extrema: [
-                        computeScamonFromDecimal(0.84089641525) as Min<Scamon>,
+                        computeSpevFromDecimal(0.84089641525) as Min<Spev>,
                         undefined,
                     ],
                 },
@@ -47,8 +47,8 @@ describe("findCommas", (): void => {
                 max23FreeSopfr,
                 zone: {
                     extrema: [
-                        computeScamonFromDecimal(0.79370052598) as Min<Scamon>,
-                        computeScamonFromDecimal(0.84089641525) as Max<Scamon>,
+                        computeSpevFromDecimal(0.79370052598) as Min<Spev>,
+                        computeSpevFromDecimal(0.84089641525) as Max<Spev>,
                     ],
                 },
             })
@@ -59,8 +59,8 @@ describe("findCommas", (): void => {
                 max23FreeSopfr,
                 zone: {
                     extrema: [
-                        computeScamonFromDecimal(1.189207115) as Min<Scamon>,
-                        computeScamonFromDecimal(1.25992104989) as Max<Scamon>,
+                        computeSpevFromDecimal(1.189207115) as Min<Spev>,
+                        computeSpevFromDecimal(1.25992104989) as Max<Spev>,
                     ],
                 },
             })
@@ -72,7 +72,7 @@ describe("findCommas", (): void => {
                 zone: {
                     extrema: [
                         undefined,
-                        computeScamonFromDecimal(1.189207115) as Max<Scamon>,
+                        computeSpevFromDecimal(1.189207115) as Max<Spev>,
                     ],
                 },
             })
@@ -81,16 +81,16 @@ describe("findCommas", (): void => {
     })
 
     it("returns commas if the bounds are within the abs value of the max size category bound (and the max N2D3P9 is less than the maximum N2D3P9 for which numerators are known)", (): void => {
-        const lowerBound = computeScamonFromDecimal(1.00870198379) as Min<Scamon>
-        const upperBound = computeScamonFromDecimal(1.0174796921) as Max<Scamon>
+        const lowerBound = computeSpevFromDecimal(1.00870198379) as Min<Spev>
+        const upperBound = computeSpevFromDecimal(1.0174796921) as Max<Spev>
 
         const actual = findCommas({zone: {extrema: [lowerBound, upperBound]}, max23FreeSopfr})
 
         const expected: Comma[] = [
-            {monzo: [-4, 4, -1]},
-            {monzo: [6, -2, 0, -1]},
-            {monzo: [-19, 12]},
-            {monzo: [-34, 20, 1]},
+            {pev: [-4, 4, -1]},
+            {pev: [6, -2, 0, -1]},
+            {pev: [-19, 12]},
+            {pev: [-34, 20, 1]},
         ] as Comma[]
         expect(actual).toBeArrayWithDeepEqualContents(expected)
     })
@@ -101,7 +101,7 @@ describe("findCommas", (): void => {
         const actual = findCommas({maxPrimeLimit})
 
         const expected: Comma[] = [
-            {monzo: [] as unknown[] as Monzo<{rational: true}>},
+            {pev: [] as unknown[] as Pev<{rational: true}>},
         ] as Comma[]
         expect(actual).toBeArrayWithDeepEqualContents(expected)
     })

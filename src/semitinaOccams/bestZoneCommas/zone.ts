@@ -1,4 +1,4 @@
-import {Comma, increment, Index, isScamonGreater, LogTarget, RecordKey, saveLog} from "@sagittal/general"
+import {Comma, increment, Index, isSpevGreater, LogTarget, RecordKey, saveLog} from "@sagittal/general"
 import {Semitina} from "../types"
 import {MAX_SIZE_PER_SEMITINA_ZONE, SEMITINA_ZONES} from "./constants"
 
@@ -16,7 +16,7 @@ const computeCommasBySemitinaZone = (
 
     commas.forEach((comma: Comma): void => {
         let semitinaZone = 0 as Index<Semitina>
-        while (isScamonGreater(comma, MAX_SIZE_PER_SEMITINA_ZONE[semitinaZone])) {
+        while (isSpevGreater(comma, MAX_SIZE_PER_SEMITINA_ZONE[semitinaZone])) {
             semitinaZone = increment(semitinaZone)
         }
         commaBySemitinaZone[semitinaZone].push(comma)

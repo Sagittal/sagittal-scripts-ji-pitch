@@ -6,10 +6,10 @@ import {compute23FreeClassRow} from "./two3FreeClassRow"
 const computeFindCommasRow = (
     commaAnalysis: CommaAnalysis,
     maybeCommaClassId: Maybe<CommaClassId>,
-    maxMonzoLength: Max<Count<Exponent<Prime>>>,
+    maxPevLength: Max<Count<Exponent<Prime>>>,
 ): Row<{of: CommaAnalysis}> =>
     [
-        ...computeNotatingCommasRow(commaAnalysis, maybeCommaClassId, maxMonzoLength),
+        ...computeNotatingCommasRow(commaAnalysis, maybeCommaClassId, maxPevLength),
         ...compute23FreeClassRow(commaAnalysis.two3FreeClassAnalysis) as Row as Row<{of: CommaAnalysis}>,
     ] as Row<{of: CommaAnalysis}>
 

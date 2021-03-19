@@ -1,10 +1,10 @@
-import {Comma, Scamon, sort} from "@sagittal/general"
+import {Comma, Spev, sort} from "@sagittal/general"
 import {analyzeComma, CommaAnalysis, findNotatingCommas} from "@sagittal/system"
 import {FindCommasOptions} from "../findCommas"
 import {jiPitchScriptGroupSettings} from "../globals"
 
 const findNotatingCommaAnalyses = (
-    jiPitch: Scamon<{rational: true}>,
+    jiPitch: Spev<{rational: true}>,
     findNotatingCommasOptions: Partial<FindCommasOptions> = {},
 ): CommaAnalysis[] => {
     const notatingCommas: Comma[] = findNotatingCommas(

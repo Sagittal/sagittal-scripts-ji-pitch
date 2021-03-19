@@ -4,11 +4,11 @@ import {CommaField, JiPitchField} from "../../../../src/types"
 
 describe("parseFields", (): void => {
     it("splits the fields by comma", (): void => {
-        const fieldsIo = "monzo,name" as Io
+        const fieldsIo = "pev,name" as Io
 
         const actual = parseFields(fieldsIo)
 
-        const expected = [JiPitchField.MONZO, CommaField.NAME]
+        const expected = [JiPitchField.PEV, CommaField.NAME]
         expect(actual).toEqual(expected)
     })
 
@@ -17,7 +17,7 @@ describe("parseFields", (): void => {
 
         expect((): void => {
             parseFields(fieldsIo)
-        }).toThrowError("Tried to parse field two3FreeClass but it is not a member of the list of possible fields: {quotient,monzo,cents,apotomeSlope,aas,ate,commaClass,name,sizeCategory,two3FreePrimeLimit,two3FreeClassName,two3FreeCopfr,two3FreeSopfr,n2d3p9}, as well as specific terms of some fields e.g. monzo2, quotientN")
+        }).toThrowError("Tried to parse field two3FreeClass but it is not a member of the list of possible fields: {quotient,pev,cents,apotomeSlope,aas,ate,commaClass,name,sizeCategory,two3FreePrimeLimit,two3FreeClassName,two3FreeCopfr,two3FreeSopfr,n2d3p9}, as well as specific terms of some fields e.g. pev2, quotientN")
     })
 })
 
@@ -69,12 +69,12 @@ describe("parseSortBy", (): void => {
         expect(actual).toEqual(expected)
     })
 
-    it("works when given a specific term of a monzo", (): void => {
-        const sortByIo = "monzo5" as Io
+    it("works when given a specific term of a pev", (): void => {
+        const sortByIo = "pev5" as Io
 
         const actual = parseSortBy(sortByIo)
 
-        const expected = [{monzo: 2} as Record<string, number>] as KeyPath[]    // 5 is the 3rd prime, AKA index 2
+        const expected = [{pev: 2} as Record<string, number>] as KeyPath[]    // 5 is the 3rd prime, AKA index 2
         expect(actual).toEqual(expected)
     })
 

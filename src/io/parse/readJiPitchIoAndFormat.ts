@@ -8,8 +8,8 @@ const readJiPitchIoAndFormat = (): [Io, PitchFormat] => {
         return [jiPitchIo, PitchFormat.UNKNOWN]
 
         // When provided via specific flags, they are pre-parsed (in readOptions.ts).
-    } else if (program.monzo) {
-        return [program.monzo, PitchFormat.MONZO]
+    } else if (program.pev) {
+        return [program.pev, PitchFormat.PEV]
     } else if (program.quotient) {
         return [program.quotient, PitchFormat.QUOTIENT]
     } else if (program.commaName) {

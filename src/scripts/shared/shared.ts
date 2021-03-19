@@ -1,4 +1,4 @@
-import {Filename, Io, program, Scamon, setupScriptAndIo} from "@sagittal/general"
+import {Filename, Io, program, Spev, setupScriptAndIo} from "@sagittal/general"
 import {FactoringMode} from "@sagittal/system"
 import {jiPitchScriptGroupSettings} from "../../globals"
 import {parsePitch} from "../../io"
@@ -9,8 +9,8 @@ import {parseExclusive, parseFields, parseSortBy} from "./parse"
 
 const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
     program
-        .option("--lower-bound <lowerBound>", "lower bound", (pitchIo: string): Scamon => parsePitch(pitchIo as Io))
-        .option("--upper-bound <upperBound>", "upper bound", (pitchIo: string): Scamon => parsePitch(pitchIo as Io))
+        .option("--lower-bound <lowerBound>", "lower bound", (pitchIo: string): Spev => parsePitch(pitchIo as Io))
+        .option("--upper-bound <upperBound>", "upper bound", (pitchIo: string): Spev => parsePitch(pitchIo as Io))
         .option("--exclusive [exclusive]", "exclusive bounds", parseExclusive)
         .option("--max-aas <maxAas>", "max AAS", parseFloat)
         .option("--max-ate <maxAte>", "max ATE", parseInt)

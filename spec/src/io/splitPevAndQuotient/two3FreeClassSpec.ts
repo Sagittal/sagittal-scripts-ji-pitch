@@ -1,9 +1,9 @@
 import {Formatted, ioSettings, TableFormat, Two3FreeClass} from "@sagittal/general"
 import {Two3FreeClassAnalysis} from "@sagittal/system"
-import {formatSplit23FreeClass} from "../../../../src/io/splitMonzoAndQuotient"
+import {formatSplit23FreeClass} from "../../../../src/io/splitPevAndQuotient"
 
 describe("formatSplit23FreeClass", (): void => {
-    const two3FreeClass = {monzo: [0, 0, -1, 1]} as Two3FreeClass
+    const two3FreeClass = {pev: [0, 0, -1, 1]} as Two3FreeClass
 
     it("splits the 2,3-free class into the numinator, vinculum, diminuator, and sign", (): void => {
         const actual = formatSplit23FreeClass(two3FreeClass)

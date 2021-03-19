@@ -1,10 +1,10 @@
-import {Comma, computeMonzoMapping, Decimal, LogTarget, saveLog} from "@sagittal/general"
-import {computeCommaName, formatComma, INSANE_ZETA_PEAK_VAL} from "@sagittal/system"
+import {Comma, computePevMapping, Decimal, LogTarget, saveLog} from "@sagittal/general"
+import {computeCommaName, formatComma, INSANE_ZETA_PEAK_MAPPING} from "@sagittal/system"
 import {inconsistentMetacommas} from "../../globals"
 import {BucketName} from "./types"
 
 const checkMetacommaConsistency = (metacomma: Comma, tinaBucket: BucketName): void => {
-    const tinaMapping = computeMonzoMapping(metacomma.monzo, INSANE_ZETA_PEAK_VAL)
+    const tinaMapping = computePevMapping(metacomma.pev, INSANE_ZETA_PEAK_MAPPING)
     const insaneZetaPeakEdoConsistent = tinaMapping as Decimal<{integer: true}> === tinaBucket
 
     if (!insaneZetaPeakEdoConsistent) {

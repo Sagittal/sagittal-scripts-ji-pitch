@@ -3,17 +3,17 @@ import {JiPitchesOrFindCommasField, JiPitchField, JiPitchScriptGroupField, Two3F
 import {
     ADDITIONAL_COLUMNS_FOR_SPLIT_2_3_FREE_CLASS_FIELD,
     ADDITIONAL_COLUMNS_FOR_SPLIT_QUOTIENT_FIELD,
-    computeAdditionalColumnCountForSplitMonzoField,
+    computeAdditionalColumnCountForSplitPevField,
 } from "./additionalColumnsForSplitFields"
 import {OffsetColumnIndexOffsetOptions, OrderedTableAndAlignmentOptions} from "./types"
 
 const offsetColumnIndexOffset = (
     options: OffsetColumnIndexOffsetOptions,
 ): Offset<Offset<Index<Column>>> => {
-    const {field, maxMonzoLength = 0 as Max<Count<Exponent<Prime>>>, recognizeNameTitleAsBeingFor23FreeClass} = options
+    const {field, maxPevLength = 0 as Max<Count<Exponent<Prime>>>, recognizeNameTitleAsBeingFor23FreeClass} = options
     switch (field) {
-        case JiPitchField.MONZO:
-            return computeAdditionalColumnCountForSplitMonzoField(maxMonzoLength) as
+        case JiPitchField.PEV:
+            return computeAdditionalColumnCountForSplitPevField(maxPevLength) as
                 Decimal<{integer: true}> as Offset<Offset<Index<Column>>>
         case JiPitchField.QUOTIENT:
             return ADDITIONAL_COLUMNS_FOR_SPLIT_QUOTIENT_FIELD as
@@ -33,7 +33,7 @@ const offsetColumnIndexOffset = (
 
 const computeOrderedColumnIndex = (
     orderedField: JiPitchScriptGroupField,
-    {fieldTitles, maxMonzoLength, recognizeNameTitleAsBeingFor23FreeClass}: OrderedTableAndAlignmentOptions,
+    {fieldTitles, maxPevLength, recognizeNameTitleAsBeingFor23FreeClass}: OrderedTableAndAlignmentOptions,
 ): Index<Column> => {
     let columnIndexOffset = 0 as Offset<Index<Column>>
 
@@ -45,7 +45,7 @@ const computeOrderedColumnIndex = (
             columnIndexOffset,
             offsetColumnIndexOffset({
                 field,
-                maxMonzoLength,
+                maxPevLength,
                 recognizeNameTitleAsBeingFor23FreeClass,
             }),
         )

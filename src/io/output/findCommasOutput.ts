@@ -6,7 +6,7 @@ import {JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES} from "../fieldTitles"
 import {computeJiPitchesOrFindCommasHeaderRows} from "../headerRows"
 import {computeOrderedTableAndAlignment} from "../orderedFields"
 import {computeFindCommasRow} from "../row"
-import {computeMaxMonzoLength, computeSplitMonzoAndQuotientTableAlignment} from "../splitMonzoAndQuotient"
+import {computeMaxPevLength, computeSplitPevAndQuotientTableAlignment} from "../splitPevAndQuotient"
 import {computeFindCommasTableTitle} from "../tableTitles"
 import {NO_RESULTS} from "./constants"
 
@@ -19,15 +19,15 @@ const computeFindCommasOutput = (
 
     if (isEmpty(commaAnalyses)) return sumTexts(tableTitle, NO_RESULTS)
 
-    const maxMonzoLength = computeMaxMonzoLength(commaAnalyses)
-    const findCommasHeaderRows = computeJiPitchesOrFindCommasHeaderRows(maxMonzoLength)
+    const maxPevLength = computeMaxPevLength(commaAnalyses)
+    const findCommasHeaderRows = computeJiPitchesOrFindCommasHeaderRows(maxPevLength)
     const headerRowCount = count(findCommasHeaderRows)
-    let tableAlignment = computeSplitMonzoAndQuotientTableAlignment(findCommasHeaderRows)
+    let tableAlignment = computeSplitPevAndQuotientTableAlignment(findCommasHeaderRows)
 
     let findCommasTable: Table<CommaAnalysis> = [
         ...findCommasHeaderRows,
         ...commaAnalyses.map((commaAnalysis: CommaAnalysis, index: number): Row<{of: CommaAnalysis}> => {
-            return computeFindCommasRow(commaAnalysis, maybeCommaClassIds[index], maxMonzoLength)
+            return computeFindCommasRow(commaAnalysis, maybeCommaClassIds[index], maxPevLength)
         }),
     ]
 
@@ -37,7 +37,7 @@ const computeFindCommasOutput = (
             tableAlignment: orderedTableAlignment,
         } = computeOrderedTableAndAlignment(
             {table: findCommasTable, tableAlignment},
-            {maxMonzoLength, fieldTitles: JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES},
+            {maxPevLength, fieldTitles: JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES},
         )
         findCommasTable = orderedFindCommasTable
         tableAlignment = orderedTableAlignment

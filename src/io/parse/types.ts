@@ -1,5 +1,5 @@
 enum PitchFormat {
-    MONZO = "monzo",
+    PEV = "pev",
     QUOTIENT = "quotient",
     COMMA_NAME = "commaName",
     CENTS = "cents",
@@ -9,7 +9,7 @@ enum PitchFormat {
 }
 
 enum JiPitchScriptFlag {
-    MONZO = "m",
+    PEV = "m",
     QUOTIENT = "q",
     COMMA_NAME = "n",
     ACCIDENTAL = "a",

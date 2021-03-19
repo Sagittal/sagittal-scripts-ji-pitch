@@ -2,7 +2,7 @@ import {formatDecimal, formatIntegerDecimal, Formatted, Row} from "@sagittal/gen
 import {Two3FreeClassAnalysis} from "@sagittal/system"
 import {jiPitchScriptGroupSettings} from "../../globals"
 import {Two3FreeClassField} from "../../types"
-import {formatSplit23FreeClass} from "../splitMonzoAndQuotient"
+import {formatSplit23FreeClass} from "../splitPevAndQuotient"
 
 const compute23FreeClassRow = (
     two3FreeClassAnalysis: Two3FreeClassAnalysis,

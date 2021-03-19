@@ -1,29 +1,29 @@
 import {Alignment, Row} from "@sagittal/general"
-import {computeSplitMonzoAndQuotientTableAlignment} from "../../../../src/io/splitMonzoAndQuotient"
+import {computeSplitPevAndQuotientTableAlignment} from "../../../../src/io/splitPevAndQuotient"
 import {
-    INVISIBLE_MONZO_CLOSING_ANGLE_BRACKET_COLUMN_TITLE,
-    INVISIBLE_MONZO_OPENING_SQUARE_BRACKET_COLUMN_TITLE,
-} from "../../../../src/io/splitMonzoAndQuotient/constants"
+    INVISIBLE_PEV_CLOSING_ANGLE_BRACKET_COLUMN_TITLE,
+    INVISIBLE_PEV_OPENING_SQUARE_BRACKET_COLUMN_TITLE,
+} from "../../../../src/io/splitPevAndQuotient/constants"
 
-describe("computeSplitMonzoAndQuotientTableAlignment", (): void => {
-    it("aligns quotients to center on the vinculum, and monzos so that the square bracket is closer to the rest of the materials", (): void => {
+describe("computeSplitPevAndQuotientTableAlignment", (): void => {
+    it("aligns quotients to center on the vinculum, and pevs so that the square bracket is closer to the rest of the materials", (): void => {
         const headerRows = [
-            ["comma", "quotient", "", "", "monzo", "", "", "", "apotome"],
+            ["comma", "quotient", "", "", "pev", "", "", "", "apotome"],
             // tslint:disable-next-line max-line-length
-            ["name", "n", "/", "d", INVISIBLE_MONZO_OPENING_SQUARE_BRACKET_COLUMN_TITLE, "2", "3", INVISIBLE_MONZO_CLOSING_ANGLE_BRACKET_COLUMN_TITLE, "slope"],
+            ["name", "n", "/", "d", INVISIBLE_PEV_OPENING_SQUARE_BRACKET_COLUMN_TITLE, "2", "3", INVISIBLE_PEV_CLOSING_ANGLE_BRACKET_COLUMN_TITLE, "slope"],
         ] as Array<Row<{header: true}>>
 
-        const actual = computeSplitMonzoAndQuotientTableAlignment(headerRows)
+        const actual = computeSplitPevAndQuotientTableAlignment(headerRows)
 
         const expected = [
             undefined,          // Comma name
             Alignment.RIGHT,    // Quotient numerator
             Alignment.CENTER,   // Quotient vinculum
             Alignment.LEFT,     // Quotient denominator
-            Alignment.RIGHT,    // Monzo [
-            Alignment.CENTER,   // Monzo 2
-            Alignment.CENTER,   // Monzo 3
-            Alignment.LEFT,     // Monzo ⟩
+            Alignment.RIGHT,    // Pev [
+            Alignment.CENTER,   // Pev 2
+            Alignment.CENTER,   // Pev 3
+            Alignment.LEFT,     // Pev ⟩
             undefined,          // Apotome slope
         ]
         expect(actual).toEqual(expected)
@@ -36,7 +36,7 @@ describe("computeSplitMonzoAndQuotientTableAlignment", (): void => {
             ["limit", "n", "/", "d", "₂,₃", "CoPFR"],
         ] as Array<Row<{header: true}>>
 
-        const actual = computeSplitMonzoAndQuotientTableAlignment(headerRows)
+        const actual = computeSplitPevAndQuotientTableAlignment(headerRows)
 
         const expected = [
             undefined,          // 2,3-free prime limit
@@ -52,7 +52,7 @@ describe("computeSplitMonzoAndQuotientTableAlignment", (): void => {
     it("doesn't crash when there are no header rows", (): void => {
         const headerRows = [] as Array<Row<{header: true}>>
 
-        const actual = computeSplitMonzoAndQuotientTableAlignment(headerRows)
+        const actual = computeSplitPevAndQuotientTableAlignment(headerRows)
 
         expect(actual).toBeUndefined()
     })

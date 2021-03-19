@@ -1,4 +1,4 @@
-import {Abs, Copfr, Exclusive, Extrema, Max, Min, Prime, program, Scamon, Sopfr} from "@sagittal/general"
+import {Abs, Copfr, Exclusive, Extrema, Max, Min, Prime, program, Spev, Sopfr} from "@sagittal/general"
 import {ApotomeSlope, Ate, JiPitchAnalysis, N2D3P9} from "@sagittal/system"
 import {DEFAULT_FIND_COMMAS_OPTIONS} from "./constants"
 import {FindCommasOptions} from "./types"
@@ -25,16 +25,16 @@ const computeFindCommasOptions = (
         defaultOverrides.maxAte ||
         DEFAULT_FIND_COMMAS_OPTIONS.maxAte
 
-    const lowerBound: Min<Scamon> = program.lowerBound ||
+    const lowerBound: Min<Spev> = program.lowerBound ||
         defaultOverrides.zone?.extrema[0] ||
         DEFAULT_FIND_COMMAS_OPTIONS.zone?.extrema[0]
-    const upperBound: Max<Scamon> = program.upperBound ||
+    const upperBound: Max<Spev> = program.upperBound ||
         defaultOverrides.zone?.extrema[1] ||
         DEFAULT_FIND_COMMAS_OPTIONS.zone?.extrema[1]
     const exclusive: Exclusive = program.exclusive ||
         defaultOverrides.zone?.exclusive ||
         DEFAULT_FIND_COMMAS_OPTIONS.zone!.exclusive!
-    const zone = {extrema: [lowerBound, upperBound] as Extrema<{of: Scamon, open: true}>, exclusive}
+    const zone = {extrema: [lowerBound, upperBound] as Extrema<{of: Spev, open: true}>, exclusive}
 
     return {max23FreeSopfr, max23FreeCopfr, maxPrimeLimit, maxN2D3P9, zone, maxAas, maxAte}
 }

@@ -4,14 +4,14 @@ import {
     Comma,
     Copfr,
     Decimal,
-    EMPTY_MONZO,
+    EMPTY_PEV,
     Index,
     Max,
-    Monzo,
+    Pev,
     Name,
     Prime,
     Quotient,
-    Scamon,
+    Spev,
     Sopfr,
     Two3FreeClass,
     two3FreeClassFixture,
@@ -36,15 +36,15 @@ const two3FreeClassAnalysisFixture: Two3FreeClassAnalysis = {
     n2d3p9: 1 as N2D3P9,
 }
 
-const jiPitchFixture: Scamon<{rational: true}> = {
-    monzo: EMPTY_MONZO,
-} as Scamon<{rational: true}>
+const jiPitchFixture: Spev<{rational: true}> = {
+    pev: EMPTY_PEV,
+} as Spev<{rational: true}>
 
 const jiPitchAnalysisFixture: JiPitchAnalysis = {
     pitch: jiPitchFixture,
     cents: 0 as Cents,
     decimal: 1 as Decimal<{rational: true}>,
-    monzo: [] as unknown[] as Monzo<{rational: true}>,
+    pev: [] as unknown[] as Pev<{rational: true}>,
     quotient: [1, 1] as Quotient<{rational: true}>,
     apotomeSlope: 0 as ApotomeSlope,
     aas: 0 as Abs<ApotomeSlope>,
@@ -53,7 +53,7 @@ const jiPitchAnalysisFixture: JiPitchAnalysis = {
 }
 
 const commaFixture: Comma = {
-    monzo: EMPTY_MONZO,
+    pev: EMPTY_PEV,
 } as Comma
 
 const commaAnalysisFixture: CommaAnalysis = {

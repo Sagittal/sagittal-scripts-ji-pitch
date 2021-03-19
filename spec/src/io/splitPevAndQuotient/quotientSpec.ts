@@ -1,6 +1,6 @@
 import {Formatted, ioSettings, Quotient, TableFormat} from "@sagittal/general"
 import {JiPitchAnalysis} from "@sagittal/system"
-import {formatSplitQuotient} from "../../../../src/io/splitMonzoAndQuotient"
+import {formatSplitQuotient} from "../../../../src/io/splitPevAndQuotient"
 
 describe("formatSplitQuotient", (): void => {
     const quotient = [7, 6] as Quotient<{rational: true}>

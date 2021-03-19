@@ -10,7 +10,7 @@ interface JiPitchScriptGroupSettings {
 
 enum JiPitchField {
     QUOTIENT = "quotient",
-    MONZO = "monzo",
+    PEV = "pev",
     CENTS = "cents",
     APOTOME_SLOPE = "apotomeSlope",
     AAS = "aas",
@@ -27,7 +27,7 @@ enum Two3FreeClassField {
 
 enum CommaField {
     QUOTIENT = "quotient",
-    MONZO = "monzo",
+    PEV = "pev",
     CENTS = "cents",
     APOTOME_SLOPE = "apotomeSlope",
     AAS = "aas",
@@ -39,7 +39,7 @@ enum CommaField {
 
 enum JiPitchesOrFindCommasField {
     QUOTIENT = "quotient",
-    MONZO = "monzo",
+    PEV = "pev",
     CENTS = "cents",
     APOTOME_SLOPE = "apotomeSlope",
     AAS = "aas",

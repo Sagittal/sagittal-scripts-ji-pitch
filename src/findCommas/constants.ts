@@ -1,4 +1,4 @@
-import {Monzo} from "@sagittal/general"
+import {Pev} from "@sagittal/general"
 import {
     DEFAULT_EXCLUSIVE,
     DEFAULT_LOWER_BOUND,
@@ -22,9 +22,9 @@ const DEFAULT_FIND_COMMAS_OPTIONS: FindCommasOptions = {
     maxAte: DEFAULT_MAX_ATE,
 }
 
-const TWO_3_FREE_MONZO_BASE = [0, 0] as Monzo<{rational: true, rough: 5}>
+const TWO_3_FREE_PEV_BASE = [0, 0] as Pev<{rational: true, rough: 5}>
 
 export {
     DEFAULT_FIND_COMMAS_OPTIONS,
-    TWO_3_FREE_MONZO_BASE,
+    TWO_3_FREE_PEV_BASE,
 }

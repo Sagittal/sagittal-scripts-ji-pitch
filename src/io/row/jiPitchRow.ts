@@ -12,21 +12,21 @@ import {
 import {JiPitchAnalysis} from "@sagittal/system"
 import {jiPitchScriptGroupSettings} from "../../globals"
 import {JiPitchField} from "../../types"
-import {formatSplitMonzo, formatSplitQuotient} from "../splitMonzoAndQuotient"
+import {formatSplitPev, formatSplitQuotient} from "../splitPevAndQuotient"
 
 const computeJiPitchRow = (
     jiPitchAnalysis: JiPitchAnalysis,
-    maxMonzoLength: Max<Count<Exponent<Prime>>>,
+    maxPevLength: Max<Count<Exponent<Prime>>>,
 ): Row<{of: JiPitchAnalysis}> => {
-    const {cents, monzo, quotient, apotomeSlope, aas, ate} = jiPitchAnalysis
+    const {cents, pev, quotient, apotomeSlope, aas, ate} = jiPitchAnalysis
 
     const row = [] as unknown[] as Row<{of: JiPitchAnalysis}>
 
     if (!jiPitchScriptGroupSettings.excludedFields.includes(JiPitchField.QUOTIENT)) {
         row.push(...formatSplitQuotient(quotient))
     }
-    if (!jiPitchScriptGroupSettings.excludedFields.includes(JiPitchField.MONZO)) {
-        row.push(...formatSplitMonzo(monzo, maxMonzoLength))
+    if (!jiPitchScriptGroupSettings.excludedFields.includes(JiPitchField.PEV)) {
+        row.push(...formatSplitPev(pev, maxPevLength))
     }
     if (!jiPitchScriptGroupSettings.excludedFields.includes(JiPitchField.CENTS)) {
         row.push(formatCents(cents, {align: true}) as Formatted as Formatted<JiPitchAnalysis>)

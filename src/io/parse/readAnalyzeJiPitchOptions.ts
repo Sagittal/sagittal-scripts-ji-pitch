@@ -1,13 +1,13 @@
-import {Comma, Decimal, Io, Monzo, parseInteger, parseMonzo, parseQuotient, program, Quotient} from "@sagittal/general"
+import {Comma, Decimal, Io, Pev, parseInteger, parsePev, parseQuotient, program, Quotient} from "@sagittal/general"
 import {Accidental, Sagitype, computeCommaFromCommaName, parseAccidental, parseCommaName} from "@sagittal/system"
 import {JiPitchScriptFlag} from "./types"
 
 const readAnalyzeJiPitchOptions = (): void => {
     program
         .option(
-            `-${JiPitchScriptFlag.MONZO}, --monzo <monzo>`,
-            "monzo",
-            (monzoText: string): Monzo => parseMonzo(monzoText as Io),
+            `-${JiPitchScriptFlag.PEV}, --pev <pev>`,
+            "pev",
+            (pevText: string): Pev => parsePev(pevText as Io),
         )
         .option(
             `-${JiPitchScriptFlag.QUOTIENT}, --quotient <quotient>`,

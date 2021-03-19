@@ -1,4 +1,4 @@
-import {Abs, Copfr, Decimal, Max, Monzo, Prime, Scamon, Sopfr} from "@sagittal/general"
+import {Abs, Copfr, Decimal, Max, Pev, Prime, Spev, Sopfr} from "@sagittal/general"
 import {ApotomeSlope, Ate, computeAas, JiPitchAnalysis, N2D3P9} from "@sagittal/system"
 import {computeFindNotatingCommasOptions, DEFAULT_FIND_COMMAS_OPTIONS} from "../../../src/findCommas"
 import {jiPitchAnalysisFixture, two3FreeClassAnalysisFixture} from "../../helpers/src/fixtures"
@@ -6,8 +6,8 @@ import {jiPitchAnalysisFixture, two3FreeClassAnalysisFixture} from "../../helper
 describe("computeFindNotatingCommasOptions", (): void => {
     const n2d3p9 = DEFAULT_FIND_COMMAS_OPTIONS.maxN2D3P9 + 100 as N2D3P9
     const ate = DEFAULT_FIND_COMMAS_OPTIONS.maxAte + 10 as Ate
-    const monzo = [0, ate] as Monzo<{rational: true}>
-    const pitch = {monzo} as Scamon<{rational: true}>
+    const pev = [0, ate] as Pev<{rational: true}>
+    const pitch = {pev} as Spev<{rational: true}>
     const aas = computeAas(pitch)
     const decimal = 847300834270 as Decimal<{rational: true}>             // 47548.9¢
     const two3FreePrimeLimit = 8191 as Max<Prime<{rough: 5}>>

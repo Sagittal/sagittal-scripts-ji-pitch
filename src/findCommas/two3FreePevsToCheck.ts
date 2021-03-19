@@ -1,7 +1,7 @@
 import {
     computeExtensionBase,
-    computeRationalMonzoCopfr,
-    computeRationalMonzoSopfr,
+    computeRationalPevCopfr,
+    computeRationalPevSopfr,
     computeTrimmedArray,
     Copfr,
     Decimal,
@@ -12,20 +12,20 @@ import {
     isUndefined,
     Max,
     Maybe,
-    Monzo,
+    Pev,
     Prime,
     shallowClone,
     Sopfr,
 } from "@sagittal/general"
 import {computePrimeExponentExtremasGivenMaxN2D3P9} from "@sagittal/system"
-import {TWO_3_FREE_MONZO_BASE} from "./constants"
+import {TWO_3_FREE_PEV_BASE} from "./constants"
 import {computePrimeExponentRange} from "./primeExponentRange"
 import {compute23FreePrimesToCheck} from "./two3FreePrimesToCheck"
 import {FindCommasOptions} from "./types"
 
-const compute23FreeRationalMonzosToCheck = (
+const compute23FreeRationalPevsToCheck = (
     {maxPrimeLimit, max23FreeSopfr, max23FreeCopfr, maxN2D3P9}: Partial<FindCommasOptions> = {},
-): Array<Monzo<{rational: true, rough: 5}>> => {
+): Array<Pev<{rational: true, rough: 5}>> => {
     if (isUndefined(max23FreeSopfr) && isUndefined(maxN2D3P9)) {
         if (isUndefined(maxPrimeLimit)) {
             if (isUndefined(max23FreeCopfr)) {
@@ -48,20 +48,20 @@ const compute23FreeRationalMonzosToCheck = (
         primeExponentExtremasGivenMaxN2D3P9,
     })
 
-    let two3FreeRationalMonzosToCheck: Array<Monzo<{rational: true, rough: 5}>> = [
-        shallowClone(TWO_3_FREE_MONZO_BASE),
+    let two3FreeRationalPevsToCheck: Array<Pev<{rational: true, rough: 5}>> = [
+        shallowClone(TWO_3_FREE_PEV_BASE),
     ]
     two3FreePrimesToCheck.forEach((two3FreePrimeToCheck: Prime, index: number): void => {
-        const extended23FreeMonzosToCheck: Array<Monzo<{rational: true, rough: 5}>> =
-            computeExtensionBase(ExtensionBaseType.ARRAY) as Array<Monzo<{rational: true, rough: 5}>>
+        const extended23FreePevsToCheck: Array<Pev<{rational: true, rough: 5}>> =
+            computeExtensionBase(ExtensionBaseType.ARRAY) as Array<Pev<{rational: true, rough: 5}>>
 
         const primeExponentExtremaGivenMaxN2D3P9:
             Maybe<Extrema<{of: Decimal<{integer: true}> & Exponent<Prime>}>> =
             primeExponentExtremasGivenMaxN2D3P9 && primeExponentExtremasGivenMaxN2D3P9[index + FIVE_PRIME_INDEX]
 
-        two3FreeRationalMonzosToCheck.forEach((two3FreeMonzoToCheck: Monzo<{rational: true}>): void => {
-            const two3FreeSopfr = computeRationalMonzoSopfr(two3FreeMonzoToCheck)
-            const two3FreeCopfr = computeRationalMonzoCopfr(two3FreeMonzoToCheck)
+        two3FreeRationalPevsToCheck.forEach((two3FreePevToCheck: Pev<{rational: true}>): void => {
+            const two3FreeSopfr = computeRationalPevSopfr(two3FreePevToCheck)
+            const two3FreeCopfr = computeRationalPevCopfr(two3FreePevToCheck)
 
             const adjustedMax23FreeSopfr = max23FreeSopfr &&
                 max23FreeSopfr - two3FreeSopfr as Max<Sopfr<{rough: 5}>>
@@ -80,18 +80,18 @@ const compute23FreeRationalMonzosToCheck = (
             primeExponentRange.forEach((
                 potentialNextTerm: Decimal<{integer: true}> & Exponent<Prime>,
             ): void => {
-                extended23FreeMonzosToCheck.push(
-                    two3FreeMonzoToCheck.concat(potentialNextTerm) as Monzo<{rational: true, rough: 5}>,
+                extended23FreePevsToCheck.push(
+                    two3FreePevToCheck.concat(potentialNextTerm) as Pev<{rational: true, rough: 5}>,
                 )
             })
         })
 
-        two3FreeRationalMonzosToCheck = extended23FreeMonzosToCheck
+        two3FreeRationalPevsToCheck = extended23FreePevsToCheck
     })
 
-    return two3FreeRationalMonzosToCheck.map(computeTrimmedArray)
+    return two3FreeRationalPevsToCheck.map(computeTrimmedArray)
 }
 
 export {
-    compute23FreeRationalMonzosToCheck,
+    compute23FreeRationalPevsToCheck,
 }

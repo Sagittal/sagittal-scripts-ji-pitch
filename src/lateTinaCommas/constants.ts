@@ -1,4 +1,4 @@
-import {add, Cents, computePitchFromCents, Copfr, Exclusive, Max, Min, Scamon, subtract} from "@sagittal/general"
+import {add, Cents, computePitchFromCents, Copfr, Exclusive, Max, Min, Spev, subtract} from "@sagittal/general"
 import {computeCentsFromTinas, Tinas} from "@sagittal/system"
 
 const INFINITE_2_3_FREE_COPFR = Infinity as Max<Copfr<{rough: 5}>>
@@ -10,17 +10,17 @@ const TINA_COMMAS_LOWER_BOUND = computePitchFromCents(
     computeCentsFromTinas(
         subtract(TINAS_TO_CHECK[0], TINA_COMMAS_PLUS_MINUS_RANGE),
     ),
-) as Min<Scamon<{rational: false}>>
+) as Min<Spev<{rational: false}>>
 const TINA_COMMAS_UPPER_BOUND = computePitchFromCents(
     computeCentsFromTinas(
         add(TINAS_TO_CHECK[TINAS_TO_CHECK.length - 1], TINA_COMMAS_PLUS_MINUS_RANGE),
     ),
-) as Max<Scamon<{rational: false}>>
+) as Max<Spev<{rational: false}>>
 
 const MAX_TINA_SIZES: Cents[] = TINAS_TO_CHECK
     .map((tina: Tinas): Cents => computeCentsFromTinas(add(tina, TINA_COMMAS_PLUS_MINUS_RANGE)))
 
-const TINA_COMMAS_EXTREMA: [Min<Scamon<{rational: false}>>, Max<Scamon<{rational: false}>>] =
+const TINA_COMMAS_EXTREMA: [Min<Spev<{rational: false}>>, Max<Spev<{rational: false}>>] =
     [TINA_COMMAS_LOWER_BOUND, TINA_COMMAS_UPPER_BOUND]
 const TINA_COMMAS_EXCLUSIVE: Exclusive = true
 const TINA_COMMAS_ZONE = {extrema: TINA_COMMAS_EXTREMA, exclusive: TINA_COMMAS_EXCLUSIVE}

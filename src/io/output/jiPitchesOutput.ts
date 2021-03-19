@@ -5,16 +5,16 @@ import {JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES} from "../fieldTitles"
 import {computeJiPitchesOrFindCommasHeaderRows} from "../headerRows"
 import {computeOrderedTableAndAlignment} from "../orderedFields"
 import {computeJiPitchesRow} from "../row"
-import {computeMaxMonzoLength, computeSplitMonzoAndQuotientTableAlignment} from "../splitMonzoAndQuotient"
+import {computeMaxPevLength, computeSplitPevAndQuotientTableAlignment} from "../splitPevAndQuotient"
 
 const computeJiPitchesOutput = (
     potentiallyCommaAnalyses: PotentiallyCommaAnalysis[],
     maybeCommaClassIds: Array<Maybe<CommaClassId>>,
 ): Io => {
-    const maxMonzoLength = computeMaxMonzoLength(potentiallyCommaAnalyses)
-    const jiPitchesHeaderRows = computeJiPitchesOrFindCommasHeaderRows(maxMonzoLength)
+    const maxPevLength = computeMaxPevLength(potentiallyCommaAnalyses)
+    const jiPitchesHeaderRows = computeJiPitchesOrFindCommasHeaderRows(maxPevLength)
     const headerRowCount = count(jiPitchesHeaderRows)
-    let tableAlignment = computeSplitMonzoAndQuotientTableAlignment(jiPitchesHeaderRows)
+    let tableAlignment = computeSplitPevAndQuotientTableAlignment(jiPitchesHeaderRows)
 
     let jiPitchesTable: Table<JiPitchAnalysis> = [
         ...jiPitchesHeaderRows,
@@ -23,7 +23,7 @@ const computeJiPitchesOutput = (
                 potentiallyCommaAnalysis: PotentiallyCommaAnalysis,
                 index: number,
             ): Row<{of: PotentiallyCommaAnalysis}> => {
-                return computeJiPitchesRow(potentiallyCommaAnalysis, maybeCommaClassIds[index], maxMonzoLength)
+                return computeJiPitchesRow(potentiallyCommaAnalysis, maybeCommaClassIds[index], maxPevLength)
             },
         ),
     ]
@@ -34,7 +34,7 @@ const computeJiPitchesOutput = (
             tableAlignment: orderedTableAlignment,
         } = computeOrderedTableAndAlignment(
             {table: jiPitchesTable, tableAlignment},
-            {maxMonzoLength, fieldTitles: JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES},
+            {maxPevLength, fieldTitles: JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES},
         )
         jiPitchesTable = orderedJiPitchesTable
         tableAlignment = orderedTableAlignment

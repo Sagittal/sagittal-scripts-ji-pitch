@@ -7,7 +7,7 @@ import {
     RecordKey,
     saveLog,
     stringify,
-    subtractRationalScamons,
+    subtractRationalSpevs,
 } from "@sagittal/general"
 import {computeCommaName} from "@sagittal/system"
 import {metacommaNameToMetacommaMap} from "../../globals"
@@ -27,7 +27,7 @@ const computeFractionalTinaOccamBucket = (
 
         const subsequentBestCommaInThatSemitinaZone = bestCommaPerSemitinaZone[index + 1][1]
 
-        const metacommaBetweenConsecutiveBestCommas = subtractRationalScamons(
+        const metacommaBetweenConsecutiveBestCommas = subtractRationalSpevs(
             subsequentBestCommaInThatSemitinaZone,
             bestCommaInThisSemitinaZone,
         ) as Comma

@@ -15,20 +15,20 @@ import {JI_PITCH_FIELD_TITLES} from "../fieldTitles"
 import {computeJiPitchHeaderRows} from "../headerRows"
 import {computeOrderedTableAndAlignment} from "../orderedFields"
 import {computeJiPitchRow} from "../row"
-import {computeMaxMonzoLength, computeSplitMonzoAndQuotientTableAlignment} from "../splitMonzoAndQuotient"
+import {computeMaxPevLength, computeSplitPevAndQuotientTableAlignment} from "../splitPevAndQuotient"
 import {JI_PITCH_TABLE_TITLE} from "../tableTitles"
 
 const computeJiPitchOutput = (
     jiPitchAnalysis: JiPitchAnalysis,
 ): Io => {
-    const maxMonzoLength = computeMaxMonzoLength([jiPitchAnalysis])
-    const jiPitchHeaderRows = computeJiPitchHeaderRows(maxMonzoLength)
+    const maxPevLength = computeMaxPevLength([jiPitchAnalysis])
+    const jiPitchHeaderRows = computeJiPitchHeaderRows(maxPevLength)
     const headerRowCount = count(jiPitchHeaderRows)
-    let tableAlignment = computeSplitMonzoAndQuotientTableAlignment(jiPitchHeaderRows)
+    let tableAlignment = computeSplitPevAndQuotientTableAlignment(jiPitchHeaderRows)
 
     let jiPitchTable: Table<JiPitchAnalysis> = [
         ...jiPitchHeaderRows,
-        computeJiPitchRow(jiPitchAnalysis, maxMonzoLength),
+        computeJiPitchRow(jiPitchAnalysis, maxPevLength),
     ]
 
     if (!isUndefined(jiPitchScriptGroupSettings.orderedFields)) {
@@ -37,7 +37,7 @@ const computeJiPitchOutput = (
             tableAlignment: orderedTableAlignment,
         } = computeOrderedTableAndAlignment(
             {table: jiPitchTable, tableAlignment},
-            {maxMonzoLength, fieldTitles: JI_PITCH_FIELD_TITLES},
+            {maxPevLength, fieldTitles: JI_PITCH_FIELD_TITLES},
         )
         jiPitchTable = orderedJiPitchTable
         tableAlignment = orderedTableAlignment

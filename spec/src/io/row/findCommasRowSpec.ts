@@ -7,7 +7,7 @@ import {
     Direction,
     Exponent,
     Max,
-    Monzo,
+    Pev,
     Name,
     Prime,
     Quotient,
@@ -26,7 +26,7 @@ describe("computeFindCommasRow", (): void => {
     const commaAnalysis: CommaAnalysis = {
         ...commaAnalysisFixture,
         cents: 11.2 as Cents,
-        monzo: [0, -1, 1] as Monzo<{rational: true}>,
+        pev: [0, -1, 1] as Pev<{rational: true}>,
         quotient: [5, 4] as Quotient<{rational: true}>,
         name: "1/5C" as Name<Comma>,
         apotomeSlope: 8.2 as ApotomeSlope,
@@ -39,15 +39,15 @@ describe("computeFindCommasRow", (): void => {
             two3FreeSopfr: 13 as Sopfr<{rough: 5}>,
             n2d3p9: 18.4567 as N2D3P9,
             two3FreeClass: {
-                monzo: [0, 0, 1] as Monzo<{rational: true, rough: 5, direction: Direction.SUPER}>,
+                pev: [0, 0, 1] as Pev<{rational: true, rough: 5, direction: Direction.SUPER}>,
             } as Two3FreeClass,
         },
     }
     const commaClassId = CommaClassId._1_V_5_C
-    const maxMonzoLength = 5 as Max<Count<Exponent<Prime>>>
+    const maxPevLength = 5 as Max<Count<Exponent<Prime>>>
 
     it("takes the properties of the comma and puts them in order in a row", (): void => {
-        const actual = computeFindCommasRow(commaAnalysis, commaClassId, maxMonzoLength)
+        const actual = computeFindCommasRow(commaAnalysis, commaClassId, maxPevLength)
 
         const expected = [
             "    /|  ",         // Comma class
@@ -55,13 +55,13 @@ describe("computeFindCommasRow", (): void => {
             "5",                // Quotient numerator
             "/",                // Quotient vinculum
             "4",                // Quotient denominator
-            "[",                // Monzo [
-            "  0    ",          // Monzo 2
-            " -1    ",          // Monzo 3
-            "  1    ",          // Monzo 5
-            "",                 // Monzo 7
-            "",                 // Monzo 11
-            "⟩",                // Monzo ⟩
+            "[",                // Pev [
+            "  0    ",          // Pev 2
+            " -1    ",          // Pev 3
+            "  1    ",          // Pev 5
+            "",                 // Pev 7
+            "",                 // Pev 11
+            "⟩",                // Pev ⟩
             "        11.200¢",  // Cents
             "  8.200",          // Apotome slope
             "  8.200",          // AAS
@@ -80,7 +80,7 @@ describe("computeFindCommasRow", (): void => {
 
     it("can filter the excluded fields", (): void => {
         jiPitchScriptGroupSettings.excludedFields = [JiPitchesOrFindCommasField.AAS, JiPitchesOrFindCommasField.ATE]
-        const actual = computeFindCommasRow(commaAnalysis, commaClassId, maxMonzoLength)
+        const actual = computeFindCommasRow(commaAnalysis, commaClassId, maxPevLength)
 
         const expected = [
             "    /|  ",         // Comma class
@@ -89,13 +89,13 @@ describe("computeFindCommasRow", (): void => {
             "5",                // Quotient numerator
             "/",                // Quotient vinculum
             "4",                // Quotient denominator
-            "[",                // Monzo [
-            "  0    ",          // Monzo 2
-            " -1    ",          // Monzo 3
-            "  1    ",          // Monzo 5
-            "",                 // Monzo 7
-            "",                 // Monzo 11
-            "⟩",                // Monzo ⟩
+            "[",                // Pev [
+            "  0    ",          // Pev 2
+            " -1    ",          // Pev 3
+            "  1    ",          // Pev 5
+            "",                 // Pev 7
+            "",                 // Pev 11
+            "⟩",                // Pev ⟩
             "        11.200¢",  // Cents
             "  8.200",          // Apotome slope
             " 14    ",          // 2,3-free prime limit

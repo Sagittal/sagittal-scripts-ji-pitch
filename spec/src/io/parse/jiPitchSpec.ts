@@ -1,11 +1,11 @@
-import {program, Scamon} from "@sagittal/general"
+import {program, Spev} from "@sagittal/general"
 import {ArmId, Compatible, computeAccidental, HeadId} from "@sagittal/system"
 import {parseJiPitch, readJiPitchIoAndFormat} from "../../../../src/io"
 
 describe("parseJiPitch", (): void => {
     beforeEach((): void => {
         program.args = []
-        program.monzo = undefined
+        program.pev = undefined
         program.quotient = undefined
         program.commaName = undefined
         program.integer = undefined
@@ -13,13 +13,13 @@ describe("parseJiPitch", (): void => {
     })
 
     describe("when the JI pitch is provided as an argument directly (not as a specific flag)", (): void => {
-        it("works for a monzo", (): void => {
+        it("works for a pev", (): void => {
             program.args = ["[0, 1, -2, 1⟩"]
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {monzo: [0, 1, -2, 1]} as Scamon<{rational: true}>
+            const expected = {pev: [0, 1, -2, 1]} as Spev<{rational: true}>
             expect(actual).toEqual(expected)
         })
 
@@ -29,7 +29,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {monzo: [-1, 0, 0, 1]} as Scamon<{rational: true}>
+            const expected = {pev: [-1, 0, 0, 1]} as Spev<{rational: true}>
             expect(actual).toEqual(expected)
         })
 
@@ -39,7 +39,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {monzo: [-11, 7]} as Scamon<{rational: true}>
+            const expected = {pev: [-11, 7]} as Spev<{rational: true}>
             expect(actual).toEqual(expected)
         })
 
@@ -49,7 +49,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {monzo: [0, 1]} as Scamon<{rational: true}>
+            const expected = {pev: [0, 1]} as Spev<{rational: true}>
             expect(actual).toEqual(expected)
         })
 
@@ -62,19 +62,19 @@ describe("parseJiPitch", (): void => {
             // ``~~|# =
             // ``~~|    [  13  -9   0  -1   0   0   1 ⟩
             //      #   [ -11   7                     ⟩
-            const expected = {monzo: [2, -2, 0, -1, 0, 0, 1]} as Scamon<{rational: true}>
+            const expected = {pev: [2, -2, 0, -1, 0, 0, 1]} as Spev<{rational: true}>
             expect(actual).toEqual(expected)
         })
     })
 
     describe("when the JI pitch is provided by a specific flag", (): void => {
-        it("works for a monzo (which will have been pre-parsed)", (): void => {
-            program.monzo = [0, 1, -2, 1]
+        it("works for a pev (which will have been pre-parsed)", (): void => {
+            program.pev = [0, 1, -2, 1]
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {monzo: [0, 1, -2, 1]} as Scamon<{rational: true}>
+            const expected = {pev: [0, 1, -2, 1]} as Spev<{rational: true}>
             expect(actual).toEqual(expected)
         })
 
@@ -84,17 +84,17 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {monzo: [-1, 0, 0, 1]} as Scamon<{rational: true}>
+            const expected = {pev: [-1, 0, 0, 1]} as Spev<{rational: true}>
             expect(actual).toEqual(expected)
         })
 
         it("works for a comma name (which will have been pre-parsed into a comma)", (): void => {
-            program.commaName = {monzo: [-11, 7]}
+            program.commaName = {pev: [-11, 7]}
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {monzo: [-11, 7]} as Scamon<{rational: true}>
+            const expected = {pev: [-11, 7]} as Spev<{rational: true}>
             expect(actual).toEqual(expected)
         })
 
@@ -104,7 +104,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {monzo: [0, 1]} as Scamon<{rational: true}>
+            const expected = {pev: [0, 1]} as Spev<{rational: true}>
             expect(actual).toEqual(expected)
         })
 
@@ -121,7 +121,7 @@ describe("parseJiPitch", (): void => {
             // ``~~|# =
             // ``~~|    [  13  -9   0  -1   0   0   1 ⟩
             //      #   [ -11   7                     ⟩
-            const expected = {monzo: [2, -2, 0, -1, 0, 0, 1]} as Scamon<{rational: true}>
+            const expected = {pev: [2, -2, 0, -1, 0, 0, 1]} as Spev<{rational: true}>
             expect(actual).toEqual(expected)
         })
     })

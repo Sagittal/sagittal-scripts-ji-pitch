@@ -15,7 +15,7 @@ import {TWO_3_FREE_CLASS_FIELD_TITLES} from "../fieldTitles"
 import {compute23FreeClassHeaderRows} from "../headerRows"
 import {computeOrderedTableAndAlignment} from "../orderedFields"
 import {compute23FreeClassRow} from "../row"
-import {computeSplitMonzoAndQuotientTableAlignment} from "../splitMonzoAndQuotient"
+import {computeSplitPevAndQuotientTableAlignment} from "../splitPevAndQuotient"
 import {TWO_3_FREE_CLASS_TABLE_TITLE} from "../tableTitles"
 
 const compute23FreeClassOutput = (
@@ -23,7 +23,7 @@ const compute23FreeClassOutput = (
 ): Io => {
     const two3FreeClassHeaderRows = compute23FreeClassHeaderRows()
     const headerRowCount = count(two3FreeClassHeaderRows)
-    let tableAlignment = computeSplitMonzoAndQuotientTableAlignment(two3FreeClassHeaderRows)
+    let tableAlignment = computeSplitPevAndQuotientTableAlignment(two3FreeClassHeaderRows)
 
     let two3FreeClassTable: Table<Two3FreeClassAnalysis> = [
         ...two3FreeClassHeaderRows,

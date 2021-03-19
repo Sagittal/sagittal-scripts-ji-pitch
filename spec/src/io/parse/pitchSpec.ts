@@ -1,13 +1,13 @@
-import {Io, IRRATIONAL_SCAMON_BASE_MONZO, Monzo, Quotient, Scamon} from "@sagittal/general"
+import {Io, IRRATIONAL_SPEV_BASE_PEV, Pev, Quotient, Spev} from "@sagittal/general"
 import {parsePitch} from "../../../../src/io"
 
 describe("parsePitch", (): void => {
-    it("works when given as a monzo, returning a JI pitch", (): void => {
+    it("works when given as a pev, returning a JI pitch", (): void => {
         const pitchText = "[0, 1, -2, 1⟩" as Io
 
         const actual = parsePitch(pitchText)
 
-        const expected = {monzo: [0, 1, -2, 1]} as Scamon<{rational: true}>
+        const expected = {pev: [0, 1, -2, 1]} as Spev<{rational: true}>
         expect(actual).toEqual(expected)
     })
 
@@ -16,7 +16,7 @@ describe("parsePitch", (): void => {
 
         const actual = parsePitch(pitchText)
 
-        const expected = {monzo: [-1, 0, 0, 1]} as Scamon<{rational: true}>
+        const expected = {pev: [-1, 0, 0, 1]} as Spev<{rational: true}>
         expect(actual).toEqual(expected)
     })
 
@@ -25,7 +25,7 @@ describe("parsePitch", (): void => {
 
         const actual = parsePitch(pitchText)
 
-        const expected = {monzo: [-11, 7]} as Scamon<{rational: true}>
+        const expected = {pev: [-11, 7]} as Spev<{rational: true}>
         expect(actual).toEqual(expected)
     })
 
@@ -35,9 +35,9 @@ describe("parsePitch", (): void => {
         const actual = parsePitch(pitchText)
 
         const expected = {
-            monzo: IRRATIONAL_SCAMON_BASE_MONZO,
+            pev: IRRATIONAL_SPEV_BASE_PEV,
             scaler: [0.027833, 1] as Quotient,
-        } as Scamon<{rational: false}>
+        } as Spev<{rational: false}>
         expect(actual).toBeCloseToObject(expected)
     })
 
@@ -46,7 +46,7 @@ describe("parsePitch", (): void => {
 
         const actual = parsePitch(pitchText)
 
-        const expected = {monzo: [0, 0, -1, 0, 0, 0, 1]} as Scamon<{rational: true}>
+        const expected = {pev: [0, 0, -1, 0, 0, 0, 1]} as Spev<{rational: true}>
         expect(actual).toEqual(expected)
     })
 
@@ -56,9 +56,9 @@ describe("parsePitch", (): void => {
         const actual = parsePitch(pitchText)
 
         const expected = {
-            monzo: IRRATIONAL_SCAMON_BASE_MONZO,
+            pev: IRRATIONAL_SPEV_BASE_PEV,
             scaler: [1.781502, 1] as Quotient,
-        } as Scamon<{rational: false}>
+        } as Spev<{rational: false}>
         expect(actual).toBeCloseToObject(expected)
     })
 
@@ -70,7 +70,7 @@ describe("parsePitch", (): void => {
         //   [ -25  12   1   0   0   1 ⟩   ,'/|)
         // + [  16  -8   0   0  -1     ⟩        <b
         // = [  -9   4   1   0  -1   1 ⟩   ,'/|)<b
-        const expected = {monzo: [-9, 4, 1, 0, -1, 1]} as Scamon<{rational: false}>
+        const expected = {pev: [-9, 4, 1, 0, -1, 1]} as Spev<{rational: false}>
         expect(actual).toBeCloseToObject(expected)
     })
 
@@ -79,7 +79,7 @@ describe("parsePitch", (): void => {
 
         const actual = parsePitch(pitchText)
 
-        const expected = {monzo: [18, -10, -1]} as Scamon<{rational: false}>
+        const expected = {pev: [18, -10, -1]} as Spev<{rational: false}>
         expect(actual).toBeCloseToObject(expected)
     })
 
@@ -91,7 +91,7 @@ describe("parsePitch", (): void => {
         // - [  -4   9  -2  -2     ⟩   ,'|(
         // + [ -16   8   0   0   1 ⟩       >#
         // = [ -12  -1   2   2   1 ⟩   `.!(>#
-        const expected = {monzo: [-12, -1, 2, 2, 1]} as Scamon<{rational: false}>
+        const expected = {pev: [-12, -1, 2, 2, 1]} as Spev<{rational: false}>
         expect(actual).toBeCloseToObject(expected)
     })
 
@@ -103,16 +103,16 @@ describe("parsePitch", (): void => {
         // - [   1  -2  -1   0   0   0   0   0   1 ⟩    /|~
         // + [ -22  14                             ⟩       x
         // = [ -23  16   1   0   0   0   0   0  -1 ⟩    \!~x
-        const expected = {monzo: [-23, 16, 1, 0, 0, 0, 0, 0, -1]} as Scamon<{rational: false}>
+        const expected = {pev: [-23, 16, 1, 0, 0, 0, 0, 0, -1]} as Spev<{rational: false}>
         expect(actual).toBeCloseToObject(expected)
     })
 
-    it("can handle an empty monzo", (): void => {
+    it("can handle an empty pev", (): void => {
         const pitchText = "[]"
 
         const actual = parsePitch(pitchText)
 
-        const expected = {monzo: [] as unknown[] as Monzo<{rational: true}>} as Scamon<{rational: true}>
+        const expected = {pev: [] as unknown[] as Pev<{rational: true}>} as Spev<{rational: true}>
         expect(actual).toEqual(expected)
     })
 })
