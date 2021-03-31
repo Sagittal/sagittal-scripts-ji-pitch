@@ -20,7 +20,8 @@
     "analyze-ji-pitches": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/analyzeJiPitches.ts",
     "zone-commas": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/zoneCommas.ts",
     "late-tina-commas": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/lateTinaCommas.ts",
-    "semitina-occams": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/semitinaOccams.ts"
+    "semitina-occams": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/semitinaOccams.ts",
+    "notated-pitches": "node -r ts-node/register/transpile-only --max-old-space-size=131072 src/scripts/notatedPitches.ts"
   },
   "devDependencies": {
     "@sagittal/general": "^1.0.115",
