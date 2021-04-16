@@ -6,13 +6,13 @@ import {
     Direction,
     Io,
     Max,
-    Pev,
     Name,
     NEWLINE,
+    Pev,
     Prime,
     Quotient,
-    Spev,
     Sopfr,
+    Spev,
     Two3FreeClass,
 } from "@sagittal/general"
 import {ApotomeSlope, Ate, CommaClassId, N2D3P9, PotentiallyCommaAnalysis} from "@sagittal/system"

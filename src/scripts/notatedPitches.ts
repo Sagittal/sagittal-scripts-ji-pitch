@@ -1,10 +1,14 @@
 import {
-    abs, BLANK, COMMA,
+    abs,
+    BLANK,
+    COMMA,
     computeDecimalFromPev,
     computeQuotientFromPev,
-    formatQuotient, Formatted,
+    formatQuotient,
+    Formatted,
     isEmpty,
-    Pev, Quotient,
+    Pev,
+    Quotient,
     saveLog,
     sumPevs,
 } from "@sagittal/general"

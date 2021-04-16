@@ -1,4 +1,4 @@
-import {BLANK, Copfr, Io, Max, Pev, NEWLINE, Prime, Sopfr, Two3FreeClass} from "@sagittal/general"
+import {BLANK, Copfr, Io, Max, NEWLINE, Pev, Prime, Sopfr, Two3FreeClass} from "@sagittal/general"
 import {N2D3P9} from "@sagittal/system"
 import {jiPitchScriptGroupSettings} from "../../../../src/globals"
 import {compute23FreeClassOutput} from "../../../../src/io"

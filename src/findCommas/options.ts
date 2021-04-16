@@ -1,4 +1,4 @@
-import {Abs, Copfr, Exclusive, Extrema, Max, Min, Prime, program, Spev, Sopfr} from "@sagittal/general"
+import {Abs, Copfr, Exclusive, Extrema, Max, Min, Prime, program, Sopfr, Spev} from "@sagittal/general"
 import {ApotomeSlope, Ate, JiPitchAnalysis, N2D3P9} from "@sagittal/system"
 import {DEFAULT_FIND_COMMAS_OPTIONS} from "./constants"
 import {FindCommasOptions} from "./types"

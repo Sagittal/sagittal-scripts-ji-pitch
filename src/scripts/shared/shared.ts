@@ -1,4 +1,4 @@
-import {Filename, Io, program, Spev, setupScriptAndIo} from "@sagittal/general"
+import {Filename, Io, program, setupScriptAndIo, Spev} from "@sagittal/general"
 import {FactoringMode} from "@sagittal/system"
 import {jiPitchScriptGroupSettings} from "../../globals"
 import {parsePitch} from "../../io"

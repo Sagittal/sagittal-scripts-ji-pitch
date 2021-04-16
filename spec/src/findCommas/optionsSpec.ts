@@ -1,4 +1,4 @@
-import {Abs, Copfr, Decimal, Max, Pev, Prime, Spev, Sopfr} from "@sagittal/general"
+import {Abs, Copfr, Decimal, Max, Pev, Prime, Sopfr, Spev} from "@sagittal/general"
 import {ApotomeSlope, Ate, computeAas, JiPitchAnalysis, N2D3P9} from "@sagittal/system"
 import {computeFindNotatingCommasOptions, DEFAULT_FIND_COMMAS_OPTIONS} from "../../../src/findCommas"
 import {jiPitchAnalysisFixture, two3FreeClassAnalysisFixture} from "../../helpers/src/fixtures"

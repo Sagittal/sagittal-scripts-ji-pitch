@@ -7,8 +7,8 @@ import {
     Formatted,
     Io,
     Max,
-    Pev,
     parseInteger,
+    Pev,
     Prime,
 } from "@sagittal/general"
 import {JiPitchAnalysis} from "@sagittal/system"

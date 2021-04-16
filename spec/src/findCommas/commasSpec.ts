@@ -1,4 +1,4 @@
-import {Comma, computeSpevFromDecimal, Max, Min, Pev, Prime, Spev, Sopfr} from "@sagittal/general"
+import {Comma, computeSpevFromDecimal, Max, Min, Pev, Prime, Sopfr, Spev} from "@sagittal/general"
 import {findCommas} from "../../../src/findCommas"
 
 describe("findCommas", (): void => {
