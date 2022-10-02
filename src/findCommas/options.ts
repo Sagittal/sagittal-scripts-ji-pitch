@@ -6,32 +6,34 @@ import {FindCommasOptions} from "./types"
 const computeFindCommasOptions = (
     defaultOverrides: Partial<FindCommasOptions> = {},
 ): FindCommasOptions => {
-    const max23FreeSopfr = program.max23FreeSopfr ||
+    const programOpts = program.opts()
+
+    const max23FreeSopfr = programOpts.max23FreeSopfr ||
         defaultOverrides.max23FreeSopfr ||
         DEFAULT_FIND_COMMAS_OPTIONS.max23FreeSopfr
-    const max23FreeCopfr = program.max23FreeCopfr ||
+    const max23FreeCopfr = programOpts.max23FreeCopfr ||
         defaultOverrides.max23FreeCopfr ||
         DEFAULT_FIND_COMMAS_OPTIONS.max23FreeCopfr
-    const maxPrimeLimit: Max<Max<Prime>> = program.maxPrimeLimit ||
+    const maxPrimeLimit: Max<Max<Prime>> = programOpts.maxPrimeLimit ||
         defaultOverrides.maxPrimeLimit ||
         DEFAULT_FIND_COMMAS_OPTIONS.maxPrimeLimit
-    const maxN2D3P9: Max<N2D3P9> = program.maxN2d3p9 ||
+    const maxN2D3P9: Max<N2D3P9> = programOpts.maxN2d3p9 ||
         defaultOverrides.maxN2D3P9 ||
         DEFAULT_FIND_COMMAS_OPTIONS.maxN2D3P9
-    const maxAas: Max<Abs<ApotomeSlope>> = program.maxAas ||
+    const maxAas: Max<Abs<ApotomeSlope>> = programOpts.maxAas ||
         defaultOverrides.maxAas ||
         DEFAULT_FIND_COMMAS_OPTIONS.maxAas
-    const maxAte: Max<Ate> = program.maxAte ||
+    const maxAte: Max<Ate> = programOpts.maxAte ||
         defaultOverrides.maxAte ||
         DEFAULT_FIND_COMMAS_OPTIONS.maxAte
 
-    const lowerBound: Min<Spev> = program.lowerBound ||
+    const lowerBound: Min<Spev> = programOpts.lowerBound ||
         defaultOverrides.zone?.extrema[0] ||
         DEFAULT_FIND_COMMAS_OPTIONS.zone?.extrema[0]
-    const upperBound: Max<Spev> = program.upperBound ||
+    const upperBound: Max<Spev> = programOpts.upperBound ||
         defaultOverrides.zone?.extrema[1] ||
         DEFAULT_FIND_COMMAS_OPTIONS.zone?.extrema[1]
-    const exclusive: Exclusive = program.exclusive ||
+    const exclusive: Exclusive = programOpts.exclusive ||
         defaultOverrides.zone?.exclusive ||
         DEFAULT_FIND_COMMAS_OPTIONS.zone!.exclusive!
     const zone = {extrema: [lowerBound, upperBound] as Extrema<{of: Spev, open: true}>, exclusive}

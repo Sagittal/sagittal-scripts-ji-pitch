@@ -1,5 +1,3 @@
-// tslint:disable max-line-length
-
 import {Abs, BLANK, Cents, Comma, Io, ioSettings, Name, NEWLINE, Pev, Quotient, TableFormat} from "@sagittal/general"
 import {ApotomeSlope, Ate, CommaAnalysis, CommaClassId} from "@sagittal/system"
 import {jiPitchScriptGroupSettings} from "../../../../src/globals"

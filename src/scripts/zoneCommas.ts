@@ -25,6 +25,7 @@ program
     .option(`--secondary-comma-zones`, "use commas in each comma's secondary comma zone, rather than the default behavior of its capture zone in the Extreme precision level notation")
 
 applySharedJiPitchScriptSetup("zoneCommas" as Filename)
+const {extremeCaptureZones} = program.opts()
 
 const findCommasOptions = computeFindCommasOptions()
 
@@ -35,7 +36,7 @@ const zoneCommas = JI_NOTATION_COMMA_CLASS_IDS.reduce(
     ): Record<CommaClassId, Comma[]> => {
         saveLog(formatCommaClass(commaClassId, {name: true}), LogTarget.PROGRESS)
 
-        const zone = program.extremeCaptureZones ?
+        const zone = extremeCaptureZones ?
             computeJiNotationCaptureZone(commaClassId, JiNotationLevelId.EXTREME) :
             computeSecondaryCommaZone(commaClassId)
 

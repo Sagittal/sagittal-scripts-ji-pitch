@@ -56,6 +56,6 @@ const wholeThing = (p: Decimal<{integer: true}> & Denominator): void => {
     console.log(`${p}: ${totalMetric / primodalityIntervalPevs.length}`)
 }
 
-for (let p = 2; p < 64; p++) {
+for (let p: Decimal<{integer: true}> & Denominator = 2 as Decimal<{integer: true}> & Denominator; p < 64; p++) {
     wholeThing(p)
 }

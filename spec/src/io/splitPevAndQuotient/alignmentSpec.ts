@@ -9,7 +9,6 @@ describe("computeSplitPevAndQuotientTableAlignment", (): void => {
     it("aligns quotients to center on the vinculum, and pevs so that the square bracket is closer to the rest of the materials", (): void => {
         const headerRows = [
             ["comma", "quotient", "", "", "pev", "", "", "", "apotome"],
-            // tslint:disable-next-line max-line-length
             ["name", "n", "/", "d", INVISIBLE_PEV_OPENING_SQUARE_BRACKET_COLUMN_TITLE, "2", "3", INVISIBLE_PEV_CLOSING_ANGLE_BRACKET_COLUMN_TITLE, "slope"],
         ] as Array<Row<{header: true}>>
 

@@ -9,7 +9,8 @@ setupScriptAndIo(
     [LogTarget.PROGRESS, LogTarget.DETAILS, LogTarget.FINAL, LogTarget.ERROR],
 )
 
-const bestCommaPerSemitinaZone = computeBestCommaPerSemitinaZone(!!program.complexityOnly)
+const {complexityOnly} = program.opts()
+const bestCommaPerSemitinaZone = computeBestCommaPerSemitinaZone(!!complexityOnly)
 
 computeMetacommasAndBucketSortAndLogOccams(bestCommaPerSemitinaZone)
 

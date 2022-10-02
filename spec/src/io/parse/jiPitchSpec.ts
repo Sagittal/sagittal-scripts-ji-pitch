@@ -5,11 +5,11 @@ import {parseJiPitch, readJiPitchIoAndFormat} from "../../../../src/io"
 describe("parseJiPitch", (): void => {
     beforeEach((): void => {
         program.args = []
-        program.pev = undefined
-        program.quotient = undefined
-        program.commaName = undefined
-        program.integer = undefined
-        program.accidental = undefined
+        program.setOptionValue("pev", undefined)
+        program.setOptionValue("quotient", undefined)
+        program.setOptionValue("commaName", undefined)
+        program.setOptionValue("integer", undefined)
+        program.setOptionValue("accidental", undefined)
     })
 
     describe("when the JI pitch is provided as an argument directly (not as a specific flag)", (): void => {
@@ -69,7 +69,7 @@ describe("parseJiPitch", (): void => {
 
     describe("when the JI pitch is provided by a specific flag", (): void => {
         it("works for a pev (which will have been pre-parsed)", (): void => {
-            program.pev = [0, 1, -2, 1]
+            program.setOptionValue("pev", [0, 1, -2, 1])
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
@@ -79,7 +79,7 @@ describe("parseJiPitch", (): void => {
         })
 
         it("works for a quotient (which will have been pre-parsed)", (): void => {
-            program.quotient = [7, 2]
+            program.setOptionValue("quotient", [7, 2])
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
@@ -89,7 +89,7 @@ describe("parseJiPitch", (): void => {
         })
 
         it("works for a comma name (which will have been pre-parsed into a comma)", (): void => {
-            program.commaName = {pev: [-11, 7]}
+            program.setOptionValue("commaName", {pev: [-11, 7]})
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
@@ -99,7 +99,7 @@ describe("parseJiPitch", (): void => {
         })
 
         it("works for an integer decimal (which will have been pre-parsed as such)", (): void => {
-            program.integer = 3
+            program.setOptionValue("integer", 3)
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
@@ -109,11 +109,11 @@ describe("parseJiPitch", (): void => {
         })
 
         it("works for an accidental (which will have been pre-parsed as such)", (): void => {
-            program.accidental = computeAccidental({                                    // ``~~|#
+            program.setOptionValue("accidental", computeAccidental({                                    // ``~~|#
                 armId: ArmId.BIRD,
                 headId: HeadId.DOUBLE_LEFT_BOATHOOK,
                 compatible: Compatible.SHARP,
-            })
+            }))
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)

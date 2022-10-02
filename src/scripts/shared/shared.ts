@@ -36,21 +36,23 @@ const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
 
     setupScriptAndIo(logDir)
 
-    if (program.sortBy) jiPitchScriptGroupSettings.sortBy = program.sortBy
-    if (program.excludedFields) jiPitchScriptGroupSettings.excludedFields = program.excludedFields
-    if (program.orderedFields) {
+    const {sortBy, excludedFields, orderedFields, undirected, factoringMode, unabbreviated, ascii} = program.opts()
+
+    if (sortBy) jiPitchScriptGroupSettings.sortBy = sortBy
+    if (excludedFields) jiPitchScriptGroupSettings.excludedFields = excludedFields
+    if (orderedFields) {
         // The excluded fields must be wiped out if ordered fields feature is in use.
         // The code which re-orders fields is not smart enough to take into account excluded fields.
         // Think of the ordered fields feature as completely overriding which fields are in use, as well as their order.
         jiPitchScriptGroupSettings.excludedFields = []
-        jiPitchScriptGroupSettings.orderedFields = program.orderedFields
+        jiPitchScriptGroupSettings.orderedFields = orderedFields
     }
 
     jiPitchScriptGroupSettings.commaNameOptions = {
-        directed: !program.undirected,
-        factoringMode: program.factoringMode || FactoringMode.THRESHOLD,
-        abbreviated: !program.unabbreviated,
-        ascii: program.ascii,
+        directed: !undirected,
+        factoringMode: factoringMode || FactoringMode.THRESHOLD,
+        abbreviated: !unabbreviated,
+        ascii,
     }
 }
 

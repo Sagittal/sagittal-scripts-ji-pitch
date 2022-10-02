@@ -54,7 +54,6 @@ commaAnalysesSortedByTinaEntries.forEach(([tina, tinaCommaAnalyses]: [string, Co
         saveLog(`NO COMMAS given current constraints for tina ${tina}.`, LogTarget.ERROR)
     } else {
         saveLog(
-            // tslint:disable-next-line max-line-length
             `Processing tina ${tina} with ${tinaCommaAnalyses.length} possible commas to check, sorted by increasing N2D3P9` as Io,
             LogTarget.PROGRESS,
         )
