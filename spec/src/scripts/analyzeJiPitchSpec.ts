@@ -1,4 +1,4 @@
-import {Io, onlyRunInCi, runScriptAndGetConsoleOutput} from "@sagittal/general"
+import {Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput} from "@sagittal/general"
 import {
     OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS,
     OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS,
@@ -30,7 +30,7 @@ describe("analyze-ji-pitch", (): void => {
     ] as Io[]
 
     it("can analyze a JI pitch, given it in the form of a pev (note that it includes inverses in the notating commas list)", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run analyze-ji-pitch -- -m [3,-7,2,0,1] --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -40,7 +40,7 @@ describe("analyze-ji-pitch", (): void => {
     })
 
     it("can analyze a JI pitch, given it in the form of a rational quotient", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run analyze-ji-pitch -- -q 2200/2187 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -50,7 +50,7 @@ describe("analyze-ji-pitch", (): void => {
     })
 
     it("can analyze a JI pitch, given it in the form of a comma name", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run analyze-ji-pitch -- --comma-name 275k --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -60,7 +60,7 @@ describe("analyze-ji-pitch", (): void => {
     })
 
     it("can analyze a JI pitch, given it in the form of a completely differently formatted comma name", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run analyze-ji-pitch -- --comma-name 5²⋅11-kleisma --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -91,7 +91,7 @@ describe("analyze-ji-pitch", (): void => {
      */
 
     it("can analyze a JI pitch, given it in the form of an accidental (expressed as Sagitype)", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run analyze-ji-pitch -- --accidental "\`)|(" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -101,7 +101,7 @@ describe("analyze-ji-pitch", (): void => {
     })
 
     it("can analyze a JI pitch, given it in the form of an accidental (expressed as smiley)", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run analyze-ji-pitch -- --accidental ":\`::)|(:" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -111,7 +111,7 @@ describe("analyze-ji-pitch", (): void => {
     })
 
     it("can analyze a JI pitch, given it in the form of an accidental (expressed as Unicode)", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run analyze-ji-pitch -- --accidental "" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -121,7 +121,7 @@ describe("analyze-ji-pitch", (): void => {
     })
 
     it("throws an error if you provide neither pev, quotient, comma name, integer decimal, or accidental", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = "npm run analyze-ji-pitch" as Io
 
@@ -131,7 +131,7 @@ describe("analyze-ji-pitch", (): void => {
     })
 
     it("can sort the notating commas", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run analyze-ji-pitch [3,-7,2,0,1] -- --sort-by apotomeSlope --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -163,7 +163,7 @@ describe("analyze-ji-pitch", (): void => {
     })
 
     it("sorts size category correctly (notice that it hasn't sorted by cents, as in the middle of the S size category, it has one that's out of order, but is still in the correct category)", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run analyze-ji-pitch [-271,171] -- --sort-by sizeCategory` as Io
 
@@ -209,7 +209,7 @@ describe("analyze-ji-pitch", (): void => {
     })
 
     it("can analyze a JI pitch given as an integer decimal", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run analyze-ji-pitch -- -i 275 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -241,7 +241,7 @@ describe("analyze-ji-pitch", (): void => {
     })
 
     it("can format the names of the commas in the notating commas table", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run analyze-ji-pitch [3,-7,2,0,1] -- --undirected --factoring-mode always --unabbreviated --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -273,7 +273,7 @@ describe("analyze-ji-pitch", (): void => {
     })
 
     it("automatically adjusts the filters to include the JI pitch itself in the list of notating commas", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = "npm run analyze-ji-pitch \"[  -34   19   0   0   1  -1   0   1 ⟩\"" as Io
 
@@ -311,7 +311,7 @@ describe("analyze-ji-pitch", (): void => {
     // Which is... fine I guess, but the problem was when you pick ordered fields that one of the tables doesn't have
     // Then it gets totally scrambled. So I've fixed that now. Which results sometimes in a table having no columns.
     it("can order fields without scrambling any of the tables", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = "npm run analyze-ji-pitch 1/5C -- --ordered-fields name,cents,aas,ate" as Io
 

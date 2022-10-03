@@ -1,4 +1,4 @@
-import {Io, onlyRunInCi, runScriptAndGetConsoleOutput} from "@sagittal/general"
+import {Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput} from "@sagittal/general"
 import {
     OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS,
     OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS,
@@ -7,7 +7,7 @@ import {
 
 describe("find-commas", (): void => {
     it("finds commas, given the finding options", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `           \
         npm run find-commas --      \
@@ -44,7 +44,7 @@ describe("find-commas", (): void => {
     })
 
     it("can sort the resulting list by a specific field", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by apotomeSlope --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -74,7 +74,7 @@ describe("find-commas", (): void => {
     })
 
     it("can sort the resulting list by more than one field", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run find-commas -- --sort-by n2d3p9,cents --max-prime-limit 7 --max-n2d3p9 8 --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -113,7 +113,7 @@ describe("find-commas", (): void => {
     })
 
     it("can sort the resulting list by a specific term of the pev", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by pev2 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -143,7 +143,7 @@ describe("find-commas", (): void => {
     })
 
     it("can set the format of the comma names", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --undirected --factoring-mode always --unabbreviated --ascii --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -173,7 +173,7 @@ describe("find-commas", (): void => {
     })
 
     it("can exclude fields from the results", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `                                            \
         npm run find-commas --                                      \
@@ -211,7 +211,7 @@ describe("find-commas", (): void => {
     })
 
     it("can set bounds by pevs and quotients instead of just cents", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run find-commas -- --lower-bound 1594323/1548800 --upper-bound "[ -25  12   1   0   0   1 ⟩" --undirected --factoring-mode always --unabbreviated --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -241,7 +241,7 @@ describe("find-commas", (): void => {
     })
 
     it("can format for a spreadsheet", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by apotomeSlope --table-format spreadsheet --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS} --factoring-mode never` as Io
 
@@ -271,7 +271,7 @@ describe("find-commas", (): void => {
     })
 
     it("by default includes the bounds", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run find-commas -- --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -299,7 +299,7 @@ describe("find-commas", (): void => {
     })
 
     it("can exclude the bounds", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run find-commas -- --exclusive --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
@@ -323,7 +323,7 @@ describe("find-commas", (): void => {
     })
 
     it("can exclude only one or the other of the bounds", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run find-commas -- --exclusive true,false --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 

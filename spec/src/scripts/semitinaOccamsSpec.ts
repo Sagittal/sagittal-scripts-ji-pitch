@@ -1,8 +1,8 @@
-import {Io, onlyRunInCi, runScriptAndGetConsoleOutput} from "@sagittal/general"
+import {Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput} from "@sagittal/general"
 
 describe("semitina-occams", (): void => {
     it("finds, for each tina up to 9, the top 20% candidate commas, sorted in descending order by their occurrence counts as metacommas between the best commas per semitina zone up to the half-apotome, plus the candidate commas for the semitina, also top 20% sorted descending by occam, but this time the metacommas are between consecutive semitinas of the best commas per semitina zone up to the half apotome", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run semitina-occams -- --log-targets final` as Io
 

@@ -1,8 +1,0 @@
-language: node_js
-node_js:
-  - 14
-script:
-  - npm run test-ci
-
-# Necessary for the `npm run analyze-ji-pitch -- --accidental` Sagitype and Smiley tests to pass.
-os: windows

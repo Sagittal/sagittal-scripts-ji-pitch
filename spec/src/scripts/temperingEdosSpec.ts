@@ -1,8 +1,8 @@
-import {Io, onlyRunInCi, runScriptAndGetConsoleOutput} from "@sagittal/general"
+import {Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput} from "@sagittal/general"
 
 describe("tempering-edos", (): void => {
     it("returns the list of EDOs which temper a given comma", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = `npm run tempering-edos 81/80` as Io
 

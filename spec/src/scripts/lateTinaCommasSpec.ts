@@ -1,8 +1,8 @@
-import {Io, onlyRunInCi, runScriptAndGetConsoleOutput} from "@sagittal/general"
+import {Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput} from "@sagittal/general"
 
 describe("late-tina-commas", (): void => {
     it("finds LATE commas for tinas", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = "npm run late-tina-commas -- --max-2-3-free-sopfr 37" as Io
 

@@ -1,8 +1,8 @@
-import {Io, onlyRunInCi, runScriptAndGetConsoleOutput} from "@sagittal/general"
+import {Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput} from "@sagittal/general"
 
 describe("analyze-ji-pitches", (): void => {
     it("takes in the list of JI pitches in the input file and outputs a table of their analyses", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = "npm run analyze-ji-pitches -- --table-format forum" as Io
 
@@ -30,7 +30,7 @@ describe("analyze-ji-pitches", (): void => {
     })
 
     it("supports reordering the fields, and overrides the default excluded fields (currently only sizeCategory)            ", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = "npm run analyze-ji-pitches -- --ordered-fields cents,quotient,name,pev,two3FreePrimeLimit,sizeCategory" as Io
 
@@ -56,7 +56,7 @@ describe("analyze-ji-pitches", (): void => {
     })
 
     it("supports sorting the results", (): void => {
-        onlyRunInCi()
+        slowTestOnlyRunInFullSuite()
 
         const script = "npm run analyze-ji-pitches -- --ordered-fields cents,quotient,name,pev,two3FreePrimeLimit,sizeCategory --sort-by name" as Io
 
