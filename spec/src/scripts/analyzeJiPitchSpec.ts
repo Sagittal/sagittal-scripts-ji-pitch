@@ -71,17 +71,17 @@ describe("analyze-ji-pitch", (): void => {
 
     /*
     Formats that work:
-    npm run analyze-ji-pitch "|\\\\"          |\    requires escaping the backlash in two phases!
-    npm run analyze-ji-pitch " /|"           /|     requires a space to prevent interpretation as file path
-    npm run analyze-ji-pitch " /|\\\\"       /|\    both hacks required
-    npm run analyze-ji-pitch "'/|"          '/|     leading space not required if anything is in front of the fwd slash
-    npm run analyze-ji-pitch "\`)|("        `)|(    double quote requires escaping `
-    npm run analyze-ji-pitch '`)|('         `)|(    single quote requires *not* escaping `, which is better, of course
-    npm run analyze-ji-pitch "'"'/|'        '/|     when single quoting, a tick up needs to be in double quotes
-    npm run analyze-ji-pitch '`'"'"'/|'    `'/|     this works too, when the single quote is in the middle of the symbol
-    npm run analyze-ji-pitch '|\\'            |\    when single quoting, only need one phase of backlash escaping
-    npm run analyze-ji-pitch ' /|'           /|     single quotes still requires the leading space
-    npm run analyze-ji-pitch ' /|\\'         /|\
+    make analyze-ji-pitch "|\\\\"          |\    requires escaping the backlash in two phases!
+    make analyze-ji-pitch " /|"           /|     requires a space to prevent interpretation as file path
+    make analyze-ji-pitch " /|\\\\"       /|\    both hacks required
+    make analyze-ji-pitch "'/|"          '/|     leading space not required if anything is in front of the fwd slash
+    make analyze-ji-pitch "\`)|("        `)|(    double quote requires escaping `
+    make analyze-ji-pitch '`)|('         `)|(    single quote requires *not* escaping `, which is better, of course
+    make analyze-ji-pitch "'"'/|'        '/|     when single quoting, a tick up needs to be in double quotes
+    make analyze-ji-pitch '`'"'"'/|'    `'/|     this works too, when the single quote is in the middle of the symbol
+    make analyze-ji-pitch '|\\'            |\    when single quoting, only need one phase of backlash escaping
+    make analyze-ji-pitch ' /|'           /|     single quotes still requires the leading space
+    make analyze-ji-pitch ' /|\\'         /|\
 
     So of course double quotes are nice because they're not actually used in any of the symbols
     But they don't seem to work on CI, so that's kind of a deal-breaker

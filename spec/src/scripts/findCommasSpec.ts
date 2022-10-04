@@ -10,7 +10,7 @@ describe("find-commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script = `           \
-        npm run find-commas --      \
+        make find-commas --      \
          --lower-bound 30c          \
          --upper-bound 30.5c        \
          --max-ate 2                \
@@ -176,7 +176,7 @@ describe("find-commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script = `                                            \
-        npm run find-commas --                                      \
+        make find-commas --                                      \
          --lower-bound 30c                                          \
          --upper-bound 30.5c                                        \
          --max-ate 2                                                \
