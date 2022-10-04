@@ -5,6 +5,8 @@ import {
     OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS,
 } from "../../helpers/src/constants"
 
+const ESCAPED_CHAR = process?.env?.CI ? "\\\`" : "\`"
+
 describe("analyze-ji-pitch", (): void => {
     const expected = [
         "   --- JI pitch ---",
@@ -93,7 +95,7 @@ describe("analyze-ji-pitch", (): void => {
     it("can analyze a JI pitch, given it in the form of an accidental (expressed as Sagitype)", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch -- --accidental "\`)|(" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script = `npm run analyze-ji-pitch -- --accidental "${ESCAPED_CHAR})|(" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -103,7 +105,7 @@ describe("analyze-ji-pitch", (): void => {
     it("can analyze a JI pitch, given it in the form of an accidental (expressed as smiley)", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch -- --accidental ":\`::)|(:" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script = `npm run analyze-ji-pitch -- --accidental ":${ESCAPED_CHAR}::)|(:" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 

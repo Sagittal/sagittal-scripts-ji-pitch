@@ -3,7 +3,7 @@ run-name: testing
 on: [push]
 jobs:
   test:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
         
     steps:
       - uses: actions/checkout@v3
