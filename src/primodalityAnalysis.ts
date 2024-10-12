@@ -9,8 +9,8 @@ import {
     Pev,
     Quotient,
     saveLog,
+    subtractPevs,
 } from "@sagittal/general"
-import { subtractPevs } from "@sagittal/general/dist/cjs/math"
 
 const wholeThing = (p: Decimal<{ integer: true }> & Denominator): void => {
     const primodalityNumerators: Array<Decimal<{ integer: true }> & Numerator> =

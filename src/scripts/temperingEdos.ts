@@ -9,12 +9,12 @@ import {
     LogTarget,
     Max,
     OCTAVE_WINDOW,
+    Prime,
     saveLog,
     setupScriptAndIo,
     stringify,
     Window,
 } from "@sagittal/general"
-import {Prime} from "@sagittal/general/dist/cjs/math/rational"
 import {parseJiPitch, readAnalyzeJiPitchOptions, readJiPitchIoAndFormat} from "../io"
 
 const MAX_EDO = 1000 as Ed<{of: Window<{of: 2}>}>

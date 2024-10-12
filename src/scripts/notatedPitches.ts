@@ -4,16 +4,16 @@ import {
     COMMA,
     computeDecimalFromPev,
     computeQuotientFromPev,
+    Exponent,
     formatQuotient,
     Formatted,
     isEmpty,
     Pev,
+    Prime,
     Quotient,
     saveLog,
     sumPevs,
 } from "@sagittal/general"
-import {Prime} from "@sagittal/general/dist/cjs/math/rational"
-import {Exponent} from "@sagittal/general/dist/cjs/math/types"
 
 const PYTHAGOREAN_PEVS: Pev[] = [
     [54, -34],
