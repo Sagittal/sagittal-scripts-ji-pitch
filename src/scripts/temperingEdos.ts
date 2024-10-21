@@ -1,9 +1,9 @@
 import {
-    computePevMapping,
+    mapPev,
     computeRange,
     computeRationalPevFromRationalSpev,
     computeRationalPevSmoothness,
-    computeStandardMapping,
+    computeSimpleMap,
     Ed,
     Filename,
     LogTarget,
@@ -15,9 +15,13 @@ import {
     stringify,
     Window,
 } from "@sagittal/general"
-import {parseJiPitch, readAnalyzeJiPitchOptions, readJiPitchIoAndFormat} from "../io"
+import {
+    parseJiPitch,
+    readAnalyzeJiPitchOptions,
+    readJiPitchIoAndFormat,
+} from "../io"
 
-const MAX_EDO = 1000 as Ed<{of: Window<{of: 2}>}>
+const MAX_EDO = 1000 as Ed<{ of: Window<{ of: 2 }> }>
 
 readAnalyzeJiPitchOptions()
 
@@ -28,23 +32,26 @@ const jiPitch = parseJiPitch(jiPitchIo, pitchFormat)
 
 const pev = computeRationalPevFromRationalSpev(jiPitch)
 
-const primeLimit = computeRationalPevSmoothness(pev) as number as Max<Max<Prime>>
+const primeLimit = computeRationalPevSmoothness(pev) as number as Max<
+    Max<Prime>
+>
 
-const temperingEdos = [] as Array<Ed<{of: Window<{of: 2}>}>>
+const temperingEdos = [] as Array<Ed<{ of: Window<{ of: 2 }> }>>
 
-computeRange(1 as Ed<{of: Window<{of: 2}>}>, MAX_EDO)
-    .forEach((edo: Ed<{of: Window<{of: 2}>}>): void => {
-        const mapping = computeStandardMapping({
+computeRange(1 as Ed<{ of: Window<{ of: 2 }> }>, MAX_EDO).forEach(
+    (edo: Ed<{ of: Window<{ of: 2 }> }>): void => {
+        const simpleMap = computeSimpleMap({
             ed: edo,
             window: OCTAVE_WINDOW,
             primeLimit,
         })
 
-        const steps = computePevMapping(pev, mapping)
+        const steps = mapPev(pev, simpleMap)
 
         if (steps === 0) {
             temperingEdos.push(edo)
         }
-    })
+    },
+)
 
 saveLog(stringify(temperingEdos), LogTarget.FINAL)
