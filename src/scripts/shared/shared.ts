@@ -5,7 +5,7 @@ import {parsePitch} from "../../io"
 import {JiPitchScriptGroupField} from "../../types"
 import {parseExclusive, parseFields, parseSortBy} from "./parse"
 
-// TODO: sort by should be case sensitive (allow me to `--sort-by ATE`, please)
+// TODO: CASE-INSENSITIVE SORT BY (allow me to `--sort-by ATE`, please)
 
 const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
     program
