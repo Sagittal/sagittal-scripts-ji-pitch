@@ -1,16 +1,16 @@
-import {Maybe, SortBy} from "@sagittal/general"
-import {CommaNameOptions} from "@sagittal/system"
+import { Maybe, SortBy } from "@sagittal/general"
+import { CommaNameOptions } from "@sagittal/system"
 
 interface JiPitchScriptGroupSettings {
-    sortBy?: SortBy,
-    commaNameOptions: CommaNameOptions,
-    excludedFields: JiPitchScriptGroupField[],
-    orderedFields: Maybe<JiPitchScriptGroupField[]>,
+    sortBy?: SortBy
+    commaNameOptions: CommaNameOptions
+    excludedFields: JiPitchScriptGroupField[]
+    orderedFields: Maybe<JiPitchScriptGroupField[]>
 }
 
 enum JiPitchField {
     QUOTIENT = "quotient",
-    PEV = "pev",
+    VECTOR = "vector",
     CENTS = "cents",
     APOTOME_SLOPE = "apotomeSlope",
     AAS = "aas",
@@ -27,19 +27,19 @@ enum Two3FreeClassField {
 
 enum CommaField {
     QUOTIENT = "quotient",
-    PEV = "pev",
+    VECTOR = "vector",
     CENTS = "cents",
     APOTOME_SLOPE = "apotomeSlope",
     AAS = "aas",
     ATE = "ate",
     COMMA_CLASS = "commaClass",
     NAME = "name",
-    SIZE_CATEGORY = "sizeCategory"
+    SIZE_CATEGORY = "sizeCategory",
 }
 
 enum JiPitchesOrFindCommasField {
     QUOTIENT = "quotient",
-    PEV = "pev",
+    VECTOR = "vector",
     CENTS = "cents",
     APOTOME_SLOPE = "apotomeSlope",
     AAS = "aas",
@@ -55,7 +55,7 @@ enum JiPitchesOrFindCommasField {
 }
 
 type JiPitchScriptGroupField =
-    JiPitchField
+    | JiPitchField
     | Two3FreeClassField
     | CommaField
     | JiPitchesOrFindCommasField

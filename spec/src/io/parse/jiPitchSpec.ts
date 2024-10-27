@@ -1,11 +1,11 @@
-import {program, Spev} from "@sagittal/general"
-import {ArmId, Compatible, computeAccidental, HeadId} from "@sagittal/system"
-import {parseJiPitch, readJiPitchIoAndFormat} from "../../../../src/io"
+import { program, ScaledVector } from "@sagittal/general"
+import { ArmId, Compatible, computeAccidental, HeadId } from "@sagittal/system"
+import { parseJiPitch, readJiPitchIoAndFormat } from "../../../../src/io"
 
 describe("parseJiPitch", (): void => {
     beforeEach((): void => {
         program.args = []
-        program.setOptionValue("pev", undefined)
+        program.setOptionValue("vector", undefined)
         program.setOptionValue("quotient", undefined)
         program.setOptionValue("commaName", undefined)
         program.setOptionValue("integer", undefined)
@@ -13,13 +13,13 @@ describe("parseJiPitch", (): void => {
     })
 
     describe("when the JI pitch is provided as an argument directly (not as a specific flag)", (): void => {
-        it("works for a pev", (): void => {
+        it("works for a vector", (): void => {
             program.args = ["[0, 1, -2, 1⟩"]
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {pev: [0, 1, -2, 1]} as Spev<{rational: true}>
+            const expected = { vector: [0, 1, -2, 1] } as ScaledVector<{ rational: true }>
             expect(actual).toEqual(expected)
         })
 
@@ -29,7 +29,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {pev: [-1, 0, 0, 1]} as Spev<{rational: true}>
+            const expected = { vector: [-1, 0, 0, 1] } as ScaledVector<{ rational: true }>
             expect(actual).toEqual(expected)
         })
 
@@ -39,7 +39,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {pev: [-11, 7]} as Spev<{rational: true}>
+            const expected = { vector: [-11, 7] } as ScaledVector<{ rational: true }>
             expect(actual).toEqual(expected)
         })
 
@@ -49,7 +49,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {pev: [0, 1]} as Spev<{rational: true}>
+            const expected = { vector: [0, 1] } as ScaledVector<{ rational: true }>
             expect(actual).toEqual(expected)
         })
 
@@ -62,19 +62,19 @@ describe("parseJiPitch", (): void => {
             // ``~~|# =
             // ``~~|    [  13  -9   0  -1   0   0   1 ⟩
             //      #   [ -11   7                     ⟩
-            const expected = {pev: [2, -2, 0, -1, 0, 0, 1]} as Spev<{rational: true}>
+            const expected = { vector: [2, -2, 0, -1, 0, 0, 1] } as ScaledVector<{ rational: true }>
             expect(actual).toEqual(expected)
         })
     })
 
     describe("when the JI pitch is provided by a specific flag", (): void => {
-        it("works for a pev (which will have been pre-parsed)", (): void => {
-            program.setOptionValue("pev", [0, 1, -2, 1])
+        it("works for a vector (which will have been pre-parsed)", (): void => {
+            program.setOptionValue("vector", [0, 1, -2, 1])
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {pev: [0, 1, -2, 1]} as Spev<{rational: true}>
+            const expected = { vector: [0, 1, -2, 1] } as ScaledVector<{ rational: true }>
             expect(actual).toEqual(expected)
         })
 
@@ -84,17 +84,17 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {pev: [-1, 0, 0, 1]} as Spev<{rational: true}>
+            const expected = { vector: [-1, 0, 0, 1] } as ScaledVector<{ rational: true }>
             expect(actual).toEqual(expected)
         })
 
         it("works for a comma name (which will have been pre-parsed into a comma)", (): void => {
-            program.setOptionValue("commaName", {pev: [-11, 7]})
+            program.setOptionValue("commaName", { vector: [-11, 7] })
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {pev: [-11, 7]} as Spev<{rational: true}>
+            const expected = { vector: [-11, 7] } as ScaledVector<{ rational: true }>
             expect(actual).toEqual(expected)
         })
 
@@ -104,16 +104,20 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = {pev: [0, 1]} as Spev<{rational: true}>
+            const expected = { vector: [0, 1] } as ScaledVector<{ rational: true }>
             expect(actual).toEqual(expected)
         })
 
         it("works for an accidental (which will have been pre-parsed as such)", (): void => {
-            program.setOptionValue("accidental", computeAccidental({                                    // ``~~|#
-                armId: ArmId.BIRD,
-                headId: HeadId.DOUBLE_LEFT_BOATHOOK,
-                compatible: Compatible.SHARP,
-            }))
+            program.setOptionValue(
+                "accidental",
+                computeAccidental({
+                    // ``~~|#
+                    armId: ArmId.BIRD,
+                    headId: HeadId.DOUBLE_LEFT_BOATHOOK,
+                    compatible: Compatible.SHARP,
+                }),
+            )
             const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
@@ -121,7 +125,7 @@ describe("parseJiPitch", (): void => {
             // ``~~|# =
             // ``~~|    [  13  -9   0  -1   0   0   1 ⟩
             //      #   [ -11   7                     ⟩
-            const expected = {pev: [2, -2, 0, -1, 0, 0, 1]} as Spev<{rational: true}>
+            const expected = { vector: [2, -2, 0, -1, 0, 0, 1] } as ScaledVector<{ rational: true }>
             expect(actual).toEqual(expected)
         })
     })

@@ -1,9 +1,9 @@
-import {Io} from "@sagittal/general"
-import {CommaField, JiPitchesOrFindCommasField, JiPitchField, Two3FreeClassField} from "../types"
+import { Io } from "@sagittal/general"
+import { CommaField, JiPitchesOrFindCommasField, JiPitchField, Two3FreeClassField } from "../types"
 
 const JI_PITCH_FIELD_TITLES: Record<JiPitchField, Io> = {
     [JiPitchField.QUOTIENT]: "quotient" as Io,
-    [JiPitchField.PEV]: "pev" as Io,
+    [JiPitchField.VECTOR]: "vector" as Io,
     [JiPitchField.CENTS]: "cents" as Io,
     [JiPitchField.APOTOME_SLOPE]: "apotome slope" as Io,
     [JiPitchField.AAS]: "AAS" as Io,

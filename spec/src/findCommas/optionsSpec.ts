@@ -1,18 +1,21 @@
-import {Abs, Copfr, Decimal, Max, Pev, Prime, Sopfr, Spev} from "@sagittal/general"
-import {ApotomeSlope, Ate, computeAas, JiPitchAnalysis, N2D3P9} from "@sagittal/system"
-import {computeFindNotatingCommasOptions, DEFAULT_FIND_COMMAS_OPTIONS} from "../../../src/findCommas"
-import {jiPitchAnalysisFixture, two3FreeClassAnalysisFixture} from "../../helpers/src/fixtures"
+import { Abs, Copfr, Decimal, Max, Vector, Prime, Sopfr, ScaledVector } from "@sagittal/general"
+import { ApotomeSlope, Ate, computeAas, JiPitchAnalysis, N2D3P9 } from "@sagittal/system"
+import {
+    computeFindNotatingCommasOptions,
+    DEFAULT_FIND_COMMAS_OPTIONS,
+} from "../../../src/findCommas"
+import { jiPitchAnalysisFixture, two3FreeClassAnalysisFixture } from "../../helpers/src/fixtures"
 
 describe("computeFindNotatingCommasOptions", (): void => {
-    const n2d3p9 = DEFAULT_FIND_COMMAS_OPTIONS.maxN2D3P9 + 100 as N2D3P9
-    const ate = DEFAULT_FIND_COMMAS_OPTIONS.maxAte + 10 as Ate
-    const pev = [0, ate] as Pev<{rational: true}>
-    const pitch = {pev} as Spev<{rational: true}>
+    const n2d3p9 = (DEFAULT_FIND_COMMAS_OPTIONS.maxN2D3P9 + 100) as N2D3P9
+    const ate = (DEFAULT_FIND_COMMAS_OPTIONS.maxAte + 10) as Ate
+    const vector = [0, ate] as Vector<{ rational: true }>
+    const pitch = { vector } as ScaledVector<{ rational: true }>
     const aas = computeAas(pitch)
-    const decimal = 847300834270 as Decimal<{rational: true}>             // 47548.9¢
-    const two3FreePrimeLimit = 8191 as Max<Prime<{rough: 5}>>
-    const two3FreeCopfr = 1000 as Copfr<{rough: 5}>
-    const two3FreeSopfr = 100 as Sopfr<{rough: 5}>
+    const decimal = 847300834270 as Decimal<{ rational: true }> // 47548.9¢
+    const two3FreePrimeLimit = 8191 as Max<Prime<{ rough: 5 }>>
+    const two3FreeCopfr = 1000 as Copfr<{ rough: 5 }>
+    const two3FreeSopfr = 100 as Sopfr<{ rough: 5 }>
     const jiPitchAnalysis: JiPitchAnalysis = {
         ...jiPitchAnalysisFixture,
         ate,
@@ -55,12 +58,12 @@ describe("computeFindNotatingCommasOptions", (): void => {
     it("adjusts the max CoPFR if the JI pitch has greater than the current options", (): void => {
         const actual = computeFindNotatingCommasOptions(jiPitchAnalysis)
 
-        expect(actual.max23FreeCopfr).toBe(two3FreeCopfr as Max<Copfr<{rough: 5}>>)
+        expect(actual.max23FreeCopfr).toBe(two3FreeCopfr as Max<Copfr<{ rough: 5 }>>)
     })
 
     it("adjusts the max SoPFR if the JI pitch has greater than the current options", (): void => {
         const actual = computeFindNotatingCommasOptions(jiPitchAnalysis)
 
-        expect(actual.max23FreeSopfr).toBe(two3FreeSopfr as Max<Sopfr<{rough: 5}>>)
+        expect(actual.max23FreeSopfr).toBe(two3FreeSopfr as Max<Sopfr<{ rough: 5 }>>)
     })
 })

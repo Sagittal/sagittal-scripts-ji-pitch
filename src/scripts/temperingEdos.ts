@@ -1,8 +1,8 @@
 import {
-    mapPev,
+    mapVector,
     computeRange,
-    computeRationalPevFromRationalSpev,
-    computeRationalPevSmoothness,
+    computeRationalVectorFromRationalScaledVector,
+    computeRationalVectorSmoothness,
     computeSimpleMap,
     Ed,
     Filename,
@@ -15,11 +15,7 @@ import {
     stringify,
     Window,
 } from "@sagittal/general"
-import {
-    parseJiPitch,
-    readAnalyzeJiPitchOptions,
-    readJiPitchIoAndFormat,
-} from "../io"
+import { parseJiPitch, readAnalyzeJiPitchOptions, readJiPitchIoAndFormat } from "../io"
 
 const MAX_EDO = 1000 as Ed<{ of: Window<{ of: 2 }> }>
 
@@ -30,11 +26,9 @@ setupScriptAndIo("analyzeJiPitch" as Filename)
 const [jiPitchIo, pitchFormat] = readJiPitchIoAndFormat()
 const jiPitch = parseJiPitch(jiPitchIo, pitchFormat)
 
-const pev = computeRationalPevFromRationalSpev(jiPitch)
+const vector = computeRationalVectorFromRationalScaledVector(jiPitch)
 
-const primeLimit = computeRationalPevSmoothness(pev) as number as Max<
-    Max<Prime>
->
+const primeLimit = computeRationalVectorSmoothness(vector) as number as Max<Max<Prime>>
 
 const temperingEdos = [] as Array<Ed<{ of: Window<{ of: 2 }> }>>
 
@@ -46,7 +40,7 @@ computeRange(1 as Ed<{ of: Window<{ of: 2 }> }>, MAX_EDO).forEach(
             primeLimit,
         })
 
-        const steps = mapPev(pev, simpleMap)
+        const steps = mapVector(vector, simpleMap)
 
         if (steps === 0) {
             temperingEdos.push(edo)

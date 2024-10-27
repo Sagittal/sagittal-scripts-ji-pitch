@@ -7,43 +7,49 @@ import {
     RecordKey,
     saveLog,
     stringify,
-    subtractRationalSpevs,
+    subtractRationalScaledVectors,
 } from "@sagittal/general"
-import {computeCommaName} from "@sagittal/system"
-import {metacommaNameToMetacommaMap} from "../../globals"
-import {Semitina} from "../types"
-import {checkMetacommaConsistency} from "./consistency"
-import {BucketName, Occam} from "./types"
+import { computeCommaName } from "@sagittal/system"
+import { metacommaNameToMetacommaMap } from "../../globals"
+import { Semitina } from "../types"
+import { checkMetacommaConsistency } from "./consistency"
+import { BucketName, Occam } from "./types"
 
 const computeFractionalTinaOccamBucket = (
     bestCommaPerSemitinaZone: Array<[Index<Semitina>, Comma]>,
 ): Record<RecordKey<Name<Comma>>, Occam> => {
     const fractionalTinaOccamBucket: Record<RecordKey<Name<Comma>>, Occam> = {}
 
-    bestCommaPerSemitinaZone.forEach((bestCommaPerSemitinaZoneEntry: [Index<Semitina>, Comma], index: number): void => {
-        if (index === indexOfFinalElement(bestCommaPerSemitinaZone)) return
+    bestCommaPerSemitinaZone.forEach(
+        (bestCommaPerSemitinaZoneEntry: [Index<Semitina>, Comma], index: number): void => {
+            if (index === indexOfFinalElement(bestCommaPerSemitinaZone)) return
 
-        const [semitinaZone, bestCommaInThisSemitinaZone] = bestCommaPerSemitinaZoneEntry
+            const [semitinaZone, bestCommaInThisSemitinaZone] = bestCommaPerSemitinaZoneEntry
 
-        const subsequentBestCommaInThatSemitinaZone = bestCommaPerSemitinaZone[index + 1][1]
+            const subsequentBestCommaInThatSemitinaZone = bestCommaPerSemitinaZone[index + 1][1]
 
-        const metacommaBetweenConsecutiveBestCommas = subtractRationalSpevs(
-            subsequentBestCommaInThatSemitinaZone,
-            bestCommaInThisSemitinaZone,
-        ) as Comma
-        const metacommaName = computeCommaName(metacommaBetweenConsecutiveBestCommas)
-        fractionalTinaOccamBucket[metacommaName] = fractionalTinaOccamBucket[metacommaName] || 0 as Occam
-        fractionalTinaOccamBucket[metacommaName] = fractionalTinaOccamBucket[metacommaName] + 1 as Occam
+            const metacommaBetweenConsecutiveBestCommas = subtractRationalScaledVectors(
+                subsequentBestCommaInThatSemitinaZone,
+                bestCommaInThisSemitinaZone,
+            ) as Comma
+            const metacommaName = computeCommaName(metacommaBetweenConsecutiveBestCommas)
+            fractionalTinaOccamBucket[metacommaName] =
+                fractionalTinaOccamBucket[metacommaName] || (0 as Occam)
+            fractionalTinaOccamBucket[metacommaName] = (fractionalTinaOccamBucket[metacommaName] +
+                1) as Occam
 
-        checkMetacommaConsistency(metacommaBetweenConsecutiveBestCommas, 0 as BucketName)
+            checkMetacommaConsistency(metacommaBetweenConsecutiveBestCommas, 0 as BucketName)
 
-        metacommaNameToMetacommaMap[metacommaName] = metacommaBetweenConsecutiveBestCommas
+            metacommaNameToMetacommaMap[metacommaName] = metacommaBetweenConsecutiveBestCommas
 
-        saveLog(
-            `semitina zone ${semitinaZone}: ${stringify(metacommaBetweenConsecutiveBestCommas)}`,
-            LogTarget.DETAILS,
-        )
-    })
+            saveLog(
+                `semitina zone ${semitinaZone}: ${stringify(
+                    metacommaBetweenConsecutiveBestCommas,
+                )}`,
+                LogTarget.DETAILS,
+            )
+        },
+    )
 
     saveLog(
         "metacommas between consecutive best commas per semitina zone gathered, and fractional tina occams bucketed",
@@ -53,6 +59,4 @@ const computeFractionalTinaOccamBucket = (
     return fractionalTinaOccamBucket
 }
 
-export {
-    computeFractionalTinaOccamBucket,
-}
+export { computeFractionalTinaOccamBucket }

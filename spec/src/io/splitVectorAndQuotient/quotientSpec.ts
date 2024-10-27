@@ -1,9 +1,9 @@
-import {Formatted, ioSettings, Quotient, TableFormat} from "@sagittal/general"
-import {JiPitchAnalysis} from "@sagittal/system"
-import {formatSplitQuotient} from "../../../../src/io/splitPevAndQuotient"
+import { Formatted, ioSettings, Quotient, TableFormat } from "@sagittal/general"
+import { JiPitchAnalysis } from "@sagittal/system"
+import { formatSplitQuotient } from "../../../../src/io/splitVectorAndQuotient"
 
 describe("formatSplitQuotient", (): void => {
-    const quotient = [7, 6] as Quotient<{rational: true}>
+    const quotient = [7, 6] as Quotient<{ rational: true }>
 
     it("splits the quotient into the numerator, vinculum, and denominator", (): void => {
         const actual = formatSplitQuotient(quotient)
@@ -21,7 +21,7 @@ describe("formatSplitQuotient", (): void => {
     })
 
     it("works for a quotient with a 1 denominator", (): void => {
-        const quotient = [7, 1] as Quotient<{rational: true}>
+        const quotient = [7, 1] as Quotient<{ rational: true }>
 
         const actual = formatSplitQuotient(quotient)
 

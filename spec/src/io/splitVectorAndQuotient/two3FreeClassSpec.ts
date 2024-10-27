@@ -1,9 +1,9 @@
-import {Formatted, ioSettings, TableFormat, Two3FreeClass} from "@sagittal/general"
-import {Two3FreeClassAnalysis} from "@sagittal/system"
-import {formatSplit23FreeClass} from "../../../../src/io/splitPevAndQuotient"
+import { Formatted, ioSettings, TableFormat, Two3FreeClass } from "@sagittal/general"
+import { Two3FreeClassAnalysis } from "@sagittal/system"
+import { formatSplit23FreeClass } from "../../../../src/io/splitVectorAndQuotient"
 
 describe("formatSplit23FreeClass", (): void => {
-    const two3FreeClass = {pev: [0, 0, -1, 1]} as Two3FreeClass
+    const two3FreeClass = { vector: [0, 0, -1, 1] } as Two3FreeClass
 
     it("splits the 2,3-free class into the numinator, vinculum, diminuator, and sign", (): void => {
         const actual = formatSplit23FreeClass(two3FreeClass)
@@ -16,23 +16,19 @@ describe("formatSplit23FreeClass", (): void => {
         ioSettings.tableFormat = TableFormat.FORUM
         const actual = formatSplit23FreeClass(two3FreeClass)
 
-        const expected = [
-            "[latex]\\{\\frac{7}{5}\\}_{\\scriptsize{2,3}}[/latex]",
-        ] as Array<Formatted<Two3FreeClassAnalysis>>
+        const expected = ["[latex]\\{\\frac{7}{5}\\}_{\\scriptsize{2,3}}[/latex]"] as Array<
+            Formatted<Two3FreeClassAnalysis>
+        >
         expect(actual).toEqual(expected)
-
     })
 
     it("when formatting for the forum with split quotient, still uses the LaTeX version of the sign", (): void => {
         ioSettings.tableFormat = TableFormat.FORUM_WITH_SPLIT_QUOTIENTS
         const actual = formatSplit23FreeClass(two3FreeClass)
 
-        const expected = [
-            "7",
-            "/",
-            "5",
-            "[latex]_{\\scriptsize{2,3}}[/latex]",
-        ] as Array<Formatted<Two3FreeClassAnalysis>>
+        const expected = ["7", "/", "5", "[latex]_{\\scriptsize{2,3}}[/latex]"] as Array<
+            Formatted<Two3FreeClassAnalysis>
+        >
         expect(actual).toEqual(expected)
     })
 })

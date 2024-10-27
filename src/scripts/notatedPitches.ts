@@ -2,20 +2,20 @@ import {
     abs,
     BLANK,
     COMMA,
-    computeDecimalFromPev,
-    computeQuotientFromPev,
+    computeDecimalFromVector,
+    computeQuotientFromVector,
     Exponent,
     formatQuotient,
     Formatted,
     isEmpty,
-    Pev,
+    Vector,
     Prime,
     Quotient,
     saveLog,
-    sumPevs,
+    sumVectors,
 } from "@sagittal/general"
 
-const PYTHAGOREAN_PEVS: Pev[] = [
+const PYTHAGOREAN_VECTORS: Vector[] = [
     [54, -34],
     [53, -33],
     [51, -32],
@@ -85,9 +85,9 @@ const PYTHAGOREAN_PEVS: Pev[] = [
     [-50, 32],
     [-52, 33],
     [-53, 34],
-] as Pev[]
+] as Vector[]
 
-const SAGITTAL_COMMA_PEVS: Pev[] = [
+const SAGITTAL_COMMA_VECTORS: Vector[] = [
     [10, -6, 1, -1],
     [-10, 6, -1, 1],
     [-4, 4, -1],
@@ -336,31 +336,30 @@ const SAGITTAL_COMMA_PEVS: Pev[] = [
     [5, -1, 0, 0, -1],
     [-16, 8, 0, 0, 1],
     [16, -8, 0, 0, -1],
-] as Pev[]
+] as Vector[]
 
-SAGITTAL_COMMA_PEVS.forEach((commaPev: Pev): void => {
+SAGITTAL_COMMA_VECTORS.forEach((commaVector: Vector): void => {
     const notatedPitches = [] as Array<Formatted<Quotient>>
 
-    if (isEmpty(commaPev)) {
+    if (isEmpty(commaVector)) {
         saveLog(BLANK)
         return
     }
 
-    PYTHAGOREAN_PEVS.forEach((pythagoreanPev: Pev): void => {
-        const notatedPev = sumPevs(commaPev, pythagoreanPev)
+    PYTHAGOREAN_VECTORS.forEach((pythagoreanVector: Vector): void => {
+        const notatedVector = sumVectors(commaVector, pythagoreanVector)
 
         // Range for Sagittal-SMuFL-Map
-        if (abs(notatedPev[1]) <= 2) {
-
+        if (abs(notatedVector[1]) <= 2) {
             // Reduce to within octave
-            while (computeDecimalFromPev(notatedPev) > 2) {
-                notatedPev[0] = notatedPev[0] - 1 as Exponent<Prime>
+            while (computeDecimalFromVector(notatedVector) > 2) {
+                notatedVector[0] = (notatedVector[0] - 1) as Exponent<Prime>
             }
-            while (computeDecimalFromPev(notatedPev) < 1) {
-                notatedPev[0] = notatedPev[0] + 1 as Exponent<Prime>
+            while (computeDecimalFromVector(notatedVector) < 1) {
+                notatedVector[0] = (notatedVector[0] + 1) as Exponent<Prime>
             }
 
-            notatedPitches.push(formatQuotient(computeQuotientFromPev(notatedPev)))
+            notatedPitches.push(formatQuotient(computeQuotientFromVector(notatedVector)))
         }
     })
 

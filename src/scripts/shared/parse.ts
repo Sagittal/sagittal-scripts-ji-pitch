@@ -11,20 +11,22 @@ import {
     SortBy,
     split,
 } from "@sagittal/general"
-import {JI_PITCH_SCRIPTS_FIELDS} from "../../constants"
-import {JiPitchesOrFindCommasField, JiPitchScriptGroupField} from "../../types"
+import { JI_PITCH_SCRIPTS_FIELDS } from "../../constants"
+import { JiPitchesOrFindCommasField, JiPitchScriptGroupField } from "../../types"
 
 const parseFields = (fieldsIo: Io): JiPitchScriptGroupField[] => {
     const fields = split(fieldsIo, COMMA)
 
     fields.forEach((field: Io): void => {
         if (
-            !JI_PITCH_SCRIPTS_FIELDS.includes(field as JiPitchesOrFindCommasField)
-            && !field.match(/pev\d+/)
-            && !field.match(/quotient[ND]/)
-            && !field.match(/two3FreeClassName[ND]/)
+            !JI_PITCH_SCRIPTS_FIELDS.includes(field as JiPitchesOrFindCommasField) &&
+            !field.match(/vector\d+/) &&
+            !field.match(/quotient[ND]/) &&
+            !field.match(/two3FreeClassName[ND]/)
         ) {
-            throw new Error(`Tried to parse field ${field} but it is not a member of the list of possible fields: {${JI_PITCH_SCRIPTS_FIELDS}}, as well as specific terms of some fields e.g. pev2, quotientN`)
+            throw new Error(
+                `Tried to parse field ${field} but it is not a member of the list of possible fields: {${JI_PITCH_SCRIPTS_FIELDS}}, as well as specific terms of some fields e.g. vector2, quotientN`,
+            )
         }
     })
 
@@ -41,15 +43,27 @@ const parseExclusive = (exclusiveIo: boolean | Io): Exclusive => {
 
 const FIELD_TO_KEY_PATH_MAP: Record<JiPitchScriptGroupField, KeyPath> = {
     [JiPitchesOrFindCommasField.QUOTIENT]: computeKeyPath("quotient"),
-    [JiPitchesOrFindCommasField.PEV]: computeKeyPath("pev"),
+    [JiPitchesOrFindCommasField.VECTOR]: computeKeyPath("vector"),
     [JiPitchesOrFindCommasField.CENTS]: computeKeyPath("cents"),
     [JiPitchesOrFindCommasField.APOTOME_SLOPE]: computeKeyPath("apotomeSlope"),
     [JiPitchesOrFindCommasField.AAS]: computeKeyPath("aas"),
     [JiPitchesOrFindCommasField.ATE]: computeKeyPath("ate"),
-    [JiPitchesOrFindCommasField.TWO_3_FREE_CLASS_NAME]: computeKeyPath("two3FreeClassAnalysis", "name"),
-    [JiPitchesOrFindCommasField.TWO_3_FREE_COPFR]: computeKeyPath("two3FreeClassAnalysis", "two3FreeCopfr"),
-    [JiPitchesOrFindCommasField.TWO_3_FREE_SOPFR]: computeKeyPath("two3FreeClassAnalysis", "two3FreeSopfr"),
-    [JiPitchesOrFindCommasField.TWO_3_FREE_PRIME_LIMIT]: computeKeyPath("two3FreeClassAnalysis", "two3FreePrimeLimit"),
+    [JiPitchesOrFindCommasField.TWO_3_FREE_CLASS_NAME]: computeKeyPath(
+        "two3FreeClassAnalysis",
+        "name",
+    ),
+    [JiPitchesOrFindCommasField.TWO_3_FREE_COPFR]: computeKeyPath(
+        "two3FreeClassAnalysis",
+        "two3FreeCopfr",
+    ),
+    [JiPitchesOrFindCommasField.TWO_3_FREE_SOPFR]: computeKeyPath(
+        "two3FreeClassAnalysis",
+        "two3FreeSopfr",
+    ),
+    [JiPitchesOrFindCommasField.TWO_3_FREE_PRIME_LIMIT]: computeKeyPath(
+        "two3FreeClassAnalysis",
+        "two3FreePrimeLimit",
+    ),
     [JiPitchesOrFindCommasField.N2D3P9]: computeKeyPath("two3FreeClassAnalysis", "n2d3p9"),
     [JiPitchesOrFindCommasField.COMMA_CLASS]: computeKeyPath("commaClass"),
     [JiPitchesOrFindCommasField.NAME]: computeKeyPath("name"),
@@ -60,20 +74,23 @@ const parseSortBy = (sortByIo: Io): SortBy => {
     const fields = parseFields(sortByIo)
 
     return fields.map((field: JiPitchScriptGroupField): KeyPath => {
-        if (field.match(/pev\d+/)) {
-            return computeKeyPath("pev", computePrimeCount(parseInt(field.replace("pev", BLANK))) - 1)
+        if (field.match(/vector\d+/)) {
+            return computeKeyPath(
+                "vector",
+                computePrimeCount(parseInt(field.replace("vector", BLANK))) - 1,
+            )
         } else if (field.match(/quotient[ND]/)) {
             return computeKeyPath("quotient", field[field.length - 1] === "N" ? 0 : 1)
         } else if (field.match(/two3FreeClassName[ND]/)) {
-            return computeKeyPath("two3FreeClassAnalysis", "name", field[field.length - 1] === "N" ? 0 : 1)
+            return computeKeyPath(
+                "two3FreeClassAnalysis",
+                "name",
+                field[field.length - 1] === "N" ? 0 : 1,
+            )
         }
 
         return FIELD_TO_KEY_PATH_MAP[field]
     })
 }
 
-export {
-    parseFields,
-    parseExclusive,
-    parseSortBy,
-}
+export { parseFields, parseExclusive, parseSortBy }

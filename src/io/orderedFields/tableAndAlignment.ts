@@ -1,35 +1,33 @@
-import {Column, Index} from "@sagittal/general"
-import {jiPitchScriptGroupSettings} from "../../globals"
-import {JiPitchScriptGroupField} from "../../types"
-import {computeOrderedTableAlignment} from "./alignment"
-import {computeOrderedColumnIndex} from "./columnIndex"
-import {maybeAppendAdditionalColumnIndicesForSplitField} from "./maybeAppendAdditionalColumnIndicesForSplitField"
-import {computeOrderedTable} from "./table"
-import {OrderableTableInformation, OrderedTableAndAlignmentOptions} from "./types"
+import { Column, Index } from "@sagittal/general"
+import { jiPitchScriptGroupSettings } from "../../globals"
+import { JiPitchScriptGroupField } from "../../types"
+import { computeOrderedTableAlignment } from "./alignment"
+import { computeOrderedColumnIndex } from "./columnIndex"
+import { maybeAppendAdditionalColumnIndicesForSplitField } from "./maybeAppendAdditionalColumnIndicesForSplitField"
+import { computeOrderedTable } from "./table"
+import { OrderableTableInformation, OrderedTableAndAlignmentOptions } from "./types"
 
 const computeOrderedTableAndAlignment = <T>(
-    {table, tableAlignment}: OrderableTableInformation<T>,
+    { table, tableAlignment }: OrderableTableInformation<T>,
     options: OrderedTableAndAlignmentOptions,
 ): OrderableTableInformation<T> => {
-    const {maxPevLength, recognizeNameTitleAsBeingFor23FreeClass, fieldTitles} = options
+    const { maxVectorLength, recognizeNameTitleAsBeingFor23FreeClass, fieldTitles } = options
 
-    const orderedFields = jiPitchScriptGroupSettings.orderedFields!
-        .filter((orderedField: JiPitchScriptGroupField): boolean => {
+    const orderedFields = jiPitchScriptGroupSettings.orderedFields!.filter(
+        (orderedField: JiPitchScriptGroupField): boolean => {
             return Object.keys(fieldTitles).includes(orderedField)
-        }) as JiPitchScriptGroupField[]
+        },
+    ) as JiPitchScriptGroupField[]
     const orderedColumnIndices = [] as Array<Index<Column>>
     orderedFields.forEach((orderedField: JiPitchScriptGroupField): void => {
         const columnIndex = computeOrderedColumnIndex(orderedField, options)
         orderedColumnIndices.push(columnIndex)
-        maybeAppendAdditionalColumnIndicesForSplitField(
-            orderedColumnIndices,
-            {
-                columnIndex,
-                orderedField,
-                maxPevLength,
-                recognizeNameTitleAsBeingFor23FreeClass,
-            },
-        )
+        maybeAppendAdditionalColumnIndicesForSplitField(orderedColumnIndices, {
+            columnIndex,
+            orderedField,
+            maxVectorLength,
+            recognizeNameTitleAsBeingFor23FreeClass,
+        })
     })
 
     return {
@@ -38,6 +36,4 @@ const computeOrderedTableAndAlignment = <T>(
     }
 }
 
-export {
-    computeOrderedTableAndAlignment,
-}
+export { computeOrderedTableAndAlignment }

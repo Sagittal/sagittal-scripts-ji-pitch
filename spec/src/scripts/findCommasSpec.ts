@@ -1,4 +1,4 @@
-import {Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput} from "@sagittal/general"
+import { Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput } from "@sagittal/general"
 import {
     OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS,
     OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS,
@@ -35,7 +35,7 @@ describe("find-commas", (): void => {
             "max prime limit:   \t 37    ",
             "",
             "     \t      \t        \t \t  \t   \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \t               \t       \t       \t       \t2,3-free\t2,3-free\t \t  \t   \t2,3-free\t2,3-free\t2,3-free",
-            "comma\t      \tquotient\t \t  \tpev\t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
+            "comma\t      \tquotient\t \t  \tvector\t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
             "class\tname  \t       n\t/\td \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t 13    \t 17    \t 19    \t 23    \t 29    \t \tcents          \tslope  \tAAS    \tATE    \tlimit   \t       n\t/\td \t₂,₃\tCoPFR   \tSoPFR   \tN2D3P9  ",
             "     \t29/19C\t      58\t/\t57\t  [\t  1    \t -1    \t  0    \t  0    \t  0    \t  0    \t  0    \t -1    \t  0    \t  1    \t⟩\t        30.109¢\t -2.854\t  2.854\t  1    \t 29     \t      29\t/\t19\t₂,₃\t  2     \t 48     \t295.907 ",
             "",
@@ -46,7 +46,8 @@ describe("find-commas", (): void => {
     it("can sort the resulting list by a specific field", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by apotomeSlope --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by apotomeSlope --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -62,7 +63,7 @@ describe("find-commas", (): void => {
             "max prime limit:   \t 47    ",
             "",
             "        \t           \t        \t \t        \t   \t       \t       \t       \t       \t       \t       \t       \t       \t \t               \t       \t       \t       \t2,3-free\t2,3-free\t \t  \t   \t2,3-free\t2,3-free\t2,3-free",
-            "comma   \t           \tquotient\t \t        \tpev\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
+            "comma   \t           \tquotient\t \t        \tvector\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
             "class   \tname       \t       n\t/\td       \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t 13    \t 17    \t 19    \t \tcents          \tslope  \tAAS    \tATE    \tlimit   \t       n\t/\td \t₂,₃\tCoPFR   \tSoPFR   \tN2D3P9  ",
             "        \t19/(5²⋅7)M \t    4864\t/\t4725    \t  [\t  8    \t -3    \t -2    \t -1    \t  0    \t  0    \t  0    \t  1    \t⟩\t        50.195¢\t -6.091\t  6.091\t  3    \t 19     \t     175\t/\t19\t₂,₃\t  4     \t 36     \t292.477 ",
             "        \t35/17M     \t      35\t/\t34      \t  [\t -1    \t  0    \t  1    \t  1    \t  0    \t  0    \t -1    \t       \t⟩\t        50.184¢\t -3.090\t  3.090\t  0    \t 17     \t      35\t/\t17\t₂,₃\t  3     \t 29     \t 93.657 ",
@@ -76,7 +77,8 @@ describe("find-commas", (): void => {
     it("can sort the resulting list by more than one field", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run find-commas -- --sort-by n2d3p9,cents --max-prime-limit 7 --max-n2d3p9 8 --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run find-commas -- --sort-by n2d3p9,cents --max-prime-limit 7 --max-n2d3p9 8 --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -92,7 +94,7 @@ describe("find-commas", (): void => {
             "max prime limit:   \t  7    ",
             "",
             "        \t     \t        \t \t       \t   \t       \t       \t       \t       \t \t               \t       \t       \t       \t2,3-free\t2,3-free\t \t \t   \t2,3-free\t2,3-free\t2,3-free",
-            "comma   \t     \tquotient\t \t       \tpev\t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t \t   \tclass   \tclass   \tclass   ",
+            "comma   \t     \tquotient\t \t       \tvector\t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t \t   \tclass   \tclass   \tclass   ",
             "class   \tname \t       n\t/\td      \t   \t  2    \t  3    \t  5    \t  7    \t \tcents          \tslope  \tAAS    \tATE    \tlimit   \t       n\t/\td\t₂,₃\tCoPFR   \tSoPFR   \tN2D3P9  ",
             " (|//|) \t1u   \t       1\t/\t1      \t  [\t       \t       \t       \t       \t⟩\t         0.000¢\t  0.000\t  0.000\t  0    \t  1     \t       1\t/\t1\t₂,₃\t  0     \t  0     \t  1.000 ",
             "   '/|  \t3C   \t  531441\t/\t524288 \t  [\t-19    \t 12    \t       \t       \t⟩\t        23.460¢\t 10.555\t 10.555\t 12    \t  1     \t       1\t/\t1\t₂,₃\t  0     \t  0     \t  1.000 ",
@@ -112,10 +114,11 @@ describe("find-commas", (): void => {
         expect(actual).toEqual(expected)
     })
 
-    it("can sort the resulting list by a specific term of the pev", (): void => {
+    it("can sort the resulting list by a specific term of the vector", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by pev2 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by vector2 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -131,7 +134,7 @@ describe("find-commas", (): void => {
             "max prime limit:   \t 47    ",
             "",
             "        \t           \t        \t \t        \t   \t       \t       \t       \t       \t       \t       \t       \t       \t \t               \t       \t       \t       \t2,3-free\t2,3-free\t \t  \t   \t2,3-free\t2,3-free\t2,3-free",
-            "comma   \t           \tquotient\t \t        \tpev\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
+            "comma   \t           \tquotient\t \t        \tvector\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
             "class   \tname       \t       n\t/\td       \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t 13    \t 17    \t 19    \t \tcents          \tslope  \tAAS    \tATE    \tlimit   \t       n\t/\td \t₂,₃\tCoPFR   \tSoPFR   \tN2D3P9  ",
             "  ,'/|) \t65M        \t34543665\t/\t33554432\t  [\t-25    \t 12    \t  1    \t  0    \t  0    \t  1    \t       \t       \t⟩\t        50.301¢\t  8.903\t  8.903\t 12    \t 13     \t      65\t/\t1 \t₂,₃\t  2     \t 18     \t 23.472 ",
             "        \t1/(5²⋅11²)M\t 1594323\t/\t1548800 \t  [\t -9    \t 13    \t -2    \t  0    \t -2    \t       \t       \t       \t⟩\t        50.152¢\t  9.912\t  9.912\t 13    \t 11     \t    3025\t/\t1 \t₂,₃\t  4     \t 32     \t231.076 ",
@@ -145,7 +148,8 @@ describe("find-commas", (): void => {
     it("can set the format of the comma names", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --undirected --factoring-mode always --unabbreviated --ascii --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --undirected --factoring-mode always --unabbreviated --ascii --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -161,7 +165,7 @@ describe("find-commas", (): void => {
             "max prime limit:   \t 47    ",
             "",
             "        \t                      \t        \t \t        \t   \t       \t       \t       \t       \t       \t       \t       \t       \t \t               \t       \t       \t       \t2,3-free\t2,3-free\t \t  \t   \t2,3-free\t2,3-free\t2,3-free",
-            "comma   \t                      \tquotient\t \t        \tpev\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
+            "comma   \t                      \tquotient\t \t        \tvector\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
             "class   \tname                  \t       n\t/\td       \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t 13    \t 17    \t 19    \t \tcents          \tslope  \tAAS    \tATE    \tlimit   \t       n\t/\td \t₂,₃\tCoPFR   \tSoPFR   \tN2D3P9  ",
             "  ,'/|) \t5*13-Medium-Diesis    \t34543665\t/\t33554432\t  [\t-25    \t 12    \t  1    \t  0    \t  0    \t  1    \t       \t       \t⟩\t        50.301¢\t  8.903\t  8.903\t 12    \t 13     \t      65\t/\t1 \t₂,₃\t  2     \t 18     \t 23.472 ",
             "        \t17:5*7-Medium-Diesis  \t      35\t/\t34      \t  [\t -1    \t  0    \t  1    \t  1    \t  0    \t  0    \t -1    \t       \t⟩\t        50.184¢\t -3.090\t  3.090\t  0    \t 17     \t      35\t/\t17\t₂,₃\t  3     \t 29     \t 93.657 ",
@@ -202,7 +206,7 @@ describe("find-commas", (): void => {
             "max prime limit:   \t 37    ",
             "",
             "     \t      \t        \t \t  \t   \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \t               \t       \t2,3-free\t2,3-free\t \t  \t   \t2,3-free\t2,3-free\t2,3-free",
-            "comma\t      \tquotient\t \t  \tpev\t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
+            "comma\t      \tquotient\t \t  \tvector\t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
             "class\tname  \t       n\t/\td \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t 13    \t 17    \t 19    \t 23    \t 29    \t \tcents          \tslope  \tlimit   \t       n\t/\td \t₂,₃\tCoPFR   \tSoPFR   \tN2D3P9  ",
             "     \t29/19C\t      58\t/\t57\t  [\t  1    \t -1    \t  0    \t  0    \t  0    \t  0    \t  0    \t -1    \t  0    \t  1    \t⟩\t        30.109¢\t -2.854\t 29     \t      29\t/\t19\t₂,₃\t  2     \t 48     \t295.907 ",
             "",
@@ -210,10 +214,11 @@ describe("find-commas", (): void => {
         expect(actual).toEqual(expected)
     })
 
-    it("can set bounds by pevs and quotients instead of just cents", (): void => {
+    it("can set bounds by vectors and quotients instead of just cents", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run find-commas -- --lower-bound 1594323/1548800 --upper-bound "[ -25  12   1   0   0   1 ⟩" --undirected --factoring-mode always --unabbreviated --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run find-commas -- --lower-bound 1594323/1548800 --upper-bound "[ -25  12   1   0   0   1 ⟩" --undirected --factoring-mode always --unabbreviated --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -229,7 +234,7 @@ describe("find-commas", (): void => {
             "max prime limit:   \t 47    ",
             "",
             "        \t                     \t        \t \t        \t   \t       \t       \t       \t       \t       \t       \t       \t       \t \t               \t       \t       \t       \t2,3-free\t2,3-free\t \t  \t   \t2,3-free\t2,3-free\t2,3-free",
-            "comma   \t                     \tquotient\t \t        \tpev\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
+            "comma   \t                     \tquotient\t \t        \tvector\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t  \t   \tclass   \tclass   \tclass   ",
             "class   \tname                 \t       n\t/\td       \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t 13    \t 17    \t 19    \t \tcents          \tslope  \tAAS    \tATE    \tlimit   \t       n\t/\td \t₂,₃\tCoPFR   \tSoPFR   \tN2D3P9  ",
             "  ,'/|) \t5⋅13-Medium-Diesis   \t34543665\t/\t33554432\t  [\t-25    \t 12    \t  1    \t  0    \t  0    \t  1    \t       \t       \t⟩\t        50.301¢\t  8.903\t  8.903\t 12    \t 13     \t      65\t/\t1 \t₂,₃\t  2     \t 18     \t 23.472 ",
             "        \t17:5⋅7-Medium-Diesis \t      35\t/\t34      \t  [\t -1    \t  0    \t  1    \t  1    \t  0    \t  0    \t -1    \t       \t⟩\t        50.184¢\t -3.090\t  3.090\t  0    \t 17     \t      35\t/\t17\t₂,₃\t  3     \t 29     \t 93.657 ",
@@ -243,7 +248,8 @@ describe("find-commas", (): void => {
     it("can format for a spreadsheet", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by apotomeSlope --table-format spreadsheet --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS} --factoring-mode never` as Io
+        const script =
+            `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by apotomeSlope --table-format spreadsheet --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS} --factoring-mode never` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -259,7 +265,7 @@ describe("find-commas", (): void => {
             "max prime limit:   \t47",
             "",
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t2,3-free\t2,3-free\t\t\t\t2,3-free\t2,3-free\t2,3-free",
-            "comma\t\tquotient\t\t\tpev\t\t\t\t\t\t\t\t\t\t\tapotome\t\t\tprime\tclass\t\t\t\tclass\tclass\tclass",
+            "comma\t\tquotient\t\t\tvector\t\t\t\t\t\t\t\t\t\t\tapotome\t\t\tprime\tclass\t\t\t\tclass\tclass\tclass",
             "class\tname\tn\t/\td\t \t2\t3\t5\t7\t11\t13\t17\t19\t \tcents\tslope\tAAS\tATE\tlimit\tn\t/\td\t₂,₃\tCoPFR\tSoPFR\tN2D3P9",
             "\t19/175M\t4864\t/\t4725\t[\t8\t-3\t-2\t-1\t0\t0\t0\t1\t⟩\t50.195¢\t-6.091\t6.091\t3\t19\t175\t/\t19\t₂,₃\t4\t36\t292.477",
             "\t35/17M\t35\t/\t34\t[\t-1\t0\t1\t1\t0\t0\t-1\t\t⟩\t50.184¢\t-3.090\t3.090\t0\t17\t35\t/\t17\t₂,₃\t3\t29\t93.657",
@@ -273,7 +279,8 @@ describe("find-commas", (): void => {
     it("by default includes the bounds", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run find-commas -- --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run find-commas -- --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -289,7 +296,7 @@ describe("find-commas", (): void => {
             "max prime limit:   \t  3    ",
             "",
             "        \t    \t        \t \t      \t   \t       \t       \t \t               \t       \t       \t       \t2,3-free\t2,3-free\t \t \t   \t2,3-free\t2,3-free\t2,3-free",
-            "comma   \t    \tquotient\t \t      \tpev\t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t \t   \tclass   \tclass   \tclass   ",
+            "comma   \t    \tquotient\t \t      \tvector\t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t \t   \tclass   \tclass   \tclass   ",
             "class   \tname\t       n\t/\td     \t   \t  2    \t  3    \t \tcents          \tslope  \tAAS    \tATE    \tlimit   \t       n\t/\td\t₂,₃\tCoPFR   \tSoPFR   \tN2D3P9  ",
             " (|//|) \t1u  \t       1\t/\t1     \t  [\t       \t       \t⟩\t         0.000¢\t  0.000\t  0.000\t  0    \t  1     \t       1\t/\t1\t₂,₃\t  0     \t  0     \t  1.000 ",
             "   '/|  \t3C  \t  531441\t/\t524288\t  [\t-19    \t 12    \t⟩\t        23.460¢\t 10.555\t 10.555\t 12    \t  1     \t       1\t/\t1\t₂,₃\t  0     \t  0     \t  1.000 ",
@@ -301,7 +308,8 @@ describe("find-commas", (): void => {
     it("can exclude the bounds", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run find-commas -- --exclusive --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run find-commas -- --exclusive --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -325,7 +333,8 @@ describe("find-commas", (): void => {
     it("can exclude only one or the other of the bounds", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run find-commas -- --exclusive true,false --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run find-commas -- --exclusive true,false --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -341,7 +350,7 @@ describe("find-commas", (): void => {
             "max prime limit:   \t  3    ",
             "",
             "        \t    \t        \t \t      \t   \t       \t       \t \t               \t       \t       \t       \t2,3-free\t2,3-free\t \t \t   \t2,3-free\t2,3-free\t2,3-free",
-            "comma   \t    \tquotient\t \t      \tpev\t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t \t   \tclass   \tclass   \tclass   ",
+            "comma   \t    \tquotient\t \t      \tvector\t       \t       \t \t               \tapotome\t       \t       \tprime   \t   class\t \t \t   \tclass   \tclass   \tclass   ",
             "class   \tname\t       n\t/\td     \t   \t  2    \t  3    \t \tcents          \tslope  \tAAS    \tATE    \tlimit   \t       n\t/\td\t₂,₃\tCoPFR   \tSoPFR   \tN2D3P9  ",
             "   '/|  \t3C  \t  531441\t/\t524288\t  [\t-19    \t 12    \t⟩\t        23.460¢\t 10.555\t 10.555\t 12    \t  1     \t       1\t/\t1\t₂,₃\t  0     \t  0     \t  1.000 ",
             "",

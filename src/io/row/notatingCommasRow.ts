@@ -1,4 +1,4 @@
-import {BLANK, Count, Exponent, Max, Maybe, Prime, Row} from "@sagittal/general"
+import { BLANK, Count, Exponent, Max, Maybe, Prime, Row } from "@sagittal/general"
 import {
     CommaAnalysis,
     CommaClassId,
@@ -6,15 +6,15 @@ import {
     formatSizeCategory,
     PotentiallyCommaAnalysis,
 } from "@sagittal/system"
-import {jiPitchScriptGroupSettings} from "../../globals"
-import {CommaField} from "../../types"
-import {computeJiPitchRow} from "./jiPitchRow"
+import { jiPitchScriptGroupSettings } from "../../globals"
+import { CommaField } from "../../types"
+import { computeJiPitchRow } from "./jiPitchRow"
 
 const computeNotatingCommasRow = (
     commaAnalysis: CommaAnalysis | PotentiallyCommaAnalysis,
     maybeCommaClassId: Maybe<CommaClassId>,
-    maxPevLength: Max<Count<Exponent<Prime>>>,
-): Row<{of: CommaAnalysis}> => {
+    maxVectorLength: Max<Count<Exponent<Prime>>>,
+): Row<{ of: CommaAnalysis }> => {
     const row = []
 
     if (!jiPitchScriptGroupSettings.excludedFields.includes(CommaField.COMMA_CLASS)) {
@@ -22,20 +22,17 @@ const computeNotatingCommasRow = (
         row.push(formattedCommaClass)
     }
     if (!jiPitchScriptGroupSettings.excludedFields.includes(CommaField.NAME)) {
-        const {name} = commaAnalysis
+        const { name } = commaAnalysis
         row.push(name)
     }
     if (!jiPitchScriptGroupSettings.excludedFields.includes(CommaField.SIZE_CATEGORY)) {
-        const {sizeCategory} = commaAnalysis
+        const { sizeCategory } = commaAnalysis
         row.push(formatSizeCategory(sizeCategory))
     }
 
-    return [
-        ...row,
-        ...computeJiPitchRow(commaAnalysis, maxPevLength),
-    ] as Row<{of: CommaAnalysis}>
+    return [...row, ...computeJiPitchRow(commaAnalysis, maxVectorLength)] as Row<{
+        of: CommaAnalysis
+    }>
 }
 
-export {
-    computeNotatingCommasRow,
-}
+export { computeNotatingCommasRow }

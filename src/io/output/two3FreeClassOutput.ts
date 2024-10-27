@@ -9,21 +9,19 @@ import {
     sumTexts,
     Table,
 } from "@sagittal/general"
-import {Two3FreeClassAnalysis} from "@sagittal/system"
-import {jiPitchScriptGroupSettings} from "../../globals"
-import {TWO_3_FREE_CLASS_FIELD_TITLES} from "../fieldTitles"
-import {compute23FreeClassHeaderRows} from "../headerRows"
-import {computeOrderedTableAndAlignment} from "../orderedFields"
-import {compute23FreeClassRow} from "../row"
-import {computeSplitPevAndQuotientTableAlignment} from "../splitPevAndQuotient"
-import {TWO_3_FREE_CLASS_TABLE_TITLE} from "../tableTitles"
+import { Two3FreeClassAnalysis } from "@sagittal/system"
+import { jiPitchScriptGroupSettings } from "../../globals"
+import { TWO_3_FREE_CLASS_FIELD_TITLES } from "../fieldTitles"
+import { compute23FreeClassHeaderRows } from "../headerRows"
+import { computeOrderedTableAndAlignment } from "../orderedFields"
+import { compute23FreeClassRow } from "../row"
+import { computeSplitVectorAndQuotientTableAlignment } from "../splitVectorAndQuotient"
+import { TWO_3_FREE_CLASS_TABLE_TITLE } from "../tableTitles"
 
-const compute23FreeClassOutput = (
-    two3FreeClassAnalysis: Two3FreeClassAnalysis,
-): Io => {
+const compute23FreeClassOutput = (two3FreeClassAnalysis: Two3FreeClassAnalysis): Io => {
     const two3FreeClassHeaderRows = compute23FreeClassHeaderRows()
     const headerRowCount = count(two3FreeClassHeaderRows)
-    let tableAlignment = computeSplitPevAndQuotientTableAlignment(two3FreeClassHeaderRows)
+    let tableAlignment = computeSplitVectorAndQuotientTableAlignment(two3FreeClassHeaderRows)
 
     let two3FreeClassTable: Table<Two3FreeClassAnalysis> = [
         ...two3FreeClassHeaderRows,
@@ -31,13 +29,14 @@ const compute23FreeClassOutput = (
     ]
 
     if (!isUndefined(jiPitchScriptGroupSettings.orderedFields)) {
-        const {
-            table: ordered23FreeClassTable,
-            tableAlignment: orderedTableAlignment,
-        } = computeOrderedTableAndAlignment(
-            {table: two3FreeClassTable, tableAlignment},
-            {fieldTitles: TWO_3_FREE_CLASS_FIELD_TITLES, recognizeNameTitleAsBeingFor23FreeClass: true},
-        )
+        const { table: ordered23FreeClassTable, tableAlignment: orderedTableAlignment } =
+            computeOrderedTableAndAlignment(
+                { table: two3FreeClassTable, tableAlignment },
+                {
+                    fieldTitles: TWO_3_FREE_CLASS_FIELD_TITLES,
+                    recognizeNameTitleAsBeingFor23FreeClass: true,
+                },
+            )
         two3FreeClassTable = ordered23FreeClassTable
         tableAlignment = orderedTableAlignment
     }
@@ -46,10 +45,8 @@ const compute23FreeClassOutput = (
 
     return sumTexts(
         TWO_3_FREE_CLASS_TABLE_TITLE,
-        formatTableFromScript(two3FreeClassTable, {headerRowCount, tableAlignment}),
+        formatTableFromScript(two3FreeClassTable, { headerRowCount, tableAlignment }),
     )
 }
 
-export {
-    compute23FreeClassOutput,
-}
+export { compute23FreeClassOutput }

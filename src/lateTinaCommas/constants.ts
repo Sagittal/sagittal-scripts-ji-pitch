@@ -1,29 +1,42 @@
-import {add, Cents, computePitchFromCents, Copfr, Exclusive, Max, Min, Spev, subtract} from "@sagittal/general"
-import {computeCentsFromTinas, Tinas} from "@sagittal/system"
+import {
+    add,
+    Cents,
+    computePitchFromCents,
+    Copfr,
+    Exclusive,
+    Max,
+    Min,
+    ScaledVector,
+    subtract,
+} from "@sagittal/general"
+import { computeCentsFromTinas, Tinas } from "@sagittal/system"
 
-const INFINITE_2_3_FREE_COPFR = Infinity as Max<Copfr<{rough: 5}>>
+const INFINITE_2_3_FREE_COPFR = Infinity as Max<Copfr<{ rough: 5 }>>
 
-const TINAS_TO_CHECK: Tinas[] = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5] as Tinas[]
+const TINAS_TO_CHECK: Tinas[] = [
+    0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5,
+] as Tinas[]
 const TINA_COMMAS_PLUS_MINUS_RANGE: Tinas = 0.25 as Tinas
 
 const TINA_COMMAS_LOWER_BOUND = computePitchFromCents(
-    computeCentsFromTinas(
-        subtract(TINAS_TO_CHECK[0], TINA_COMMAS_PLUS_MINUS_RANGE),
-    ),
-) as Min<Spev<{rational: false}>>
+    computeCentsFromTinas(subtract(TINAS_TO_CHECK[0], TINA_COMMAS_PLUS_MINUS_RANGE)),
+) as Min<ScaledVector<{ rational: false }>>
 const TINA_COMMAS_UPPER_BOUND = computePitchFromCents(
     computeCentsFromTinas(
         add(TINAS_TO_CHECK[TINAS_TO_CHECK.length - 1], TINA_COMMAS_PLUS_MINUS_RANGE),
     ),
-) as Max<Spev<{rational: false}>>
+) as Max<ScaledVector<{ rational: false }>>
 
-const MAX_TINA_SIZES: Cents[] = TINAS_TO_CHECK
-    .map((tina: Tinas): Cents => computeCentsFromTinas(add(tina, TINA_COMMAS_PLUS_MINUS_RANGE)))
+const MAX_TINA_SIZES: Cents[] = TINAS_TO_CHECK.map(
+    (tina: Tinas): Cents => computeCentsFromTinas(add(tina, TINA_COMMAS_PLUS_MINUS_RANGE)),
+)
 
-const TINA_COMMAS_EXTREMA: [Min<Spev<{rational: false}>>, Max<Spev<{rational: false}>>] =
-    [TINA_COMMAS_LOWER_BOUND, TINA_COMMAS_UPPER_BOUND]
+const TINA_COMMAS_EXTREMA: [
+    Min<ScaledVector<{ rational: false }>>,
+    Max<ScaledVector<{ rational: false }>>,
+] = [TINA_COMMAS_LOWER_BOUND, TINA_COMMAS_UPPER_BOUND]
 const TINA_COMMAS_EXCLUSIVE: Exclusive = true
-const TINA_COMMAS_ZONE = {extrema: TINA_COMMAS_EXTREMA, exclusive: TINA_COMMAS_EXCLUSIVE}
+const TINA_COMMAS_ZONE = { extrema: TINA_COMMAS_EXTREMA, exclusive: TINA_COMMAS_EXCLUSIVE }
 
 export {
     INFINITE_2_3_FREE_COPFR,

@@ -1,13 +1,19 @@
-import {Io, IRRATIONAL_SPEV_BASE_PEV, Pev, Quotient, Spev} from "@sagittal/general"
-import {parsePitch} from "../../../../src/io"
+import {
+    Io,
+    IRRATIONAL_SCALED_VECTOR_BASE_VECTOR,
+    Vector,
+    Quotient,
+    ScaledVector,
+} from "@sagittal/general"
+import { parsePitch } from "../../../../src/io"
 
 describe("parsePitch", (): void => {
-    it("works when given as a pev, returning a JI pitch", (): void => {
+    it("works when given as a vector, returning a JI pitch", (): void => {
         const pitchText = "[0, 1, -2, 1⟩" as Io
 
         const actual = parsePitch(pitchText)
 
-        const expected = {pev: [0, 1, -2, 1]} as Spev<{rational: true}>
+        const expected = { vector: [0, 1, -2, 1] } as ScaledVector<{ rational: true }>
         expect(actual).toEqual(expected)
     })
 
@@ -16,7 +22,7 @@ describe("parsePitch", (): void => {
 
         const actual = parsePitch(pitchText)
 
-        const expected = {pev: [-1, 0, 0, 1]} as Spev<{rational: true}>
+        const expected = { vector: [-1, 0, 0, 1] } as ScaledVector<{ rational: true }>
         expect(actual).toEqual(expected)
     })
 
@@ -25,7 +31,7 @@ describe("parsePitch", (): void => {
 
         const actual = parsePitch(pitchText)
 
-        const expected = {pev: [-11, 7]} as Spev<{rational: true}>
+        const expected = { vector: [-11, 7] } as ScaledVector<{ rational: true }>
         expect(actual).toEqual(expected)
     })
 
@@ -35,9 +41,9 @@ describe("parsePitch", (): void => {
         const actual = parsePitch(pitchText)
 
         const expected = {
-            pev: IRRATIONAL_SPEV_BASE_PEV,
+            vector: IRRATIONAL_SCALED_VECTOR_BASE_VECTOR,
             scaler: [0.027833, 1] as Quotient,
-        } as Spev<{rational: false}>
+        } as ScaledVector<{ rational: false }>
         expect(actual).toBeCloseToObject(expected)
     })
 
@@ -46,7 +52,7 @@ describe("parsePitch", (): void => {
 
         const actual = parsePitch(pitchText)
 
-        const expected = {pev: [0, 0, -1, 0, 0, 0, 1]} as Spev<{rational: true}>
+        const expected = { vector: [0, 0, -1, 0, 0, 0, 1] } as ScaledVector<{ rational: true }>
         expect(actual).toEqual(expected)
     })
 
@@ -56,9 +62,9 @@ describe("parsePitch", (): void => {
         const actual = parsePitch(pitchText)
 
         const expected = {
-            pev: IRRATIONAL_SPEV_BASE_PEV,
+            vector: IRRATIONAL_SCALED_VECTOR_BASE_VECTOR,
             scaler: [1.781502, 1] as Quotient,
-        } as Spev<{rational: false}>
+        } as ScaledVector<{ rational: false }>
         expect(actual).toBeCloseToObject(expected)
     })
 
@@ -70,7 +76,7 @@ describe("parsePitch", (): void => {
         //   [ -25  12   1   0   0   1 ⟩   ,'/|)
         // + [  16  -8   0   0  -1     ⟩        <b
         // = [  -9   4   1   0  -1   1 ⟩   ,'/|)<b
-        const expected = {pev: [-9, 4, 1, 0, -1, 1]} as Spev<{rational: false}>
+        const expected = { vector: [-9, 4, 1, 0, -1, 1] } as ScaledVector<{ rational: false }>
         expect(actual).toBeCloseToObject(expected)
     })
 
@@ -79,7 +85,7 @@ describe("parsePitch", (): void => {
 
         const actual = parsePitch(pitchText)
 
-        const expected = {pev: [18, -10, -1]} as Spev<{rational: false}>
+        const expected = { vector: [18, -10, -1] } as ScaledVector<{ rational: false }>
         expect(actual).toBeCloseToObject(expected)
     })
 
@@ -91,7 +97,7 @@ describe("parsePitch", (): void => {
         // - [  -4   9  -2  -2     ⟩   ,'|(
         // + [ -16   8   0   0   1 ⟩       >#
         // = [ -12  -1   2   2   1 ⟩   `.!(>#
-        const expected = {pev: [-12, -1, 2, 2, 1]} as Spev<{rational: false}>
+        const expected = { vector: [-12, -1, 2, 2, 1] } as ScaledVector<{ rational: false }>
         expect(actual).toBeCloseToObject(expected)
     })
 
@@ -103,16 +109,20 @@ describe("parsePitch", (): void => {
         // - [   1  -2  -1   0   0   0   0   0   1 ⟩    /|~
         // + [ -22  14                             ⟩       x
         // = [ -23  16   1   0   0   0   0   0  -1 ⟩    \!~x
-        const expected = {pev: [-23, 16, 1, 0, 0, 0, 0, 0, -1]} as Spev<{rational: false}>
+        const expected = { vector: [-23, 16, 1, 0, 0, 0, 0, 0, -1] } as ScaledVector<{
+            rational: false
+        }>
         expect(actual).toBeCloseToObject(expected)
     })
 
-    it("can handle an empty pev", (): void => {
+    it("can handle an empty vector", (): void => {
         const pitchText = "[]"
 
         const actual = parsePitch(pitchText)
 
-        const expected = {pev: [] as unknown[] as Pev<{rational: true}>} as Spev<{rational: true}>
+        const expected = { vector: [] as unknown[] as Vector<{ rational: true }> } as ScaledVector<{
+            rational: true
+        }>
         expect(actual).toEqual(expected)
     })
 })

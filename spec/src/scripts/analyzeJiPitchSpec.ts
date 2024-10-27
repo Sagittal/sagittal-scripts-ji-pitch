@@ -1,17 +1,17 @@
-import {Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput} from "@sagittal/general"
+import { Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput } from "@sagittal/general"
 import {
     OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS,
     OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS,
     OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS,
 } from "../../helpers/src/constants"
 
-const ESCAPED_CHAR = process?.env?.CI ? "\\\`" : "\`"
+const ESCAPED_CHAR = process?.env?.CI ? "\\`" : "`"
 
 describe("analyze-ji-pitch", (): void => {
     const expected = [
         "   --- JI pitch ---",
         "",
-        "quotient\t \t    \tpev\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
+        "quotient\t \t    \tvector\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
         "       n\t/\td   \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t \tcents          \tslope  \tAAS    \tATE    ",
         "    2200\t/\t2187\t  [\t  3    \t -7    \t  2    \t  0    \t  1    \t⟩\t        10.260¢\t -7.632\t  7.632\t  7    ",
         "",
@@ -23,7 +23,7 @@ describe("analyze-ji-pitch", (): void => {
         "",
         "   --- notating commas ---",
         "",
-        "comma   \t          \tquotient\t \t        \tpev\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
+        "comma   \t          \tquotient\t \t        \tvector\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
         "class   \tname      \t       n\t/\td       \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t \tcents          \tslope  \tAAS    \tATE    ",
         "   `)|( \t5²⋅11k    \t    2200\t/\t2187    \t  [\t  3    \t -7    \t  2    \t  0    \t  1    \t⟩\t        10.260¢\t -7.632\t  7.632\t  7    ",
         "        \t5²⋅11S    \t   66825\t/\t65536   \t  [\t-16    \t  5    \t  2    \t  0    \t  1    \t⟩\t        33.720¢\t  2.924\t  2.924\t  5    ",
@@ -31,10 +31,11 @@ describe("analyze-ji-pitch", (): void => {
         "",
     ] as Io[]
 
-    it("can analyze a JI pitch, given it in the form of a pev (note that it includes inverses in the notating commas list)", (): void => {
+    it("can analyze a JI pitch, given it in the form of a vector (note that it includes inverses in the notating commas list)", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch -- -m [3,-7,2,0,1] --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run analyze-ji-pitch -- -m [3,-7,2,0,1] --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -44,7 +45,8 @@ describe("analyze-ji-pitch", (): void => {
     it("can analyze a JI pitch, given it in the form of a rational quotient", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch -- -q 2200/2187 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run analyze-ji-pitch -- -q 2200/2187 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -54,7 +56,8 @@ describe("analyze-ji-pitch", (): void => {
     it("can analyze a JI pitch, given it in the form of a comma name", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch -- --comma-name 275k --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run analyze-ji-pitch -- --comma-name 275k --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -64,7 +67,8 @@ describe("analyze-ji-pitch", (): void => {
     it("can analyze a JI pitch, given it in the form of a completely differently formatted comma name", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch -- --comma-name 5²⋅11-kleisma --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run analyze-ji-pitch -- --comma-name 5²⋅11-kleisma --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -95,7 +99,8 @@ describe("analyze-ji-pitch", (): void => {
     it("can analyze a JI pitch, given it in the form of an accidental (expressed as Sagitype)", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch -- --accidental "${ESCAPED_CHAR})|(" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run analyze-ji-pitch -- --accidental "${ESCAPED_CHAR})|(" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -105,7 +110,8 @@ describe("analyze-ji-pitch", (): void => {
     it("can analyze a JI pitch, given it in the form of an accidental (expressed as smiley)", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch -- --accidental ":${ESCAPED_CHAR}::)|(:" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run analyze-ji-pitch -- --accidental ":${ESCAPED_CHAR}::)|(:" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -115,34 +121,36 @@ describe("analyze-ji-pitch", (): void => {
     it("can analyze a JI pitch, given it in the form of an accidental (expressed as Unicode)", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch -- --accidental "" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run analyze-ji-pitch -- --accidental "" --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
         expect(actual).toEqual(expected)
     })
 
-    it("throws an error if you provide neither pev, quotient, comma name, integer decimal, or accidental", (): void => {
+    it("throws an error if you provide neither vector, quotient, comma name, integer decimal, or accidental", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script = "npm run analyze-ji-pitch" as Io
 
         expect((): void => {
-            runScriptAndGetConsoleOutput(script, {throwError: true})
+            runScriptAndGetConsoleOutput(script, { throwError: true })
         }).toThrowError(/Unable to read JI pitch/)
     })
 
     it("can sort the notating commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch [3,-7,2,0,1] -- --sort-by apotomeSlope --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run analyze-ji-pitch [3,-7,2,0,1] -- --sort-by apotomeSlope --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
         const expected = [
             "   --- JI pitch ---",
             "",
-            "quotient\t \t    \tpev\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
+            "quotient\t \t    \tvector\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
             "       n\t/\td   \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t \tcents          \tslope  \tAAS    \tATE    ",
             "    2200\t/\t2187\t  [\t  3    \t -7    \t  2    \t  0    \t  1    \t⟩\t        10.260¢\t -7.632\t  7.632\t  7    ",
             "",
@@ -154,7 +162,7 @@ describe("analyze-ji-pitch", (): void => {
             "",
             "   --- notating commas ---",
             "",
-            "comma   \t          \tquotient\t \t        \tpev\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
+            "comma   \t          \tquotient\t \t        \tvector\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
             "class   \tname      \t       n\t/\td       \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t \tcents          \tslope  \tAAS    \tATE    ",
             "        \t1/(5²⋅11)M\t16777216\t/\t16238475\t  [\t 24    \t-10    \t -2    \t  0    \t -1    \t⟩\t        56.505¢\t-13.479\t 13.479\t 10    ",
             "   `)|( \t5²⋅11k    \t    2200\t/\t2187    \t  [\t  3    \t -7    \t  2    \t  0    \t  1    \t⟩\t        10.260¢\t -7.632\t  7.632\t  7    ",
@@ -174,7 +182,7 @@ describe("analyze-ji-pitch", (): void => {
         const expected = [
             "   --- JI pitch ---",
             "",
-            "             quotient\t \t                     \tpev\t       \t       \t \t               \tapotome\t       \t       ",
+            "             quotient\t \t                     \tvector\t       \t       \t \t               \tapotome\t       \t       ",
             "                    n\t/\td                    \t   \t  2    \t  3    \t \tcents          \tslope  \tAAS    \tATE    ",
             "3.870210234510308e+81\t/\t3.794275180128377e+81\t  [\t-271   \t171    \t⟩\t        34.305¢\t168.888\t168.888\t171    ",
             "",
@@ -186,7 +194,7 @@ describe("analyze-ji-pitch", (): void => {
             "",
             "   --- notating commas ---",
             "",
-            "comma   \t      \t              quotient\t \t                      \tpev\t       \t       \t \t               \tapotome \t       \t       ",
+            "comma   \t      \t              quotient\t \t                      \tvector\t       \t       \t \t               \tapotome \t       \t       ",
             "class   \tname  \t                     n\t/\td                     \t   \t  2    \t  3    \t \tcents          \tslope   \tAAS    \tATE    ",
             " (|//|) \t1u    \t                     1\t/\t1                     \t  [\t       \t       \t⟩\t         0.000¢\t  0.000 \t  0.000\t  0    ",
             "        \t3s    \t 1.938324566768002e+25\t/\t1.9342813113834067e+25\t  [\t-84    \t 53    \t⟩\t         3.615¢\t 52.777 \t 52.777\t 53    ",
@@ -213,14 +221,15 @@ describe("analyze-ji-pitch", (): void => {
     it("can analyze a JI pitch given as an integer decimal", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch -- -i 275 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run analyze-ji-pitch -- -i 275 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
         const expected = [
             "   --- JI pitch ---",
             "",
-            "quotient\t \t \tpev\t       \t       \t       \t       \t       \t \t               \tapotome \t       \t       ",
+            "quotient\t \t \tvector\t       \t       \t       \t       \t       \t \t               \tapotome \t       \t       ",
             "       n\t/\td\t   \t  2    \t  3    \t  5    \t  7    \t 11    \t \tcents          \tslope   \tAAS    \tATE    ",
             "     275\t/\t1\t  [\t  0    \t  0    \t  2    \t  0    \t  1    \t⟩\t      9723.945¢\t-598.739\t598.739\t  0    ",
             "",
@@ -232,7 +241,7 @@ describe("analyze-ji-pitch", (): void => {
             "",
             "   --- notating commas ---",
             "",
-            "comma   \t          \tquotient\t \t        \tpev\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
+            "comma   \t          \tquotient\t \t        \tvector\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
             "class   \tname      \t       n\t/\td       \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t \tcents          \tslope  \tAAS    \tATE    ",
             "   `)|( \t5²⋅11k    \t    2200\t/\t2187    \t  [\t  3    \t -7    \t  2    \t  0    \t  1    \t⟩\t        10.260¢\t -7.632\t  7.632\t  7    ",
             "        \t5²⋅11S    \t   66825\t/\t65536   \t  [\t-16    \t  5    \t  2    \t  0    \t  1    \t⟩\t        33.720¢\t  2.924\t  2.924\t  5    ",
@@ -245,14 +254,15 @@ describe("analyze-ji-pitch", (): void => {
     it("can format the names of the commas in the notating commas table", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `npm run analyze-ji-pitch [3,-7,2,0,1] -- --undirected --factoring-mode always --unabbreviated --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+        const script =
+            `npm run analyze-ji-pitch [3,-7,2,0,1] -- --undirected --factoring-mode always --unabbreviated --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
         const expected = [
             "   --- JI pitch ---",
             "",
-            "quotient\t \t    \tpev\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
+            "quotient\t \t    \tvector\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
             "       n\t/\td   \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t \tcents          \tslope  \tAAS    \tATE    ",
             "    2200\t/\t2187\t  [\t  3    \t -7    \t  2    \t  0    \t  1    \t⟩\t        10.260¢\t -7.632\t  7.632\t  7    ",
             "",
@@ -264,7 +274,7 @@ describe("analyze-ji-pitch", (): void => {
             "",
             "   --- notating commas ---",
             "",
-            "comma   \t                   \tquotient\t \t        \tpev\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
+            "comma   \t                   \tquotient\t \t        \tvector\t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
             "class   \tname               \t       n\t/\td       \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t \tcents          \tslope  \tAAS    \tATE    ",
             "   `)|( \t5²⋅11-kleisma      \t    2200\t/\t2187    \t  [\t  3    \t -7    \t  2    \t  0    \t  1    \t⟩\t        10.260¢\t -7.632\t  7.632\t  7    ",
             "        \t5²⋅11-Small-Diesis \t   66825\t/\t65536   \t  [\t-16    \t  5    \t  2    \t  0    \t  1    \t⟩\t        33.720¢\t  2.924\t  2.924\t  5    ",
@@ -277,14 +287,14 @@ describe("analyze-ji-pitch", (): void => {
     it("automatically adjusts the filters to include the JI pitch itself in the list of notating commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = "npm run analyze-ji-pitch \"[  -34   19   0   0   1  -1   0   1 ⟩\"" as Io
+        const script = 'npm run analyze-ji-pitch "[  -34   19   0   0   1  -1   0   1 ⟩"' as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
         const expected = [
             "   --- JI pitch ---",
             "",
-            "    quotient\t \t            \tpev\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
+            "    quotient\t \t            \tvector\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
             "           n\t/\td           \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t 13    \t 17    \t 19    \t \tcents          \tslope  \tAAS    \tATE    ",
             "242912646603\t/\t223338299392\t  [\t-34    \t 19    \t  0    \t  0    \t  1    \t -1    \t  0    \t  1    \t⟩\t       145.448¢\t 10.044\t 10.044\t 19    ",
             "",
@@ -296,7 +306,7 @@ describe("analyze-ji-pitch", (): void => {
             "",
             "   --- notating commas ---",
             "",
-            "comma\t           \t quotient\t \t         \tpev\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
+            "comma\t           \t quotient\t \t         \tvector\t       \t       \t       \t       \t       \t       \t       \t       \t \t               \tapotome\t       \t       ",
             "class\tname       \t        n\t/\td        \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t 13    \t 17    \t 19    \t \tcents          \tslope  \tAAS    \tATE    ",
             "     \t11⋅19/13k  \t      209\t/\t208      \t  [\t -4    \t  0    \t  0    \t  0    \t  1    \t -1    \t  0    \t  1    \t⟩\t         8.303¢\t -0.511\t  0.511\t  0    ",
             "     \t11⋅19/13C  \t111071169\t/\t109051904\t  [\t-23    \t 12    \t  0    \t  0    \t  1    \t -1    \t  0    \t  1    \t⟩\t        31.763¢\t 10.044\t 10.044\t 12    ",

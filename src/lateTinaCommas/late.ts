@@ -1,19 +1,30 @@
-import {Comma, count, Exponent, increment, Io, LogTarget, Maybe, min, Prime, saveLog} from "@sagittal/general"
+import {
+    Comma,
+    count,
+    Exponent,
+    increment,
+    Io,
+    LogTarget,
+    Maybe,
+    min,
+    Prime,
+    saveLog,
+} from "@sagittal/general"
 import {
     CommaAnalysis,
     computeAte,
     findNotatingCommas,
     MAX_N2D3P9_FOR_WHICH_POSSIBLE_NUMERATORS_ARE_KNOWN,
 } from "@sagittal/system"
-import {jiPitchScriptGroupSettings} from "../globals"
+import { jiPitchScriptGroupSettings } from "../globals"
 
 const isCommaLate = (comma: Comma): boolean => {
     const ate = computeAte(comma)
 
-    const notatingCommas = findNotatingCommas(
-        comma,
-        {...jiPitchScriptGroupSettings, maxN2D3P9: MAX_N2D3P9_FOR_WHICH_POSSIBLE_NUMERATORS_ARE_KNOWN},
-    )
+    const notatingCommas = findNotatingCommas(comma, {
+        ...jiPitchScriptGroupSettings,
+        maxN2D3P9: MAX_N2D3P9_FOR_WHICH_POSSIBLE_NUMERATORS_ARE_KNOWN,
+    })
     const ates = notatingCommas.map((notatingComma: Comma): Exponent<Prime> => {
         return computeAte(notatingComma)
     })
@@ -22,7 +33,7 @@ const isCommaLate = (comma: Comma): boolean => {
 
     const minimumAte = min(...ates)
 
-    return ate === minimumAte as Exponent<Prime>
+    return ate === (minimumAte as Exponent<Prime>)
 }
 
 const computeLateCommaAnalysis = (tinaCommaAnalyses: CommaAnalysis[]): Maybe<CommaAnalysis> => {
@@ -32,7 +43,7 @@ const computeLateCommaAnalysis = (tinaCommaAnalyses: CommaAnalysis[]): Maybe<Com
         const tinaCommaAnalysis = tinaCommaAnalyses[index]
 
         saveLog(
-            `Checking comma ${index}: ${tinaCommaAnalysis.pev}, N2D3P9 ${tinaCommaAnalysis.two3FreeClassAnalysis.n2d3p9}` as Io,
+            `Checking comma ${index}: ${tinaCommaAnalysis.vector}, N2D3P9 ${tinaCommaAnalysis.two3FreeClassAnalysis.n2d3p9}` as Io,
             LogTarget.PROGRESS,
         )
         if (isCommaLate(tinaCommaAnalysis.pitch)) {
@@ -45,7 +56,4 @@ const computeLateCommaAnalysis = (tinaCommaAnalyses: CommaAnalysis[]): Maybe<Com
     return lateComma
 }
 
-export {
-    isCommaLate,
-    computeLateCommaAnalysis,
-}
+export { isCommaLate, computeLateCommaAnalysis }

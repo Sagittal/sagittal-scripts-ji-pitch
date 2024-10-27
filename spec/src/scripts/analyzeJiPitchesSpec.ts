@@ -1,4 +1,4 @@
-import {Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput} from "@sagittal/general"
+import { Io, slowTestOnlyRunInFullSuite, runScriptAndGetConsoleOutput } from "@sagittal/general"
 
 describe("analyze-ji-pitches", (): void => {
     it("takes in the list of JI pitches in the input file and outputs a table of their analyses", (): void => {
@@ -11,7 +11,7 @@ describe("analyze-ji-pitches", (): void => {
         const expected = [
             "[table]",
             "[tr][th][/th][th][/th][th][/th][thr][/thr][th][/th][th][/th][th][/th][th][/th][th][/th][th][/th][th][/th][th][/th][th][/th][th][/th][th][/th][th][/th][thl][/thl][th][/th][th][/th][th][/th][th][/th][th]2,3-free[/th][th]2,3-free[/th][th]2,3-free[/th][th]2,3-free[/th][th]2,3-free[/th][/tr]",
-            "[tr][th]comma[/th][th][/th][th][/th][th=14]pev[/th][th][/th][th]apotome[/th][th][/th][th][/th][th]prime[/th][th]class[/th][th]class[/th][th]class[/th][th]class[/th][/tr]",
+            "[tr][th]comma[/th][th][/th][th][/th][th=14]vector[/th][th][/th][th]apotome[/th][th][/th][th][/th][th]prime[/th][th]class[/th][th]class[/th][th]class[/th][th]class[/th][/tr]",
             "[tr][th]class[/th][th]name[/th][th]quotient[/th][thr] [/thr][th]  2    [/th][th]  3    [/th][th]  5    [/th][th]  7    [/th][th] 11    [/th][th] 13    [/th][th] 17    [/th][th] 19    [/th][th] 23    [/th][th] 29    [/th][th] 31    [/th][th] 37    [/th][thl] [/thl][th]cents[/th][th]slope[/th][th]AAS[/th][th]ATE[/th][th]limit[/th][th]name[/th][th]CoPFR[/th][th]SoPFR[/th][th]N2D3P9[/th][/tr]",
             "[tr][td][/td][td]77/(5⋅37)n[/td][td][latex]\\frac{1515591}{1515520}[/latex][/td][tdr][[/tdr][tdc]-13    [/tdc][tdc]  9    [/tdc][tdc] -1    [/tdc][tdc]  1    [/tdc][tdc]  1    [/tdc][tdc]  0    [/tdc][tdc]  0    [/tdc][tdc]  0    [/tdc][tdc]  0    [/tdc][tdc]  0    [/tdc][tdc]  0    [/tdc][tdc] -1    [/tdc][td]⟩[/td][td]  0.081¢[/td][td]  8.995[/td][td]  8.995[/td][td]  9    [/td][td] 37    [/td][td][latex]\\{\\frac{185}{77}\\}_{\\scriptsize{2,3}}[/latex][/td][td]  4    [/td][td] 60    [/td][td]1626.744[/td][/tr]",
             "[tr][td][/td][td]7²⋅11⋅19/5n[/td][td][latex]\\frac{10241}{10240}[/latex][/td][tdr][[/tdr][tdc]-11    [/tdc][tdc]  0    [/tdc][tdc] -1    [/tdc][tdc]  2    [/tdc][tdc]  1    [/tdc][tdc]  0    [/tdc][tdc]  0    [/tdc][tdc]  1    [/tdc][tdc][/tdc][tdc][/tdc][tdc][/tdc][tdc][/tdc][td]⟩[/td][td]  0.169¢[/td][td] -0.010[/td][td]  0.010[/td][td]  0    [/td][td] 19    [/td][td][latex]\\{\\frac{10241}{5}\\}_{\\scriptsize{2,3}}[/latex][/td][td]  5    [/td][td] 49    [/td][td]2252.072[/td][/tr]",
@@ -32,13 +32,14 @@ describe("analyze-ji-pitches", (): void => {
     it("supports reordering the fields, and overrides the default excluded fields (currently only sizeCategory)            ", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = "npm run analyze-ji-pitches -- --ordered-fields cents,quotient,name,pev,two3FreePrimeLimit,sizeCategory" as Io
+        const script =
+            "npm run analyze-ji-pitches -- --ordered-fields cents,quotient,name,vector,two3FreePrimeLimit,sizeCategory" as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
         const expected = [
             "               \t        \t \t       \t             \t   \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \t2,3-free\t        ",
-            "               \tquotient\t \t       \t             \tpev\t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \tprime   \tsize    ",
+            "               \tquotient\t \t       \t             \tvector\t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \tprime   \tsize    ",
             "cents          \t       n\t/\td      \tname         \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t 13    \t 17    \t 19    \t 23    \t 29    \t 31    \t 37    \t \tlimit   \tcategory",
             "         0.081¢\t 1515591\t/\t1515520\t77/(5⋅37)n   \t  [\t-13    \t  9    \t -1    \t  1    \t  1    \t  0    \t  0    \t  0    \t  0    \t  0    \t  0    \t -1    \t⟩\t 37     \tn       ",
             "         0.169¢\t   10241\t/\t10240  \t7²⋅11⋅19/5n  \t  [\t-11    \t  0    \t -1    \t  2    \t  1    \t  0    \t  0    \t  1    \t       \t       \t       \t       \t⟩\t 19     \tn       ",
@@ -58,13 +59,14 @@ describe("analyze-ji-pitches", (): void => {
     it("supports sorting the results", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = "npm run analyze-ji-pitches -- --ordered-fields cents,quotient,name,pev,two3FreePrimeLimit,sizeCategory --sort-by name" as Io
+        const script =
+            "npm run analyze-ji-pitches -- --ordered-fields cents,quotient,name,vector,two3FreePrimeLimit,sizeCategory --sort-by name" as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
         const expected = [
             "               \t        \t \t       \t             \t   \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \t2,3-free\t        ",
-            "               \tquotient\t \t       \t             \tpev\t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \tprime   \tsize    ",
+            "               \tquotient\t \t       \t             \tvector\t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t       \t \tprime   \tsize    ",
             "cents          \t       n\t/\td      \tname         \t   \t  2    \t  3    \t  5    \t  7    \t 11    \t 13    \t 17    \t 19    \t 23    \t 29    \t 31    \t 37    \t \tlimit   \tcategory",
             "         0.423¢\t    4096\t/\t4095   \t1/(5⋅7⋅13)n  \t  [\t 12    \t -2    \t -1    \t -1    \t  0    \t -1    \t       \t       \t       \t       \t       \t       \t⟩\t 13     \tn       ",
             "         1.255¢\t  131072\t/\t130977 \t1/(7²⋅11)n   \t  [\t 17    \t -5    \t  0    \t -2    \t -1    \t       \t       \t       \t       \t       \t       \t       \t⟩\t 11     \tn       ",

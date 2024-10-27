@@ -10,15 +10,18 @@ import {
     Row,
     sumTexts,
 } from "@sagittal/general"
-import {CommaAnalysis, CommaClassId} from "@sagittal/system"
-import {jiPitchScriptGroupSettings} from "../../globals"
-import {COMMA_FIELD_TITLES} from "../fieldTitles"
-import {computeNotatingCommasHeaderRows} from "../headerRows"
-import {computeOrderedTableAndAlignment} from "../orderedFields"
-import {computeNotatingCommasRow} from "../row"
-import {computeMaxPevLength, computeSplitPevAndQuotientTableAlignment} from "../splitPevAndQuotient"
-import {NOTATING_COMMAS_TABLE_TITLE} from "../tableTitles"
-import {NO_RESULTS} from "./constants"
+import { CommaAnalysis, CommaClassId } from "@sagittal/system"
+import { jiPitchScriptGroupSettings } from "../../globals"
+import { COMMA_FIELD_TITLES } from "../fieldTitles"
+import { computeNotatingCommasHeaderRows } from "../headerRows"
+import { computeOrderedTableAndAlignment } from "../orderedFields"
+import { computeNotatingCommasRow } from "../row"
+import {
+    computeMaxVectorLength,
+    computeSplitVectorAndQuotientTableAlignment,
+} from "../splitVectorAndQuotient"
+import { NOTATING_COMMAS_TABLE_TITLE } from "../tableTitles"
+import { NO_RESULTS } from "./constants"
 
 const computeNotatingCommasOutput = (
     notatingCommaAnalyses: CommaAnalysis[],
@@ -26,27 +29,30 @@ const computeNotatingCommasOutput = (
 ): Io => {
     if (isEmpty(notatingCommaAnalyses)) return sumTexts(NOTATING_COMMAS_TABLE_TITLE, NO_RESULTS)
 
-    const maxPevLength = computeMaxPevLength(notatingCommaAnalyses)
-    const notatingCommasHeaderRows = computeNotatingCommasHeaderRows(maxPevLength)
+    const maxVectorLength = computeMaxVectorLength(notatingCommaAnalyses)
+    const notatingCommasHeaderRows = computeNotatingCommasHeaderRows(maxVectorLength)
     const headerRowCount = count(notatingCommasHeaderRows)
-    let tableAlignment = computeSplitPevAndQuotientTableAlignment(notatingCommasHeaderRows)
+    let tableAlignment = computeSplitVectorAndQuotientTableAlignment(notatingCommasHeaderRows)
 
     let notatingCommasTable = [
         ...notatingCommasHeaderRows,
-        ...notatingCommaAnalyses
-            .map((notatingCommaAnalysis: CommaAnalysis, index: number): Row<{of: CommaAnalysis}> => {
-                return computeNotatingCommasRow(notatingCommaAnalysis, maybeCommaClassIds[index], maxPevLength)
-            }),
+        ...notatingCommaAnalyses.map(
+            (notatingCommaAnalysis: CommaAnalysis, index: number): Row<{ of: CommaAnalysis }> => {
+                return computeNotatingCommasRow(
+                    notatingCommaAnalysis,
+                    maybeCommaClassIds[index],
+                    maxVectorLength,
+                )
+            },
+        ),
     ]
 
     if (!isUndefined(jiPitchScriptGroupSettings.orderedFields)) {
-        const {
-            table: orderedNotatingCommasTable,
-            tableAlignment: orderedTableAlignment,
-        } = computeOrderedTableAndAlignment(
-            {table: notatingCommasTable, tableAlignment},
-            {maxPevLength, fieldTitles: COMMA_FIELD_TITLES},
-        )
+        const { table: orderedNotatingCommasTable, tableAlignment: orderedTableAlignment } =
+            computeOrderedTableAndAlignment(
+                { table: notatingCommasTable, tableAlignment },
+                { maxVectorLength, fieldTitles: COMMA_FIELD_TITLES },
+            )
         notatingCommasTable = orderedNotatingCommasTable
         tableAlignment = orderedTableAlignment
     }
@@ -55,10 +61,8 @@ const computeNotatingCommasOutput = (
 
     return sumTexts(
         NOTATING_COMMAS_TABLE_TITLE,
-        formatTableFromScript(notatingCommasTable, {headerRowCount, tableAlignment}),
+        formatTableFromScript(notatingCommasTable, { headerRowCount, tableAlignment }),
     )
 }
 
-export {
-    computeNotatingCommasOutput,
-}
+export { computeNotatingCommasOutput }

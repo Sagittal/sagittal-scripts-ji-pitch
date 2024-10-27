@@ -1,13 +1,29 @@
-import {Comma, Decimal, Io, parseInteger, parsePev, parseQuotient, Pev, program, Quotient} from "@sagittal/general"
-import {Accidental, computeCommaFromCommaName, parseAccidental, parseCommaName, Sagitype} from "@sagittal/system"
-import {JiPitchScriptFlag} from "./types"
+import {
+    Comma,
+    Decimal,
+    Io,
+    parseInteger,
+    parseVector,
+    parseQuotient,
+    Vector,
+    program,
+    Quotient,
+} from "@sagittal/general"
+import {
+    Accidental,
+    computeCommaFromCommaName,
+    parseAccidental,
+    parseCommaName,
+    Sagitype,
+} from "@sagittal/system"
+import { JiPitchScriptFlag } from "./types"
 
 const readAnalyzeJiPitchOptions = (): void => {
     program
         .option(
-            `-${JiPitchScriptFlag.PEV}, --pev <pev>`,
-            "pev",
-            (pevText: string): Pev => parsePev(pevText as Io),
+            `-${JiPitchScriptFlag.VECTOR}, --vector <vector>`,
+            "vector",
+            (vectorText: string): Vector => parseVector(vectorText as Io),
         )
         .option(
             `-${JiPitchScriptFlag.QUOTIENT}, --quotient <quotient>`,
@@ -29,10 +45,8 @@ const readAnalyzeJiPitchOptions = (): void => {
         .option(
             `-${JiPitchScriptFlag.INTEGER}, --integer <integer>`,
             "integer",
-            (integerText: string): Decimal<{integer: true}> => parseInteger(integerText as Io),
+            (integerText: string): Decimal<{ integer: true }> => parseInteger(integerText as Io),
         )
 }
 
-export {
-    readAnalyzeJiPitchOptions,
-}
+export { readAnalyzeJiPitchOptions }

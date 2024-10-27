@@ -14,7 +14,7 @@ import {applySharedJiPitchScriptSetup} from "./shared"
 //  And related, why wouldn't you want to see comma name and Sagittal symbol, if any,
 //  In the top table of analyze-ji-pitch?
 
-// TODO: PARSE SPEV?
+// TODO: PARSE SCALED VECTOR?
 //  Did I ever try that? It would have been really nice if I could say `--upper-bound "[-11 7⟩(1.5/21)"`
 
 jiPitchScriptGroupSettings.sortBy = DEFAULT_ANALYZE_JI_PITCH_AND_FIND_COMMAS_SORT_KEY

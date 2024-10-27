@@ -1,28 +1,26 @@
-import {Comma, sort, Spev} from "@sagittal/general"
-import {analyzeComma, CommaAnalysis, findNotatingCommas} from "@sagittal/system"
-import {FindCommasOptions} from "../findCommas"
-import {jiPitchScriptGroupSettings} from "../globals"
+import { Comma, sort, ScaledVector } from "@sagittal/general"
+import { analyzeComma, CommaAnalysis, findNotatingCommas } from "@sagittal/system"
+import { FindCommasOptions } from "../findCommas"
+import { jiPitchScriptGroupSettings } from "../globals"
 
 const findNotatingCommaAnalyses = (
-    jiPitch: Spev<{rational: true}>,
+    jiPitch: ScaledVector<{ rational: true }>,
     findNotatingCommasOptions: Partial<FindCommasOptions> = {},
 ): CommaAnalysis[] => {
-    const notatingCommas: Comma[] = findNotatingCommas(
-        jiPitch,
-        {...jiPitchScriptGroupSettings, ...findNotatingCommasOptions},
-    )
+    const notatingCommas: Comma[] = findNotatingCommas(jiPitch, {
+        ...jiPitchScriptGroupSettings,
+        ...findNotatingCommasOptions,
+    })
 
     const notatingCommaAnalyses = notatingCommas.map((comma: Comma): CommaAnalysis => {
         return analyzeComma(comma, jiPitchScriptGroupSettings.commaNameOptions)
     })
 
     if (jiPitchScriptGroupSettings.sortBy) {
-        sort(notatingCommaAnalyses, {by: jiPitchScriptGroupSettings.sortBy})
+        sort(notatingCommaAnalyses, { by: jiPitchScriptGroupSettings.sortBy })
     }
 
     return notatingCommaAnalyses
 }
 
-export {
-    findNotatingCommaAnalyses,
-}
+export { findNotatingCommaAnalyses }

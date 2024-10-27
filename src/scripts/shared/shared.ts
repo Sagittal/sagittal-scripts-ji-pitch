@@ -1,16 +1,24 @@
-import {Filename, Io, program, setupScriptAndIo, Spev} from "@sagittal/general"
-import {FactoringMode} from "@sagittal/system"
-import {jiPitchScriptGroupSettings} from "../../globals"
-import {parsePitch} from "../../io"
-import {JiPitchScriptGroupField} from "../../types"
-import {parseExclusive, parseFields, parseSortBy} from "./parse"
+import { Filename, Io, program, setupScriptAndIo, ScaledVector } from "@sagittal/general"
+import { FactoringMode } from "@sagittal/system"
+import { jiPitchScriptGroupSettings } from "../../globals"
+import { parsePitch } from "../../io"
+import { JiPitchScriptGroupField } from "../../types"
+import { parseExclusive, parseFields, parseSortBy } from "./parse"
 
 // TODO: CASE-INSENSITIVE SORT BY (allow me to `--sort-by ATE`, please)
 
 const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
     program
-        .option("--lower-bound <lowerBound>", "lower bound", (pitchIo: string): Spev => parsePitch(pitchIo as Io))
-        .option("--upper-bound <upperBound>", "upper bound", (pitchIo: string): Spev => parsePitch(pitchIo as Io))
+        .option(
+            "--lower-bound <lowerBound>",
+            "lower bound",
+            (pitchIo: string): ScaledVector => parsePitch(pitchIo as Io),
+        )
+        .option(
+            "--upper-bound <upperBound>",
+            "upper bound",
+            (pitchIo: string): ScaledVector => parsePitch(pitchIo as Io),
+        )
         .option("--exclusive [exclusive]", "exclusive bounds", parseExclusive)
         .option("--max-aas <maxAas>", "max AAS", parseFloat)
         .option("--max-ate <maxAte>", "max ATE", parseInt)
@@ -26,17 +34,27 @@ const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
         .option(
             "--excluded-fields <excludedFields>",
             "exclude fields",
-            (excludedFieldsIo: string): JiPitchScriptGroupField[] => parseFields(excludedFieldsIo as Io),
+            (excludedFieldsIo: string): JiPitchScriptGroupField[] =>
+                parseFields(excludedFieldsIo as Io),
         )
         .option(
             "--ordered-fields <orderedFields>",
             "specify exact ordered set of fields",
-            (orderedFieldsIo: string): JiPitchScriptGroupField[] => parseFields(orderedFieldsIo as Io),
+            (orderedFieldsIo: string): JiPitchScriptGroupField[] =>
+                parseFields(orderedFieldsIo as Io),
         )
 
     setupScriptAndIo(logDir)
 
-    const {sortBy, excludedFields, orderedFields, undirected, factoringMode, unabbreviated, ascii} = program.opts()
+    const {
+        sortBy,
+        excludedFields,
+        orderedFields,
+        undirected,
+        factoringMode,
+        unabbreviated,
+        ascii,
+    } = program.opts()
 
     if (sortBy) jiPitchScriptGroupSettings.sortBy = sortBy
     if (excludedFields) jiPitchScriptGroupSettings.excludedFields = excludedFields
@@ -56,6 +74,4 @@ const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
     }
 }
 
-export {
-    applySharedJiPitchScriptSetup,
-}
+export { applySharedJiPitchScriptSetup }

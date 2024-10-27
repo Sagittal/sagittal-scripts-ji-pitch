@@ -1,56 +1,55 @@
 import {
-    computeQuotientFromPev,
+    computeQuotientFromVector,
     computeRange,
-    computeRationalPevFromRationalQuotient,
-    computeRationalPevSopfr,
+    computeRationalVectorFromRationalQuotient,
+    computeRationalVectorSopfr,
     Decimal,
     Denominator,
     Numerator,
-    Pev,
+    Vector,
     Quotient,
     saveLog,
-    subtractPevs,
+    subtractVectors,
 } from "@sagittal/general"
 
 const wholeThing = (p: Decimal<{ integer: true }> & Denominator): void => {
-    const primodalityNumerators: Array<Decimal<{ integer: true }> & Numerator> =
-        computeRange(
-            (p + 1) as Decimal<{ integer: true }> & Numerator,
-            (2 * p + 1) as Decimal<{ integer: true }> & Numerator,
-        )
+    const primodalityNumerators: Array<Decimal<{ integer: true }> & Numerator> = computeRange(
+        (p + 1) as Decimal<{ integer: true }> & Numerator,
+        (2 * p + 1) as Decimal<{ integer: true }> & Numerator,
+    )
 
-    const primodalityQuotients: Array<Quotient<{ rational: true }>> =
-        primodalityNumerators.map(
-            (
-                primodalityNumerator: Decimal<{ integer: true }> & Numerator,
-            ): Quotient<{ rational: true }> => {
-                return [primodalityNumerator, p] as Quotient<{ rational: true }>
-            },
-        )
+    const primodalityQuotients: Array<Quotient<{ rational: true }>> = primodalityNumerators.map(
+        (
+            primodalityNumerator: Decimal<{ integer: true }> & Numerator,
+        ): Quotient<{ rational: true }> => {
+            return [primodalityNumerator, p] as Quotient<{ rational: true }>
+        },
+    )
 
-    const primodalityPevs: Array<Pev<{ rational: true }>> =
-        primodalityQuotients.map(computeRationalPevFromRationalQuotient)
+    const primodalityVectors: Array<Vector<{ rational: true }>> = primodalityQuotients.map(
+        computeRationalVectorFromRationalQuotient,
+    )
 
-    const primodalityIntervalPevs: Array<Pev<{ rational: true }>> = []
-    for (let i = 0; i < primodalityPevs.length; i++) {
-        for (let j = i + 1; j < primodalityPevs.length; j++) {
-            const basePev = primodalityPevs[i]
-            const targetPev = primodalityPevs[j]
-            const primodalityDyad = subtractPevs(targetPev, basePev)
+    const primodalityIntervalVectors: Array<Vector<{ rational: true }>> = []
+    for (let i = 0; i < primodalityVectors.length; i++) {
+        for (let j = i + 1; j < primodalityVectors.length; j++) {
+            const baseVector = primodalityVectors[i]
+            const targetVector = primodalityVectors[j]
+            const primodalityDyad = subtractVectors(targetVector, baseVector)
 
-            primodalityIntervalPevs.push(primodalityDyad)
+            primodalityIntervalVectors.push(primodalityDyad)
         }
     }
 
     let totalMetric = 0
-    primodalityIntervalPevs.forEach(
-        (primodalityIntervalPev: Pev<{ rational: true }>): void => {
-            const quotient = computeQuotientFromPev(primodalityIntervalPev)
-            const sopfr = computeRationalPevSopfr(primodalityIntervalPev)
+    primodalityIntervalVectors.forEach(
+        (primodalityIntervalVector: Vector<{ rational: true }>): void => {
+            const quotient = computeQuotientFromVector(primodalityIntervalVector)
+            const sopfr = computeRationalVectorSopfr(primodalityIntervalVector)
             totalMetric += sopfr
         },
     )
-    saveLog(`${p}: ${totalMetric / primodalityIntervalPevs.length}`)
+    saveLog(`${p}: ${totalMetric / primodalityIntervalVectors.length}`)
 }
 
 for (

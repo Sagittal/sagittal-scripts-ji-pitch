@@ -1,5 +1,5 @@
 enum PitchFormat {
-    PEV = "pev",
+    VECTOR = "vector",
     QUOTIENT = "quotient",
     COMMA_NAME = "commaName",
     CENTS = "cents",
@@ -9,14 +9,11 @@ enum PitchFormat {
 }
 
 enum JiPitchScriptFlag {
-    PEV = "m",
+    VECTOR = "m",
     QUOTIENT = "q",
     COMMA_NAME = "n",
     ACCIDENTAL = "a",
     INTEGER = "i",
 }
 
-export {
-    PitchFormat,
-    JiPitchScriptFlag,
-}
+export { PitchFormat, JiPitchScriptFlag }

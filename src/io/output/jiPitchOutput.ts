@@ -9,36 +9,35 @@ import {
     sumTexts,
     Table,
 } from "@sagittal/general"
-import {JiPitchAnalysis} from "@sagittal/system"
-import {jiPitchScriptGroupSettings} from "../../globals"
-import {JI_PITCH_FIELD_TITLES} from "../fieldTitles"
-import {computeJiPitchHeaderRows} from "../headerRows"
-import {computeOrderedTableAndAlignment} from "../orderedFields"
-import {computeJiPitchRow} from "../row"
-import {computeMaxPevLength, computeSplitPevAndQuotientTableAlignment} from "../splitPevAndQuotient"
-import {JI_PITCH_TABLE_TITLE} from "../tableTitles"
+import { JiPitchAnalysis } from "@sagittal/system"
+import { jiPitchScriptGroupSettings } from "../../globals"
+import { JI_PITCH_FIELD_TITLES } from "../fieldTitles"
+import { computeJiPitchHeaderRows } from "../headerRows"
+import { computeOrderedTableAndAlignment } from "../orderedFields"
+import { computeJiPitchRow } from "../row"
+import {
+    computeMaxVectorLength,
+    computeSplitVectorAndQuotientTableAlignment,
+} from "../splitVectorAndQuotient"
+import { JI_PITCH_TABLE_TITLE } from "../tableTitles"
 
-const computeJiPitchOutput = (
-    jiPitchAnalysis: JiPitchAnalysis,
-): Io => {
-    const maxPevLength = computeMaxPevLength([jiPitchAnalysis])
-    const jiPitchHeaderRows = computeJiPitchHeaderRows(maxPevLength)
+const computeJiPitchOutput = (jiPitchAnalysis: JiPitchAnalysis): Io => {
+    const maxVectorLength = computeMaxVectorLength([jiPitchAnalysis])
+    const jiPitchHeaderRows = computeJiPitchHeaderRows(maxVectorLength)
     const headerRowCount = count(jiPitchHeaderRows)
-    let tableAlignment = computeSplitPevAndQuotientTableAlignment(jiPitchHeaderRows)
+    let tableAlignment = computeSplitVectorAndQuotientTableAlignment(jiPitchHeaderRows)
 
     let jiPitchTable: Table<JiPitchAnalysis> = [
         ...jiPitchHeaderRows,
-        computeJiPitchRow(jiPitchAnalysis, maxPevLength),
+        computeJiPitchRow(jiPitchAnalysis, maxVectorLength),
     ]
 
     if (!isUndefined(jiPitchScriptGroupSettings.orderedFields)) {
-        const {
-            table: orderedJiPitchTable,
-            tableAlignment: orderedTableAlignment,
-        } = computeOrderedTableAndAlignment(
-            {table: jiPitchTable, tableAlignment},
-            {maxPevLength, fieldTitles: JI_PITCH_FIELD_TITLES},
-        )
+        const { table: orderedJiPitchTable, tableAlignment: orderedTableAlignment } =
+            computeOrderedTableAndAlignment(
+                { table: jiPitchTable, tableAlignment },
+                { maxVectorLength, fieldTitles: JI_PITCH_FIELD_TITLES },
+            )
         jiPitchTable = orderedJiPitchTable
         tableAlignment = orderedTableAlignment
     }
@@ -47,10 +46,8 @@ const computeJiPitchOutput = (
 
     return sumTexts(
         JI_PITCH_TABLE_TITLE,
-        formatTableFromScript(jiPitchTable, {headerRowCount, tableAlignment}),
+        formatTableFromScript(jiPitchTable, { headerRowCount, tableAlignment }),
     )
 }
 
-export {
-    computeJiPitchOutput,
-}
+export { computeJiPitchOutput }
