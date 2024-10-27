@@ -22,11 +22,9 @@ const formatSplitVector = (
     let splitFormattedVector = formattedVector.split(/\s+/)
     splitFormattedVector.shift() // Remove the "["
     splitFormattedVector.pop() // Remove the "⟩"
-    splitFormattedVector = splitFormattedVector.map(
-        (formattedPrimeExponent: string): Formatted<Decimal> => {
-            return formatIntegerDecimal(parseInteger(formattedPrimeExponent as Io), { align: true })
-        },
-    )
+    splitFormattedVector = splitFormattedVector.map((formattedPrimeCount: string): Formatted<Decimal> => {
+        return formatIntegerDecimal(parseInteger(formattedPrimeCount as Io), { align: true })
+    })
     splitFormattedVector.unshift("[") // Put back the "["
     while (splitFormattedVector.length < maxVectorLength + 1) {
         // +1 for the [

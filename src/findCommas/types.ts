@@ -7,20 +7,18 @@ interface FindCommasOptions extends Required<CommasFrom23FreeVectorOptions> {
     max23FreeSopfr: Max<Sopfr<{ rough: 5 }>>
 }
 
-type PrimeExponentRangeOptions = Partial<{
+type PrimeCountRangeOptions = Partial<{
     max23FreeCopfr: Max<Copfr<{ rough: 5 }>>
     max23FreeSopfr: Max<Sopfr<{ rough: 5 }>>
-    primeExponentExtremaGivenMaxN2D3P9: Extrema<{
-        of: Decimal<{ integer: true }> & Count<Prime> & Exponent<Prime>
+    primeCountExtremaGivenMaxN2D3P9: Extrema<{
+        of: PrimeCount
     }>
 }>
 
 type Two3FreePrimesToCheckOptions = Partial<{
     maxPrimeLimit: Max<Max<Prime>>
     max23FreeSopfr: Max<Sopfr<{ rough: 5 }>>
-    primeExponentExtremasGivenMaxN2D3P9: Array<
-        Extrema<{ of: Decimal<{ integer: true }> & Count<Prime> & Exponent<Prime> }>
-    >
+    primeCountExtremasGivenMaxN2D3P9: Array<Extrema<{ of: PrimeCount }>>
 }>
 
-export { PrimeExponentRangeOptions, Two3FreePrimesToCheckOptions, FindCommasOptions }
+export { PrimeCountRangeOptions, Two3FreePrimesToCheckOptions, FindCommasOptions }

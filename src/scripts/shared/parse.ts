@@ -2,7 +2,7 @@ import {
     BLANK,
     COMMA,
     computeKeyPath,
-    computePrimeCount,
+    computeLesserPrimeCount,
     Exclusive,
     Io,
     isString,
@@ -48,18 +48,9 @@ const FIELD_TO_KEY_PATH_MAP: Record<JiPitchScriptGroupField, KeyPath> = {
     [JiPitchesOrFindCommasField.APOTOME_SLOPE]: computeKeyPath("apotomeSlope"),
     [JiPitchesOrFindCommasField.AAS]: computeKeyPath("aas"),
     [JiPitchesOrFindCommasField.ATE]: computeKeyPath("ate"),
-    [JiPitchesOrFindCommasField.TWO_3_FREE_CLASS_NAME]: computeKeyPath(
-        "two3FreeClassAnalysis",
-        "name",
-    ),
-    [JiPitchesOrFindCommasField.TWO_3_FREE_COPFR]: computeKeyPath(
-        "two3FreeClassAnalysis",
-        "two3FreeCopfr",
-    ),
-    [JiPitchesOrFindCommasField.TWO_3_FREE_SOPFR]: computeKeyPath(
-        "two3FreeClassAnalysis",
-        "two3FreeSopfr",
-    ),
+    [JiPitchesOrFindCommasField.TWO_3_FREE_CLASS_NAME]: computeKeyPath("two3FreeClassAnalysis", "name"),
+    [JiPitchesOrFindCommasField.TWO_3_FREE_COPFR]: computeKeyPath("two3FreeClassAnalysis", "two3FreeCopfr"),
+    [JiPitchesOrFindCommasField.TWO_3_FREE_SOPFR]: computeKeyPath("two3FreeClassAnalysis", "two3FreeSopfr"),
     [JiPitchesOrFindCommasField.TWO_3_FREE_PRIME_LIMIT]: computeKeyPath(
         "two3FreeClassAnalysis",
         "two3FreePrimeLimit",
@@ -77,16 +68,12 @@ const parseSortBy = (sortByIo: Io): SortBy => {
         if (field.match(/vector\d+/)) {
             return computeKeyPath(
                 "vector",
-                computePrimeCount(parseInt(field.replace("vector", BLANK))) - 1,
+                computeLesserPrimeCount(parseInt(field.replace("vector", BLANK))) - 1,
             )
         } else if (field.match(/quotient[ND]/)) {
             return computeKeyPath("quotient", field[field.length - 1] === "N" ? 0 : 1)
         } else if (field.match(/two3FreeClassName[ND]/)) {
-            return computeKeyPath(
-                "two3FreeClassAnalysis",
-                "name",
-                field[field.length - 1] === "N" ? 0 : 1,
-            )
+            return computeKeyPath("two3FreeClassAnalysis", "name", field[field.length - 1] === "N" ? 0 : 1)
         }
 
         return FIELD_TO_KEY_PATH_MAP[field]

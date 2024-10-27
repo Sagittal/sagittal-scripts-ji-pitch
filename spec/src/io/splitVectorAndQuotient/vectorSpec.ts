@@ -3,7 +3,7 @@ import { JiPitchAnalysis } from "@sagittal/system"
 import { formatSplitVector } from "../../../../src/io/splitVectorAndQuotient"
 
 describe("formatSplitVector", (): void => {
-    it("splits a vector into a different cell for each prime exponent", (): void => {
+    it("splits a vector into a different cell for each prime count", (): void => {
         const vector = [3, -2, -1] as Vector<{ rational: true }>
         const maxVectorLength = 4 as Max<Count<Exponent<Prime>>>
 
