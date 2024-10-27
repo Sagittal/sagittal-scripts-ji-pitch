@@ -13,6 +13,7 @@ import {
     Quotient,
     saveLog,
     sumVectors,
+    Count,
 } from "@sagittal/general"
 
 const PYTHAGOREAN_VECTORS: Vector[] = [
@@ -353,10 +354,10 @@ SAGITTAL_COMMA_VECTORS.forEach((commaVector: Vector): void => {
         if (abs(notatedVector[1]) <= 2) {
             // Reduce to within octave
             while (computeDecimalFromVector(notatedVector) > 2) {
-                notatedVector[0] = (notatedVector[0] - 1) as Exponent<Prime>
+                notatedVector[0] = (notatedVector[0] - 1) as Count<Prime> & Exponent<Prime>
             }
             while (computeDecimalFromVector(notatedVector) < 1) {
-                notatedVector[0] = (notatedVector[0] + 1) as Exponent<Prime>
+                notatedVector[0] = (notatedVector[0] + 1) as Count<Prime> & Exponent<Prime>
             }
 
             notatedPitches.push(formatQuotient(computeQuotientFromVector(notatedVector)))

@@ -1,4 +1,4 @@
-import { Copfr, Decimal, Exponent, Extrema, Max, Prime, Sopfr } from "@sagittal/general"
+import { Copfr, Count, Decimal, Exponent, Extrema, Max, Prime, Sopfr } from "@sagittal/general"
 import { CommasFrom23FreeVectorOptions } from "@sagittal/system"
 
 interface FindCommasOptions extends Required<CommasFrom23FreeVectorOptions> {
@@ -11,7 +11,7 @@ type PrimeExponentRangeOptions = Partial<{
     max23FreeCopfr: Max<Copfr<{ rough: 5 }>>
     max23FreeSopfr: Max<Sopfr<{ rough: 5 }>>
     primeExponentExtremaGivenMaxN2D3P9: Extrema<{
-        of: Decimal<{ integer: true }> & Exponent<Prime>
+        of: Decimal<{ integer: true }> & Count<Prime> & Exponent<Prime>
     }>
 }>
 
@@ -19,7 +19,7 @@ type Two3FreePrimesToCheckOptions = Partial<{
     maxPrimeLimit: Max<Max<Prime>>
     max23FreeSopfr: Max<Sopfr<{ rough: 5 }>>
     primeExponentExtremasGivenMaxN2D3P9: Array<
-        Extrema<{ of: Decimal<{ integer: true }> & Exponent<Prime> }>
+        Extrema<{ of: Decimal<{ integer: true }> & Count<Prime> & Exponent<Prime> }>
     >
 }>
 
