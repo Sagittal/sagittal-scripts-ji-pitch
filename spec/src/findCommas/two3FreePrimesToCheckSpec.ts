@@ -1,4 +1,4 @@
-import {Decimal, Exponent, Extrema, Max, Prime, Sopfr} from "@sagittal/general"
+import {Count, Decimal, Exponent, Extrema, Max, Prime, Sopfr} from "@sagittal/general"
 import {compute23FreePrimesToCheck} from "../../../src/findCommas/two3FreePrimesToCheck"
 
 describe("compute23FreePrimesToCheck", (): void => {
@@ -79,7 +79,7 @@ describe("compute23FreePrimesToCheck", (): void => {
             [-1, 2],    // 11
             [-1, 1],    // 13
             [0, 1],     // 17
-        ] as Array<Extrema<{of: Decimal<{integer: true}> & Exponent<Prime>}>>
+        ] as Array<Extrema<{of: Decimal<{integer: true}> & Count<Prime> & Exponent<Prime>}>>
 
         it("when only N2D3P9 is provided, its final element is the max prime", (): void => {
             const actual = compute23FreePrimesToCheck({primeExponentExtremasGivenMaxN2D3P9})
