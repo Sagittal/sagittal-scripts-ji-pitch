@@ -31,10 +31,7 @@ import { BucketName, Occam } from "./types"
 const computeIntegerTinaOccamBuckets = (
     bestCommaPerSemitinaZone: Array<[Index<Semitina>, Comma]>,
 ): Record<RecordKey<BucketName>, Record<RecordKey<Name<Comma>>, Occam>> => {
-    const integerTinaOccamBuckets: Record<
-        RecordKey<BucketName>,
-        Record<RecordKey<Name<Comma>>, Occam>
-    > = {
+    const integerTinaOccamBuckets: Record<RecordKey<BucketName>, Record<RecordKey<Name<Comma>>, Occam>> = {
         [1]: {},
         [2]: {},
         [3]: {},
@@ -50,47 +47,44 @@ const computeIntegerTinaOccamBuckets = (
         (ultraCommaClassId: CommaClassId): void => {
             const ultraComma = getCommaClass(ultraCommaClassId).pitch
 
-            bestCommaPerSemitinaZone.forEach(
-                ([semitinaZone, bestComma]: [Index<Semitina>, Comma]): void => {
-                    const metacomma = computeSuperScaledVector(
-                        subtractRationalScaledVectors(ultraComma, bestComma),
-                    ) as unknown as Comma
-                    const metacommaName = computeCommaName(metacomma)
+            bestCommaPerSemitinaZone.forEach(([semitinaZone, bestComma]: [Index<Semitina>, Comma]): void => {
+                const metacomma = computeSuperScaledVector(
+                    subtractRationalScaledVectors(ultraComma, bestComma),
+                ) as unknown as Comma
+                const metacommaName = computeCommaName(metacomma)
 
-                    const ultraCommaSemitinaZone = round(
-                        computeCentsFromPitch(ultraComma) / SEMITINA_CENTS,
-                    ) as Index<Semitina>
-                    const metacommaSemitinaZoneJump = abs(
-                        ultraCommaSemitinaZone - semitinaZone,
-                    ) as Abs<Count<Index<Semitina>>>
+                const ultraCommaSemitinaZone = round(
+                    computeCentsFromPitch(ultraComma) / SEMITINA_CENTS,
+                ) as Index<Semitina>
+                const metacommaSemitinaZoneJump = abs(ultraCommaSemitinaZone - semitinaZone) as Abs<
+                    Count<Index<Semitina>>
+                >
 
-                    saveLog(
-                        `The metacomma between the Ultra comma ${ultraCommaClassId} and the best comma in semitina zone ${semitinaZone} ${formatComma(
-                            bestComma,
-                        )} is ${metacommaName} with size ${metacommaSemitinaZoneJump}`,
-                        LogTarget.DETAILS,
-                    )
+                saveLog(
+                    `The metacomma between the Ultra comma ${ultraCommaClassId} and the best comma in semitina zone ${semitinaZone} ${formatComma(
+                        bestComma,
+                    )} is ${metacommaName} with size ${metacommaSemitinaZoneJump}`,
+                    LogTarget.DETAILS,
+                )
 
-                    if (
-                        metacommaSemitinaZoneJump >= 2 &&
-                        metacommaSemitinaZoneJump <= 18 &&
-                        isEven(metacommaSemitinaZoneJump)
-                    ) {
-                        const tinaOccamBucketName = (metacommaSemitinaZoneJump / 2) as BucketName
+                if (
+                    metacommaSemitinaZoneJump >= 2 &&
+                    metacommaSemitinaZoneJump <= 18 &&
+                    isEven(metacommaSemitinaZoneJump)
+                ) {
+                    const tinaOccamBucketName = (metacommaSemitinaZoneJump / 2) as BucketName
 
-                        checkMetacommaConsistency(metacomma, tinaOccamBucketName)
+                    checkMetacommaConsistency(metacomma, tinaOccamBucketName)
 
-                        metacommaNameToMetacommaMap[metacommaName] = metacomma
+                    metacommaNameToMetacommaMap[metacommaName] = metacomma
 
-                        integerTinaOccamBuckets[tinaOccamBucketName][metacommaName] =
-                            integerTinaOccamBuckets[tinaOccamBucketName][metacommaName] ||
-                            (0 as Occam)
-                        integerTinaOccamBuckets[tinaOccamBucketName][metacommaName] =
-                            (integerTinaOccamBuckets[tinaOccamBucketName][metacommaName] +
-                                1) as Occam
-                    }
-                },
-            )
+                    integerTinaOccamBuckets[tinaOccamBucketName][metacommaName] =
+                        integerTinaOccamBuckets[tinaOccamBucketName][metacommaName] || (0 as Occam)
+                    integerTinaOccamBuckets[tinaOccamBucketName][metacommaName] = (integerTinaOccamBuckets[
+                        tinaOccamBucketName
+                    ][metacommaName] + 1) as Occam
+                }
+            })
         },
     )
 

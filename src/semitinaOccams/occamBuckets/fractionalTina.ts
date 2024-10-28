@@ -6,6 +6,7 @@ import {
     Name,
     RecordKey,
     saveLog,
+    ScaledVector,
     stringify,
     subtractRationalScaledVectors,
 } from "@sagittal/general"
@@ -31,21 +32,18 @@ const computeFractionalTinaOccamBucket = (
             const metacommaBetweenConsecutiveBestCommas = subtractRationalScaledVectors(
                 subsequentBestCommaInThatSemitinaZone,
                 bestCommaInThisSemitinaZone,
-            ) as Comma
+            ) as ScaledVector as Comma
             const metacommaName = computeCommaName(metacommaBetweenConsecutiveBestCommas)
             fractionalTinaOccamBucket[metacommaName] =
                 fractionalTinaOccamBucket[metacommaName] || (0 as Occam)
-            fractionalTinaOccamBucket[metacommaName] = (fractionalTinaOccamBucket[metacommaName] +
-                1) as Occam
+            fractionalTinaOccamBucket[metacommaName] = (fractionalTinaOccamBucket[metacommaName] + 1) as Occam
 
             checkMetacommaConsistency(metacommaBetweenConsecutiveBestCommas, 0 as BucketName)
 
             metacommaNameToMetacommaMap[metacommaName] = metacommaBetweenConsecutiveBestCommas
 
             saveLog(
-                `semitina zone ${semitinaZone}: ${stringify(
-                    metacommaBetweenConsecutiveBestCommas,
-                )}`,
+                `semitina zone ${semitinaZone}: ${stringify(metacommaBetweenConsecutiveBestCommas)}`,
                 LogTarget.DETAILS,
             )
         },

@@ -4,16 +4,14 @@ import {
     COMMA,
     computeDecimalFromVector,
     computeQuotientFromVector,
-    Exponent,
     formatQuotient,
     Formatted,
     isEmpty,
     Vector,
-    Prime,
     Quotient,
     saveLog,
     sumVectors,
-    Count,
+    PrimeCount,
 } from "@sagittal/general"
 
 const PYTHAGOREAN_VECTORS: Vector[] = [

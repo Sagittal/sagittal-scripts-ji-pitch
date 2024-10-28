@@ -1,4 +1,4 @@
-import { Copfr, Count, Decimal, Exponent, Extrema, Max, Prime, Sopfr } from "@sagittal/general"
+import { Copfr, Extrema, Max, Prime, PrimeCount, Sopfr } from "@sagittal/general"
 import { CommasFrom23FreeVectorOptions } from "@sagittal/system"
 
 interface FindCommasOptions extends Required<CommasFrom23FreeVectorOptions> {
