@@ -32,17 +32,13 @@ const computeJiPitchRow = (
         row.push(formatCents(cents, { align: true }) as Formatted as Formatted<JiPitchAnalysis>)
     }
     if (!jiPitchScriptGroupSettings.excludedFields.includes(JiPitchField.APOTOME_SLOPE)) {
-        row.push(
-            formatDecimal(apotomeSlope, { align: true }) as Formatted as Formatted<JiPitchAnalysis>,
-        )
+        row.push(formatDecimal(apotomeSlope, { align: true }) as Formatted as Formatted<JiPitchAnalysis>)
     }
     if (!jiPitchScriptGroupSettings.excludedFields.includes(JiPitchField.AAS)) {
         row.push(formatDecimal(aas, { align: true }) as Formatted as Formatted<JiPitchAnalysis>)
     }
     if (!jiPitchScriptGroupSettings.excludedFields.includes(JiPitchField.ATE)) {
-        row.push(
-            formatIntegerDecimal(ate, { align: true }) as Formatted as Formatted<JiPitchAnalysis>,
-        )
+        row.push(formatIntegerDecimal(ate, { align: true }) as Formatted as Formatted<JiPitchAnalysis>)
     }
 
     return row

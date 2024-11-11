@@ -1,4 +1,4 @@
-import { Copfr, Max, Vector, Prime, Row, Sopfr, Two3FreeClass } from "@sagittal/general"
+import { Copfr, Max, Vector, Prime, Row, Sopfr, Two3FreeClass, Rough } from "@sagittal/general"
 import { N2D3P9, Two3FreeClassAnalysis } from "@sagittal/system"
 import { jiPitchScriptGroupSettings } from "../../../../src/globals"
 import { compute23FreeClassRow } from "../../../../src/io/row"
@@ -9,27 +9,30 @@ describe("compute23FreeClassRow", (): void => {
     const two3FreeClassAnalysis: Two3FreeClassAnalysis = {
         ...two3FreeClassAnalysisFixture,
         two3FreeClass: {
-            vector: [0, 0, 1] as Vector<{ rational: true }>,
+            vector: [0, 0, 1] as Vector,
         } as Two3FreeClass,
-        two3FreeSopfr: 13 as Sopfr<{ rough: 5 }>,
-        two3FreeCopfr: 3 as Copfr<{ rough: 5 }>,
+        two3FreeSopfr: 13 as Sopfr<Rough<5>>,
+        two3FreeCopfr: 3 as Copfr<Rough<5>>,
         n2d3p9: 18.4567 as N2D3P9,
-        two3FreePrimeLimit: 14 as Max<Prime<{ rough: 5 }>>,
+        two3FreePrimeLimit: 14 as Max<Prime<Rough<5>>>,
     }
 
     it("returns a row of information about the JI pitch", (): void => {
         const actual = compute23FreeClassRow(two3FreeClassAnalysis)
 
+        /* eslint-disable prettier/prettier */
         const expected = [
-            " 14    ", // 2,3-free prime limit
-            "5", // 2,3-free class numinator
-            "/", // 2,3-free class vinculum
-            "1", // 2,3-free class diminuator
-            "₂,₃", // 2,3-free class sign
-            "  3    ", // 2,3-free CoPFR
-            " 13    ", // 2,3-free SoPFR
-            " 18.457", // 2,3-free N2D3P9
+            " 14    ",  // 2,3-free prime limit
+            "5",        // 2,3-free class numinator
+            "/",        // 2,3-free class vinculum
+            "1",        // 2,3-free class diminuator
+            "₂,₃",      // 2,3-free class sign
+            "  3    ",  // 2,3-free CoPFR
+            " 13    ",  // 2,3-free SoPFR
+            " 18.457",  // 2,3-free N2D3P9
         ] as Row<{ of: Two3FreeClassAnalysis; header: true }>
+        /* eslint-enable prettier/prettier */
+
         expect(actual).toEqual(expected)
     })
 
@@ -40,14 +43,17 @@ describe("compute23FreeClassRow", (): void => {
         ]
         const actual = compute23FreeClassRow(two3FreeClassAnalysis)
 
+        /* eslint-disable prettier/prettier */
         const expected = [
-            "5", // 2,3-free class numinator
-            "/", // 2,3-free class vinculum
-            "1", // 2,3-free class diminuator
-            "₂,₃", // 2,3-free class sign
-            " 13    ", // 2,3-free SoPFR
-            " 18.457", // 2,3-free N2D3P9
+            "5",        // 2,3-free class numinator
+            "/",        // 2,3-free class vinculum
+            "1",        // 2,3-free class diminuator
+            "₂,₃",      // 2,3-free class sign
+            " 13    ",  // 2,3-free SoPFR
+            " 18.457",  // 2,3-free N2D3P9
         ] as Row<{ of: Two3FreeClassAnalysis; header: true }>
+        /* eslint-enable prettier/prettier */
+
         expect(actual).toEqual(expected)
     })
 })

@@ -16,7 +16,7 @@ import { JiPitchAnalysis } from "@sagittal/system"
 const formatSplitVector = (
     vector: Vector,
     maxVectorLength: Max<Count<Exponent<Prime>>>,
-): Array<Formatted<JiPitchAnalysis>> => {
+): Formatted<JiPitchAnalysis>[] => {
     const formattedVector = formatVector(vector)
 
     let splitFormattedVector = formattedVector.split(/\s+/)
@@ -32,7 +32,7 @@ const formatSplitVector = (
     }
     splitFormattedVector.push("⟩") // Put back the "⟩"
 
-    return splitFormattedVector as Array<Formatted> as Array<Formatted<JiPitchAnalysis>>
+    return splitFormattedVector as Formatted[] as Formatted<JiPitchAnalysis>[]
 }
 
 export { formatSplitVector }

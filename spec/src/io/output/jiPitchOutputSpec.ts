@@ -1,14 +1,4 @@
-import {
-    Abs,
-    BLANK,
-    Cents,
-    Io,
-    ioSettings,
-    NEWLINE,
-    Vector,
-    Quotient,
-    TableFormat,
-} from "@sagittal/general"
+import { Abs, BLANK, Cents, Io, ioSettings, NEWLINE, Vector, Quotient, TableFormat } from "@sagittal/general"
 import { ApotomeSlope, Ate, JiPitchAnalysis } from "@sagittal/system"
 import { jiPitchScriptGroupSettings } from "../../../../src/globals"
 import { computeJiPitchOutput } from "../../../../src/io"
@@ -19,8 +9,8 @@ describe("computeJiPitchOutput", (): void => {
     const jiPitchAnalysis: JiPitchAnalysis = {
         ...jiPitchAnalysisFixture,
         cents: 11.2 as Cents,
-        vector: [0, -1, 1] as Vector<{ rational: true }>,
-        quotient: [5, 4] as Quotient<{ rational: true }>,
+        vector: [0, -1, 1] as Vector,
+        quotient: [5, 4] as Quotient,
         apotomeSlope: 8.2 as ApotomeSlope,
         aas: 8.2 as Abs<ApotomeSlope>,
         ate: 1 as Ate,
@@ -78,8 +68,7 @@ describe("computeJiPitchOutput", (): void => {
             NEWLINE +
             "               \tquotient\t \t \tvector\t       \t       \t       \t \t       " +
             NEWLINE +
-            "cents          \t       n\t/\td\t      \t  2    \t  3    \t  5    \t \tAAS    "
-                .underline +
+            "cents          \t       n\t/\td\t      \t  2    \t  3    \t  5    \t \tAAS    ".underline +
             NEWLINE +
             "        11.200¢\t       5\t/\t4\t     [\t  0    \t -1    \t  1    \t⟩\t  8.200" +
             NEWLINE) as Io

@@ -10,14 +10,14 @@ import {
     stringify,
     subtractRationalScaledVectors,
 } from "@sagittal/general"
-import { computeCommaName } from "@sagittal/system"
+import { computeCommaName, OUTDATED_COMMA_NAME_OPTIONS_PREFERENCE } from "@sagittal/system"
 import { metacommaNameToMetacommaMap } from "../../globals"
 import { Semitina } from "../types"
 import { checkMetacommaConsistency } from "./consistency"
 import { BucketName, Occam } from "./types"
 
 const computeFractionalTinaOccamBucket = (
-    bestCommaPerSemitinaZone: Array<[Index<Semitina>, Comma]>,
+    bestCommaPerSemitinaZone: [Index<Semitina>, Comma][],
 ): Record<RecordKey<Name<Comma>>, Occam> => {
     const fractionalTinaOccamBucket: Record<RecordKey<Name<Comma>>, Occam> = {}
 
@@ -33,7 +33,10 @@ const computeFractionalTinaOccamBucket = (
                 subsequentBestCommaInThatSemitinaZone,
                 bestCommaInThisSemitinaZone,
             ) as ScaledVector as Comma
-            const metacommaName = computeCommaName(metacommaBetweenConsecutiveBestCommas)
+            const metacommaName = computeCommaName(
+                metacommaBetweenConsecutiveBestCommas,
+                OUTDATED_COMMA_NAME_OPTIONS_PREFERENCE,
+            )
             fractionalTinaOccamBucket[metacommaName] =
                 fractionalTinaOccamBucket[metacommaName] || (0 as Occam)
             fractionalTinaOccamBucket[metacommaName] = (fractionalTinaOccamBucket[metacommaName] + 1) as Occam

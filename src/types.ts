@@ -54,11 +54,7 @@ enum JiPitchesOrFindCommasField {
     N2D3P9 = "n2d3p9",
 }
 
-type JiPitchScriptGroupField =
-    | JiPitchField
-    | Two3FreeClassField
-    | CommaField
-    | JiPitchesOrFindCommasField
+type JiPitchScriptGroupField = JiPitchField | Two3FreeClassField | CommaField | JiPitchesOrFindCommasField
 
 export {
     JiPitchScriptGroupSettings,

@@ -3,7 +3,6 @@ import {
     Cents,
     Comma,
     Copfr,
-    Direction,
     Io,
     Max,
     Name,
@@ -14,6 +13,9 @@ import {
     Sopfr,
     ScaledVector,
     Two3FreeClass,
+    Rough,
+    Rational,
+    Super,
 } from "@sagittal/general"
 import { ApotomeSlope, Ate, CommaClassId, N2D3P9, PotentiallyCommaAnalysis } from "@sagittal/system"
 import { jiPitchScriptGroupSettings } from "../../../../src/globals"
@@ -27,25 +29,21 @@ describe("computeJiPitchesOutput", (): void => {
             ...potentiallyCommaAnalysisFixture,
             name: "11M" as Name<Comma>,
             pitch: {
-                vector: [-5, 1, 0, 0, 1] as Vector<{ rational: true }>,
-            } as ScaledVector<{ rational: true }>,
+                vector: [-5, 1, 0, 0, 1] as Vector,
+            } as ScaledVector<Rational>,
             cents: 45.45 as Cents,
-            vector: [-5, 1, 0, 0, 1] as Vector<{ rational: true }>,
-            quotient: [33, 32] as Quotient<{ rational: true }>,
+            vector: [-5, 1, 0, 0, 1] as Vector,
+            quotient: [33, 32] as Quotient,
             apotomeSlope: -4 as ApotomeSlope,
             aas: 4 as Abs<ApotomeSlope>,
             ate: 0 as Ate,
             two3FreeClassAnalysis: {
                 name: "11/1" as Name<Two3FreeClass>,
-                two3FreePrimeLimit: 11 as Max<Prime<{ rough: 5 }>>,
-                two3FreeCopfr: 1 as Copfr<{ rough: 5 }>,
-                two3FreeSopfr: 11 as Sopfr<{ rough: 5 }>,
+                two3FreePrimeLimit: 11 as Max<Prime<Rough<5>>>,
+                two3FreeCopfr: 1 as Copfr<Rough<5>>,
+                two3FreeSopfr: 11 as Sopfr<Rough<5>>,
                 two3FreeClass: {
-                    vector: [0, 0, 0, 0, 1] as Vector<{
-                        rational: true
-                        rough: 5
-                        direction: Direction.SUPER
-                    }>,
+                    vector: [0, 0, 0, 0, 1] as Vector<Rational & Super & Rough<5>>,
                 } as Two3FreeClass,
                 n2d3p9: 6.722 as N2D3P9,
             },
@@ -54,25 +52,21 @@ describe("computeJiPitchesOutput", (): void => {
             ...potentiallyCommaAnalysisFixture,
             name: "25/49S" as Name<Comma>,
             pitch: {
-                vector: [1, 0, 2, -2] as Vector<{ rational: true }>,
-            } as ScaledVector<{ rational: true }>,
+                vector: [1, 0, 2, -2] as Vector,
+            } as ScaledVector<Rational>,
             cents: 33.4 as Cents,
-            vector: [1, 0, 2, -2] as Vector<{ rational: true }>,
-            quotient: [50, 49] as Quotient<{ rational: true }>,
+            vector: [1, 0, 2, -2] as Vector,
+            quotient: [50, 49] as Quotient,
             apotomeSlope: -2.154 as ApotomeSlope,
             aas: 2.154 as Abs<ApotomeSlope>,
             ate: 0 as Ate,
             two3FreeClassAnalysis: {
                 name: "49/25" as Name<Two3FreeClass>,
-                two3FreePrimeLimit: 7 as Max<Prime<{ rough: 5 }>>,
-                two3FreeCopfr: 4 as Copfr<{ rough: 5 }>,
-                two3FreeSopfr: 24 as Sopfr<{ rough: 5 }>,
+                two3FreePrimeLimit: 7 as Max<Prime<Rough<5>>>,
+                two3FreeCopfr: 4 as Copfr<Rough<5>>,
+                two3FreeSopfr: 24 as Sopfr<Rough<5>>,
                 two3FreeClass: {
-                    vector: [0, 0, -2, 2] as Vector<{
-                        rational: true
-                        rough: 5
-                        direction: Direction.SUPER
-                    }>,
+                    vector: [0, 0, -2, 2] as Vector<Rational & Super & Rough<5>>,
                 } as Two3FreeClass,
                 n2d3p9: 26.466 as N2D3P9,
             },
@@ -114,11 +108,17 @@ describe("computeJiPitchesOutput", (): void => {
         const actual = computeJiPitchesOutput(potentiallyCommaAnalyses, maybeCommaClassIds)
 
         const expected =
-            "       \t      \t       \t       \t       \t       \t       \t \t       \t        \t \t  \t2,3-free\t               \t2,3-free\t \t  \t   \t      " + NEWLINE +
-            "       \tvector\t       \t       \t       \t       \t       \t \t       \tquotient\t \t  \tclass   \t               \t   class\t \t  \t   \t      " + NEWLINE +
-            "ATE    \t      \t  2    \t  3    \t  5    \t  7    \t 11    \t \tAAS    \t       n\t/\td \tSoPFR   \tcents          \t       n\t/\td \t₂,₃\tname  ".underline + NEWLINE +
-            "  0    \t     [\t -5    \t  1    \t  0    \t  0    \t  1    \t⟩\t  4.000\t      33\t/\t32\t 11     \t        45.450¢\t      11\t/\t1 \t₂,₃\t11M   " + NEWLINE +
-            "  0    \t     [\t  1    \t  0    \t  2    \t -2    \t       \t⟩\t  2.154\t      50\t/\t49\t 24     \t        33.400¢\t      49\t/\t25\t₂,₃\t25/49S" + NEWLINE as Io
+            ("       \t      \t       \t       \t       \t       \t       \t \t       \t        \t \t  \t2,3-free\t               \t2,3-free\t \t  \t   \t      " +
+                NEWLINE +
+                "       \tvector\t       \t       \t       \t       \t       \t \t       \tquotient\t \t  \tclass   \t               \t   class\t \t  \t   \t      " +
+                NEWLINE +
+                "ATE    \t      \t  2    \t  3    \t  5    \t  7    \t 11    \t \tAAS    \t       n\t/\td \tSoPFR   \tcents          \t       n\t/\td \t₂,₃\tname  "
+                    .underline +
+                NEWLINE +
+                "  0    \t     [\t -5    \t  1    \t  0    \t  0    \t  1    \t⟩\t  4.000\t      33\t/\t32\t 11     \t        45.450¢\t      11\t/\t1 \t₂,₃\t11M   " +
+                NEWLINE +
+                "  0    \t     [\t  1    \t  0    \t  2    \t -2    \t       \t⟩\t  2.154\t      50\t/\t49\t 24     \t        33.400¢\t      49\t/\t25\t₂,₃\t25/49S" +
+                NEWLINE) as Io
         expect(actual).toEqual(expected)
     })
 })

@@ -9,15 +9,37 @@ import {
     program,
     Sopfr,
     ScaledVector,
+    Rough,
 } from "@sagittal/general"
-import { ApotomeSlope, Ate, JiPitchAnalysis, N2D3P9 } from "@sagittal/system"
+import {
+    ApotomeSlope,
+    Ate,
+    DirectedNumbers,
+    DirectedWord,
+    FactoringMode,
+    JiPitchAnalysis,
+    N2D3P9,
+} from "@sagittal/system"
 import { DEFAULT_FIND_COMMAS_OPTIONS } from "./constants"
 import { FindCommasOptions } from "./types"
 
-const computeFindCommasOptions = (
-    defaultOverrides: Partial<FindCommasOptions> = {},
-): FindCommasOptions => {
-    const programOpts = program.opts()
+const computeFindCommasOptions = (defaultOverrides: Partial<FindCommasOptions> = {}): FindCommasOptions => {
+    const programOpts: {
+        max23FreeSopfr: Max<Sopfr<Rough<5>>>
+        max23FreeCopfr: Max<Copfr<Rough<5>>>
+        maxPrimeLimit: Max<Max<Prime>>
+        maxN2d3p9: Max<N2D3P9>
+        maxAas: Max<Abs<ApotomeSlope>>
+        maxAte: Max<Ate>
+        lowerBound: Min<ScaledVector>
+        upperBound: Max<ScaledVector>
+        exclusive: Exclusive
+        directedNumbers: DirectedNumbers
+        directedWord: DirectedWord
+        factoringMode: FactoringMode
+        abbreviated: boolean
+        ascii: boolean
+    } = program.opts()
 
     const max23FreeSopfr =
         programOpts.max23FreeSopfr ||
@@ -49,13 +71,40 @@ const computeFindCommasOptions = (
     const exclusive: Exclusive =
         programOpts.exclusive ||
         defaultOverrides.zone?.exclusive ||
-        DEFAULT_FIND_COMMAS_OPTIONS.zone!.exclusive!
+        DEFAULT_FIND_COMMAS_OPTIONS.zone.exclusive!
     const zone = {
         extrema: [lowerBound, upperBound] as Extrema<{ of: ScaledVector; open: true }>,
         exclusive,
     }
 
-    return { max23FreeSopfr, max23FreeCopfr, maxPrimeLimit, maxN2D3P9, zone, maxAas, maxAte }
+    const directedNumbers: DirectedNumbers =
+        programOpts.directedNumbers ||
+        defaultOverrides.directedNumbers ||
+        DEFAULT_FIND_COMMAS_OPTIONS.directedNumbers
+    const directedWord: DirectedWord =
+        programOpts.directedWord || defaultOverrides.directedWord || DEFAULT_FIND_COMMAS_OPTIONS.directedWord
+    const factoringMode: FactoringMode =
+        programOpts.factoringMode ||
+        defaultOverrides.factoringMode ||
+        DEFAULT_FIND_COMMAS_OPTIONS.factoringMode
+    const abbreviated: boolean =
+        programOpts.abbreviated || defaultOverrides.abbreviated || DEFAULT_FIND_COMMAS_OPTIONS.abbreviated
+    const ascii: boolean = programOpts.ascii || defaultOverrides.ascii || DEFAULT_FIND_COMMAS_OPTIONS.ascii
+
+    return {
+        max23FreeSopfr,
+        max23FreeCopfr,
+        maxPrimeLimit,
+        maxN2D3P9,
+        zone,
+        maxAas,
+        maxAte,
+        directedNumbers,
+        directedWord,
+        factoringMode,
+        abbreviated,
+        ascii,
+    }
 }
 
 const computeFindNotatingCommasOptions = ({
@@ -81,10 +130,10 @@ const computeFindNotatingCommasOptions = ({
         findCommasOptions.maxPrimeLimit = two3FreePrimeLimit as Max<Max<Prime>>
     }
     if (two3FreeCopfr > findCommasOptions.max23FreeCopfr) {
-        findCommasOptions.max23FreeCopfr = two3FreeCopfr as Max<Copfr<{ rough: 5 }>>
+        findCommasOptions.max23FreeCopfr = two3FreeCopfr as Max<Copfr<Rough<5>>>
     }
     if (two3FreeSopfr > findCommasOptions.max23FreeSopfr) {
-        findCommasOptions.max23FreeSopfr = two3FreeSopfr as Max<Sopfr<{ rough: 5 }>>
+        findCommasOptions.max23FreeSopfr = two3FreeSopfr as Max<Sopfr<Rough<5>>>
     }
 
     return findCommasOptions

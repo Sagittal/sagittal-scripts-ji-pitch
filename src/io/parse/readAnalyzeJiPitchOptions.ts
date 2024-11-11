@@ -1,6 +1,7 @@
 import {
     Comma,
     Decimal,
+    Integer,
     Io,
     parseInteger,
     parseVector,
@@ -45,7 +46,7 @@ const readAnalyzeJiPitchOptions = (): void => {
         .option(
             `-${JiPitchScriptFlag.INTEGER}, --integer <integer>`,
             "integer",
-            (integerText: string): Decimal<{ integer: true }> => parseInteger(integerText as Io),
+            (integerText: string): Decimal<Integer> => parseInteger(integerText as Io),
         )
 }
 

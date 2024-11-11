@@ -1,6 +1,6 @@
-import {Comma, LogTarget, Name, RecordKey, saveLog} from "@sagittal/general"
-import {sortAndLogOccamBucket} from "./sortAndLogOccamBucket"
-import {Occam} from "./types"
+import { Comma, LogTarget, Name, RecordKey, saveLog } from "@sagittal/general"
+import { sortAndLogOccamBucket } from "./sortAndLogOccamBucket"
+import { Occam } from "./types"
 
 const sortAndLogFractionalTinaOccamBucket = (
     fractionalTinaOccamBucket: Record<RecordKey<Name<Comma>>, Occam>,
@@ -9,6 +9,4 @@ const sortAndLogFractionalTinaOccamBucket = (
     sortAndLogOccamBucket(fractionalTinaOccamBucket)
 }
 
-export {
-    sortAndLogFractionalTinaOccamBucket,
-}
+export { sortAndLogFractionalTinaOccamBucket }

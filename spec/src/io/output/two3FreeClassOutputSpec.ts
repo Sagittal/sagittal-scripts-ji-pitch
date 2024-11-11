@@ -1,14 +1,4 @@
-import {
-    BLANK,
-    Copfr,
-    Io,
-    Max,
-    NEWLINE,
-    Vector,
-    Prime,
-    Sopfr,
-    Two3FreeClass,
-} from "@sagittal/general"
+import { BLANK, Copfr, Io, Max, NEWLINE, Vector, Prime, Sopfr, Two3FreeClass, Rough } from "@sagittal/general"
 import { N2D3P9 } from "@sagittal/system"
 import { jiPitchScriptGroupSettings } from "../../../../src/globals"
 import { compute23FreeClassOutput } from "../../../../src/io"
@@ -19,11 +9,11 @@ describe("compute23FreeClassOutput", (): void => {
     const two3FreeClassAnalysis = {
         ...two3FreeClassAnalysisFixture,
         two3FreeClass: {
-            vector: [0, 0, 1] as Vector<{ rational: true }>,
+            vector: [0, 0, 1] as Vector,
         } as Two3FreeClass,
-        two3FreePrimeLimit: 14 as Max<Prime<{ rough: 5 }>>,
-        two3FreeCopfr: 2 as Copfr<{ rough: 5 }>,
-        two3FreeSopfr: 13 as Sopfr<{ rough: 5 }>,
+        two3FreePrimeLimit: 14 as Max<Prime<Rough<5>>>,
+        two3FreeCopfr: 2 as Copfr<Rough<5>>,
+        two3FreeSopfr: 13 as Sopfr<Rough<5>>,
         n2d3p9: 18.4567 as N2D3P9,
     }
 

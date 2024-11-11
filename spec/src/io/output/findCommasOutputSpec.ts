@@ -3,7 +3,6 @@ import {
     Cents,
     Comma,
     Copfr,
-    Direction,
     Io,
     ioSettings,
     Max,
@@ -15,6 +14,9 @@ import {
     Sopfr,
     TableFormat,
     Two3FreeClass,
+    Rational,
+    Rough,
+    Super,
 } from "@sagittal/general"
 import { ApotomeSlope, Ate, CommaAnalysis, CommaClassId, N2D3P9 } from "@sagittal/system"
 import { DEFAULT_FIND_COMMAS_OPTIONS } from "../../../../src/findCommas"
@@ -31,22 +33,18 @@ describe("computeFindCommasOutput", (): void => {
             ...commaAnalysisFixture,
             name: "11M" as Name<Comma>,
             cents: 45.45 as Cents,
-            vector: [0, 0, 1] as Vector<{ rational: true }>,
-            quotient: [33, 32] as Quotient<{ rational: true }>,
+            vector: [0, 0, 1] as Vector,
+            quotient: [33, 32] as Quotient,
             apotomeSlope: -4 as ApotomeSlope,
             aas: 4 as Abs<ApotomeSlope>,
             ate: 0 as Ate,
             two3FreeClassAnalysis: {
                 name: "11/1" as Name<Two3FreeClass>,
-                two3FreePrimeLimit: 11 as Max<Prime<{ rough: 5 }>>,
-                two3FreeCopfr: 1 as Copfr<{ rough: 5 }>,
-                two3FreeSopfr: 11 as Sopfr<{ rough: 5 }>,
+                two3FreePrimeLimit: 11 as Max<Prime<Rough<5>>>,
+                two3FreeCopfr: 1 as Copfr<Rough<5>>,
+                two3FreeSopfr: 11 as Sopfr<Rough<5>>,
                 two3FreeClass: {
-                    vector: [0, 0, 0, 0, 1] as Vector<{
-                        rational: true
-                        rough: 5
-                        direction: Direction.SUPER
-                    }>,
+                    vector: [0, 0, 0, 0, 1] as Vector<Rational & Super & Rough<5>>,
                 } as Two3FreeClass,
                 n2d3p9: 6.722 as N2D3P9,
             },
@@ -55,22 +53,18 @@ describe("computeFindCommasOutput", (): void => {
             ...commaAnalysisFixture,
             name: "25/49M" as Name<Comma>,
             cents: 33.4 as Cents,
-            vector: [1, 0, 2, -2] as Vector<{ rational: true }>,
-            quotient: [50, 49] as Quotient<{ rational: true }>,
+            vector: [1, 0, 2, -2] as Vector,
+            quotient: [50, 49] as Quotient,
             apotomeSlope: -2.154 as ApotomeSlope,
             aas: 2.154 as Abs<ApotomeSlope>,
             ate: 0 as Ate,
             two3FreeClassAnalysis: {
                 name: "49/25" as Name<Two3FreeClass>,
-                two3FreePrimeLimit: 7 as Max<Prime<{ rough: 5 }>>,
-                two3FreeCopfr: 4 as Copfr<{ rough: 5 }>,
-                two3FreeSopfr: 24 as Sopfr<{ rough: 5 }>,
+                two3FreePrimeLimit: 7 as Max<Prime<Rough<5>>>,
+                two3FreeCopfr: 4 as Copfr<Rough<5>>,
+                two3FreeSopfr: 24 as Sopfr<Rough<5>>,
                 two3FreeClass: {
-                    vector: [0, 0, -2, 2] as Vector<{
-                        rational: true
-                        rough: 5
-                        direction: Direction.SUPER
-                    }>,
+                    vector: [0, 0, -2, 2] as Vector<Rational & Super & Rough<5>>,
                 } as Two3FreeClass,
                 n2d3p9: 26.466 as N2D3P9,
             },

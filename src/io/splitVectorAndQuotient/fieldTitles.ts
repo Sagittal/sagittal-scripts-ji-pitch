@@ -50,23 +50,15 @@ const splitVectorAndQuotientFieldTitles = (
                 `vector ${INVISIBLE_VECTOR_OPENING_SQUARE_BRACKET_COLUMN_TITLE}` as Io,
                 ...(primes
                     .slice(0, maxVectorLength)
-                    .map(
-                        (prime: Prime): string => `${maybeMerge}${formatIntegerDecimal(prime)}`,
-                    ) as Io[]),
+                    .map((prime: Prime): string => `${maybeMerge}${formatIntegerDecimal(prime)}`) as Io[]),
                 `${maybeMerge}${INVISIBLE_VECTOR_CLOSING_ANGLE_BRACKET_COLUMN_TITLE}`,
             )
         } else if (ioSettings.tableFormat !== TableFormat.FORUM) {
             if (fieldTitle === JI_PITCH_FIELD_TITLES[JiPitchField.QUOTIENT]) {
-                splitFieldTitles.push(
-                    "quotient n" as Io,
-                    `${maybeMerge}/` as Io,
-                    `${maybeMerge}d` as Io,
-                )
+                splitFieldTitles.push("quotient n" as Io, `${maybeMerge}/` as Io, `${maybeMerge}d` as Io)
             } else if (
                 fieldTitle ===
-                JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES[
-                    JiPitchesOrFindCommasField.TWO_3_FREE_CLASS_NAME
-                ]
+                JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES[JiPitchesOrFindCommasField.TWO_3_FREE_CLASS_NAME]
             ) {
                 const sign =
                     ioSettings.tableFormat === TableFormat.FORUM_WITH_SPLIT_QUOTIENTS
@@ -79,8 +71,7 @@ const splitVectorAndQuotientFieldTitles = (
                     `${maybeMerge}${maybeMerge}${sign}` as Io,
                 )
             } else if (
-                fieldTitle ===
-                    TWO_3_FREE_CLASS_FIELD_TITLES[Two3FreeClassField.TWO_3_FREE_CLASS_NAME] &&
+                fieldTitle === TWO_3_FREE_CLASS_FIELD_TITLES[Two3FreeClassField.TWO_3_FREE_CLASS_NAME] &&
                 recognizeNameTitleAsBeingFor23FreeClass
             ) {
                 const sign =

@@ -1,9 +1,9 @@
-import {Filename, LogTarget, Maybe, saveLog} from "@sagittal/general"
-import {analyzeJiPitch, CommaAnalysis, CommaClassId, computeMaybeCommaClassId} from "@sagittal/system"
-import {findNotatingCommaAnalyses} from "../analyzeJiPitch"
-import {DEFAULT_ANALYZE_JI_PITCH_AND_FIND_COMMAS_SORT_KEY} from "../constants"
-import {computeFindNotatingCommasOptions} from "../findCommas"
-import {jiPitchScriptGroupSettings} from "../globals"
+import { Filename, LogTarget, Maybe, saveLog } from "@sagittal/general"
+import { analyzeJiPitch, CommaAnalysis, CommaClassId, computeMaybeCommaClassId } from "@sagittal/system"
+import { findNotatingCommaAnalyses } from "../analyzeJiPitch"
+import { DEFAULT_ANALYZE_JI_PITCH_AND_FIND_COMMAS_SORT_KEY } from "../constants"
+import { computeFindNotatingCommasOptions } from "../findCommas"
+import { jiPitchScriptGroupSettings } from "../globals"
 import {
     compute23FreeClassOutput,
     computeJiPitchOutput,
@@ -12,7 +12,7 @@ import {
     readAnalyzeJiPitchOptions,
     readJiPitchIoAndFormat,
 } from "../io"
-import {applySharedJiPitchScriptSetup} from "./shared"
+import { applySharedJiPitchScriptSetup } from "./shared"
 
 readAnalyzeJiPitchOptions()
 

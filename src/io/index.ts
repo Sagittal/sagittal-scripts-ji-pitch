@@ -5,6 +5,4 @@ export {
     computeJiPitchOutput,
     computeJiPitchesOutput,
 } from "./output"
-export {
-    readAnalyzeJiPitchOptions, parsePitch, parseJiPitch, readJiPitchIoAndFormat,
-} from "./parse"
+export { readAnalyzeJiPitchOptions, parsePitch, parseJiPitch, readJiPitchIoAndFormat } from "./parse"

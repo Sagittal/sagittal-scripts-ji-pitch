@@ -1,4 +1,4 @@
-import { program, ScaledVector } from "@sagittal/general"
+import { program, Rational, ScaledVector } from "@sagittal/general"
 import { ArmId, Compatible, computeAccidental, HeadId } from "@sagittal/system"
 import { parseJiPitch, readJiPitchIoAndFormat } from "../../../../src/io"
 
@@ -19,7 +19,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = { vector: [0, 1, -2, 1] } as ScaledVector<{ rational: true }>
+            const expected = { vector: [0, 1, -2, 1] } as ScaledVector<Rational>
             expect(actual).toEqual(expected)
         })
 
@@ -29,7 +29,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = { vector: [-1, 0, 0, 1] } as ScaledVector<{ rational: true }>
+            const expected = { vector: [-1, 0, 0, 1] } as ScaledVector<Rational>
             expect(actual).toEqual(expected)
         })
 
@@ -39,7 +39,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = { vector: [-11, 7] } as ScaledVector<{ rational: true }>
+            const expected = { vector: [-11, 7] } as ScaledVector<Rational>
             expect(actual).toEqual(expected)
         })
 
@@ -49,7 +49,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = { vector: [0, 1] } as ScaledVector<{ rational: true }>
+            const expected = { vector: [0, 1] } as ScaledVector<Rational>
             expect(actual).toEqual(expected)
         })
 
@@ -62,7 +62,7 @@ describe("parseJiPitch", (): void => {
             // ``~~|# =
             // ``~~|    [  13  -9   0  -1   0   0   1 ⟩
             //      #   [ -11   7                     ⟩
-            const expected = { vector: [2, -2, 0, -1, 0, 0, 1] } as ScaledVector<{ rational: true }>
+            const expected = { vector: [2, -2, 0, -1, 0, 0, 1] } as ScaledVector<Rational>
             expect(actual).toEqual(expected)
         })
     })
@@ -74,7 +74,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = { vector: [0, 1, -2, 1] } as ScaledVector<{ rational: true }>
+            const expected = { vector: [0, 1, -2, 1] } as ScaledVector<Rational>
             expect(actual).toEqual(expected)
         })
 
@@ -84,7 +84,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = { vector: [-1, 0, 0, 1] } as ScaledVector<{ rational: true }>
+            const expected = { vector: [-1, 0, 0, 1] } as ScaledVector<Rational>
             expect(actual).toEqual(expected)
         })
 
@@ -94,7 +94,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = { vector: [-11, 7] } as ScaledVector<{ rational: true }>
+            const expected = { vector: [-11, 7] } as ScaledVector<Rational>
             expect(actual).toEqual(expected)
         })
 
@@ -104,7 +104,7 @@ describe("parseJiPitch", (): void => {
 
             const actual = parseJiPitch(jiPitchIo, pitchFormat)
 
-            const expected = { vector: [0, 1] } as ScaledVector<{ rational: true }>
+            const expected = { vector: [0, 1] } as ScaledVector<Rational>
             expect(actual).toEqual(expected)
         })
 
@@ -125,7 +125,7 @@ describe("parseJiPitch", (): void => {
             // ``~~|# =
             // ``~~|    [  13  -9   0  -1   0   0   1 ⟩
             //      #   [ -11   7                     ⟩
-            const expected = { vector: [2, -2, 0, -1, 0, 0, 1] } as ScaledVector<{ rational: true }>
+            const expected = { vector: [2, -2, 0, -1, 0, 0, 1] } as ScaledVector<Rational>
             expect(actual).toEqual(expected)
         })
     })

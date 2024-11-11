@@ -20,21 +20,24 @@ describe("computeSplitVectorAndQuotientTableAlignment", (): void => {
                 INVISIBLE_VECTOR_CLOSING_ANGLE_BRACKET_COLUMN_TITLE,
                 "slope",
             ],
-        ] as Array<Row<{ header: true }>>
+        ] as Row<{ header: true }>[]
 
         const actual = computeSplitVectorAndQuotientTableAlignment(headerRows)
 
+        /* eslint-disable prettier/prettier */
         const expected = [
-            undefined, // Comma name
-            Alignment.RIGHT, // Quotient numerator
-            Alignment.CENTER, // Quotient vinculum
-            Alignment.LEFT, // Quotient denominator
-            Alignment.RIGHT, // Vector [
-            Alignment.CENTER, // Vector 2
-            Alignment.CENTER, // Vector 3
-            Alignment.LEFT, // Vector ⟩
-            undefined, // Apotome slope
+            undefined,          // Comma name
+            Alignment.RIGHT,    // Quotient numerator
+            Alignment.CENTER,   // Quotient vinculum
+            Alignment.LEFT,     // Quotient denominator
+            Alignment.RIGHT,    // Vector [
+            Alignment.CENTER,   // Vector 2
+            Alignment.CENTER,   // Vector 3
+            Alignment.LEFT,     // Vector ⟩
+            undefined,          // Apotome slope
         ]
+        /* eslint-enable prettier/prettier */
+
         expect(actual).toEqual(expected)
     })
 
@@ -43,23 +46,26 @@ describe("computeSplitVectorAndQuotientTableAlignment", (): void => {
             ["2,3-free", "2,3-free", "", "", "", "2,3-free"],
             ["prime", "class", "", "", "", "class"],
             ["limit", "n", "/", "d", "₂,₃", "CoPFR"],
-        ] as Array<Row<{ header: true }>>
+        ] as Row<{ header: true }>[]
 
         const actual = computeSplitVectorAndQuotientTableAlignment(headerRows)
 
+        /* eslint-disable prettier/prettier */
         const expected = [
-            undefined, // 2,3-free prime limit
-            Alignment.RIGHT, // 2,3-free class numinator
-            Alignment.CENTER, // 2,3-free class vinculum
-            Alignment.LEFT, // 2,3-free class diminuator
-            undefined, // 2,3-free class sign
-            undefined, // 2,3-free class CoPFR
+            undefined,          // 2,3-free prime limit
+            Alignment.RIGHT,    // 2,3-free class numinator
+            Alignment.CENTER,   // 2,3-free class vinculum
+            Alignment.LEFT,     // 2,3-free class diminuator
+            undefined,          // 2,3-free class sign
+            undefined,          // 2,3-free class CoPFR
         ]
+        /* eslint-enable prettier/prettier */
+
         expect(actual).toEqual(expected)
     })
 
     it("doesn't crash when there are no header rows", (): void => {
-        const headerRows = [] as Array<Row<{ header: true }>>
+        const headerRows = [] as Row<{ header: true }>[]
 
         const actual = computeSplitVectorAndQuotientTableAlignment(headerRows)
 

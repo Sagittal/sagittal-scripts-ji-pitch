@@ -21,6 +21,7 @@ import {
     getCommaClass,
     JI_NOTATION_LEVELS_COMMA_CLASS_IDS,
     JiNotationLevelId,
+    OUTDATED_COMMA_NAME_OPTIONS_PREFERENCE,
 } from "@sagittal/system"
 import { metacommaNameToMetacommaMap } from "../../globals"
 import { SEMITINA_CENTS } from "../constants"
@@ -29,7 +30,7 @@ import { checkMetacommaConsistency } from "./consistency"
 import { BucketName, Occam } from "./types"
 
 const computeIntegerTinaOccamBuckets = (
-    bestCommaPerSemitinaZone: Array<[Index<Semitina>, Comma]>,
+    bestCommaPerSemitinaZone: [Index<Semitina>, Comma][],
 ): Record<RecordKey<BucketName>, Record<RecordKey<Name<Comma>>, Occam>> => {
     const integerTinaOccamBuckets: Record<RecordKey<BucketName>, Record<RecordKey<Name<Comma>>, Occam>> = {
         [1]: {},
@@ -51,7 +52,7 @@ const computeIntegerTinaOccamBuckets = (
                 const metacomma = computeSuperScaledVector(
                     subtractRationalScaledVectors(ultraComma, bestComma),
                 ) as unknown as Comma
-                const metacommaName = computeCommaName(metacomma)
+                const metacommaName = computeCommaName(metacomma, OUTDATED_COMMA_NAME_OPTIONS_PREFERENCE)
 
                 const ultraCommaSemitinaZone = round(
                     computeCentsFromPitch(ultraComma) / SEMITINA_CENTS,

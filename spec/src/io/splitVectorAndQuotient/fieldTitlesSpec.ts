@@ -41,11 +41,7 @@ describe("splitVectorAndQuotientFieldTitles", (): void => {
     })
 
     describe("also works for 2,3-free class info", (): void => {
-        const fieldTitles = [
-            "2,3-free prime limit",
-            "2,3-free class name",
-            "2,3-free class CoPFR",
-        ] as Io[]
+        const fieldTitles = ["2,3-free prime limit", "2,3-free class name", "2,3-free class CoPFR"] as Io[]
 
         it("expands the 2,3-free class name headers to match the split up data", (): void => {
             const actual = splitVectorAndQuotientFieldTitles(fieldTitles, { maxVectorLength })

@@ -1,11 +1,4 @@
-import {
-    Count,
-    Exponent,
-    Max,
-    Prime,
-    Row,
-    splitFieldTitlesIntoRowsBySpaces,
-} from "@sagittal/general"
+import { Count, Exponent, Max, Prime, Row, splitFieldTitlesIntoRowsBySpaces } from "@sagittal/general"
 import { CommaAnalysis, JiPitchAnalysis, Two3FreeClassAnalysis } from "@sagittal/system"
 import { excludeFields } from "./excludeFields"
 import {
@@ -18,7 +11,7 @@ import { formatPrimeHeaders, splitVectorAndQuotientFieldTitles } from "./splitVe
 
 const computeJiPitchHeaderRows = (
     maxVectorLength: Max<Count<Exponent<Prime>>>,
-): Array<Row<{ of: JiPitchAnalysis; header: true }>> =>
+): Row<{ of: JiPitchAnalysis; header: true }>[] =>
     formatPrimeHeaders(
         splitFieldTitlesIntoRowsBySpaces(
             splitVectorAndQuotientFieldTitles(excludeFields(JI_PITCH_FIELD_TITLES), {
@@ -27,7 +20,7 @@ const computeJiPitchHeaderRows = (
         ),
     )
 
-const compute23FreeClassHeaderRows = (): Array<Row<{ of: Two3FreeClassAnalysis; header: true }>> =>
+const compute23FreeClassHeaderRows = (): Row<{ of: Two3FreeClassAnalysis; header: true }>[] =>
     splitFieldTitlesIntoRowsBySpaces(
         splitVectorAndQuotientFieldTitles(excludeFields(TWO_3_FREE_CLASS_FIELD_TITLES), {
             recognizeNameTitleAsBeingFor23FreeClass: true,
@@ -36,7 +29,7 @@ const compute23FreeClassHeaderRows = (): Array<Row<{ of: Two3FreeClassAnalysis; 
 
 const computeNotatingCommasHeaderRows = (
     maxVectorLength: Max<Count<Exponent<Prime>>>,
-): Array<Row<{ of: CommaAnalysis; header: true }>> =>
+): Row<{ of: CommaAnalysis; header: true }>[] =>
     formatPrimeHeaders(
         splitFieldTitlesIntoRowsBySpaces(
             splitVectorAndQuotientFieldTitles(excludeFields(COMMA_FIELD_TITLES), {
@@ -47,15 +40,12 @@ const computeNotatingCommasHeaderRows = (
 
 const computeJiPitchesOrFindCommasHeaderRows = (
     maxVectorLength: Max<Count<Exponent<Prime>>>,
-): Array<Row<{ of: CommaAnalysis; header: true }>> =>
+): Row<{ of: CommaAnalysis; header: true }>[] =>
     formatPrimeHeaders(
         splitFieldTitlesIntoRowsBySpaces(
-            splitVectorAndQuotientFieldTitles(
-                excludeFields(JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES),
-                {
-                    maxVectorLength,
-                },
-            ),
+            splitVectorAndQuotientFieldTitles(excludeFields(JI_PITCHES_OR_FIND_COMMAS_FIELD_TITLES), {
+                maxVectorLength,
+            }),
         ),
     )
 

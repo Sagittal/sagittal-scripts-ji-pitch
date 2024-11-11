@@ -9,6 +9,7 @@ import {
     min,
     Prime,
     saveLog,
+    stringify,
 } from "@sagittal/general"
 import {
     CommaAnalysis,
@@ -29,7 +30,7 @@ const isCommaLate = (comma: Comma): boolean => {
         return computeAte(notatingComma)
     })
 
-    saveLog(`ATE ${ate} vs. other notating comma ATEs ${ates}`, LogTarget.PROGRESS)
+    saveLog(`ATE ${ate} vs. other notating comma ATEs ${stringify(ates)}`, LogTarget.PROGRESS)
 
     const minimumAte = min(...ates)
 
@@ -43,7 +44,7 @@ const computeLateCommaAnalysis = (tinaCommaAnalyses: CommaAnalysis[]): Maybe<Com
         const tinaCommaAnalysis = tinaCommaAnalyses[index]
 
         saveLog(
-            `Checking comma ${index}: ${tinaCommaAnalysis.vector}, N2D3P9 ${tinaCommaAnalysis.two3FreeClassAnalysis.n2d3p9}` as Io,
+            `Checking comma ${index}: ${stringify(tinaCommaAnalysis.vector)}, N2D3P9 ${tinaCommaAnalysis.two3FreeClassAnalysis.n2d3p9}` as Io,
             LogTarget.PROGRESS,
         )
         if (isCommaLate(tinaCommaAnalysis.pitch)) {

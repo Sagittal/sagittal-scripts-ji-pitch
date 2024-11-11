@@ -4,7 +4,6 @@ import {
     computeRationalVectorFromRationalScaledVector,
     computeRationalVectorSmoothness,
     computeSimpleMap,
-    Ed,
     Filename,
     LogTarget,
     Max,
@@ -27,15 +26,12 @@ const jiPitch = parseJiPitch(jiPitchIo, pitchFormat)
 
 const vector = computeRationalVectorFromRationalScaledVector(jiPitch)
 
-const primeLimit = computeRationalVectorSmoothness(vector) as number as Max<Max<Prime>>
+const primeLimit = computeRationalVectorSmoothness(vector) as number as Max<Prime>
 
-const temperingEdos = [] as Array<Edo>
+const temperingEdos = [] as Edo[]
 
 computeRange(1 as Edo, MAX_EDO).forEach((edo: Edo): void => {
-    const simpleMap = computeSimpleMap({
-        edo: edo,
-        primeLimit,
-    })
+    const simpleMap = computeSimpleMap(edo, primeLimit)
 
     const steps = mapVector(vector, simpleMap)
 

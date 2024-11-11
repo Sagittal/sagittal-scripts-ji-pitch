@@ -1,4 +1,4 @@
-import { Count, Decimal, Exponent, Extrema, Max, Prime, PrimeCount, Sopfr } from "@sagittal/general"
+import { Extrema, Max, Prime, PrimeCount, Rough, Sopfr } from "@sagittal/general"
 import { compute23FreePrimesToCheck } from "../../../src/findCommas/two3FreePrimesToCheck"
 
 describe("compute23FreePrimesToCheck", (): void => {
@@ -30,7 +30,7 @@ describe("compute23FreePrimesToCheck", (): void => {
 
     describe("when only SoPFR is provided", (): void => {
         it("if it is not a prime, the final prime less than it is the max prime", (): void => {
-            const max23FreeSopfr = 20 as Max<Sopfr<{ rough: 5 }>>
+            const max23FreeSopfr = 20 as Max<Sopfr<Rough<5>>>
 
             const actual = compute23FreePrimesToCheck({ max23FreeSopfr })
 
@@ -39,7 +39,7 @@ describe("compute23FreePrimesToCheck", (): void => {
         })
 
         it("if it is a prime, then it is the max prime", (): void => {
-            const max23FreeSopfr = 19 as Max<Sopfr<{ rough: 5 }>>
+            const max23FreeSopfr = 19 as Max<Sopfr<Rough<5>>>
 
             const actual = compute23FreePrimesToCheck({ max23FreeSopfr })
 
@@ -51,7 +51,7 @@ describe("compute23FreePrimesToCheck", (): void => {
     describe("when both prime limit and SoPFR are provided", (): void => {
         it("if the prime limit is less than the SoPFR, prime limit should be the max prime", (): void => {
             const maxPrimeLimit = 13 as Max<Max<Prime>>
-            const max23FreeSopfr = 19 as Max<Sopfr<{ rough: 5 }>>
+            const max23FreeSopfr = 19 as Max<Sopfr<Rough<5>>>
 
             const actual = compute23FreePrimesToCheck({ maxPrimeLimit, max23FreeSopfr })
 
@@ -61,7 +61,7 @@ describe("compute23FreePrimesToCheck", (): void => {
 
         it("if the SoPFR is less than the prime limit, SoPFR should be the max prime", (): void => {
             const maxPrimeLimit = 23 as Max<Max<Prime>>
-            const max23FreeSopfr = 17 as Max<Sopfr<{ rough: 5 }>>
+            const max23FreeSopfr = 17 as Max<Sopfr<Rough<5>>>
 
             const actual = compute23FreePrimesToCheck({ maxPrimeLimit, max23FreeSopfr })
 
@@ -79,7 +79,7 @@ describe("compute23FreePrimesToCheck", (): void => {
             [-1, 2], // 11
             [-1, 1], // 13
             [0, 1], // 17
-        ] as Array<Extrema<{ of: PrimeCount }>>
+        ] as Extrema<{ of: PrimeCount }>[]
 
         it("when only N2D3P9 is provided, its final element is the max prime", (): void => {
             const actual = compute23FreePrimesToCheck({ primeCountExtremasGivenMaxN2D3P9 })
@@ -90,7 +90,7 @@ describe("compute23FreePrimesToCheck", (): void => {
 
         it("when N2D3P9 is provided, as well as other constraints, but it is less, it wins", (): void => {
             const maxPrimeLimit = 23 as Max<Max<Prime>>
-            const max23FreeSopfr = 19 as Max<Sopfr<{ rough: 5 }>>
+            const max23FreeSopfr = 19 as Max<Sopfr<Rough<5>>>
 
             const actual = compute23FreePrimesToCheck({
                 primeCountExtremasGivenMaxN2D3P9,
@@ -104,7 +104,7 @@ describe("compute23FreePrimesToCheck", (): void => {
 
         it("when N2D3P9 is provided, as well as other constraints, but it is more, the others win", (): void => {
             const maxPrimeLimit = 11 as Max<Max<Prime>>
-            const max23FreeSopfr = 17 as Max<Sopfr<{ rough: 5 }>>
+            const max23FreeSopfr = 17 as Max<Sopfr<Rough<5>>>
 
             const actual = compute23FreePrimesToCheck({
                 primeCountExtremasGivenMaxN2D3P9,

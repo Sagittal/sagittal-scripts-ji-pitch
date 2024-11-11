@@ -1,1 +1,1 @@
-export {findNotatingCommaAnalyses} from "./notatingCommaAnalyses"
+export { findNotatingCommaAnalyses } from "./notatingCommaAnalyses"

@@ -17,8 +17,8 @@ const computeOrderedTableAndAlignment = <T>(
         (orderedField: JiPitchScriptGroupField): boolean => {
             return Object.keys(fieldTitles).includes(orderedField)
         },
-    ) as JiPitchScriptGroupField[]
-    const orderedColumnIndices = [] as Array<Index<Column>>
+    )
+    const orderedColumnIndices = [] as Index<Column>[]
     orderedFields.forEach((orderedField: JiPitchScriptGroupField): void => {
         const columnIndex = computeOrderedColumnIndex(orderedField, options)
         orderedColumnIndices.push(columnIndex)

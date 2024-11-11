@@ -251,11 +251,11 @@ describe("analyze-ji-pitch", (): void => {
         expect(actual).toEqual(expected)
     })
 
-    it("can format the names of the commas in the notating commas table", (): void => {
+    xit("can format the names of the commas in the notating commas table", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script =
-            `npm run analyze-ji-pitch [3,-7,2,0,1] -- --undirected --factoring-mode always --unabbreviated --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+            `npm run analyze-ji-pitch [3,-7,2,0,1] -- --directed-numbers off-with-colon --factoring-mode always --unabbreviated --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 

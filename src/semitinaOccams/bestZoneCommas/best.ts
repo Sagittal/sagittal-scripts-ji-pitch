@@ -1,18 +1,18 @@
-import {Comma, Index, isUndefined, LogTarget, Maybe, saveLog, stringify} from "@sagittal/general"
-import {computeLpe, computeLpei, formatComma} from "@sagittal/system"
-import {SEMITINA_CENTS} from "../constants"
-import {Semitina} from "../types"
-import {computeAllCommasLessThanHalfApotome} from "./commas"
-import {computeCommasBySemitinaZone} from "./zone"
-import {computeCommasBySemitinaZoneEntries} from "./zoneEntries"
+import { Comma, Index, isUndefined, LogTarget, Maybe, saveLog, stringify } from "@sagittal/general"
+import { computeLpe, computeLpei, formatComma } from "@sagittal/system"
+import { SEMITINA_CENTS } from "../constants"
+import { Semitina } from "../types"
+import { computeAllCommasLessThanHalfApotome } from "./commas"
+import { computeCommasBySemitinaZone } from "./zone"
+import { computeCommasBySemitinaZoneEntries } from "./zoneEntries"
 
-const computeBestCommaPerSemitinaZone = (complexityOnly: boolean): Array<[Index<Semitina>, Comma]> => {
+const computeBestCommaPerSemitinaZone = (complexityOnly: boolean): [Index<Semitina>, Comma][] => {
     const commas = computeAllCommasLessThanHalfApotome()
     const commasBySemitinaZone = computeCommasBySemitinaZone(commas)
     const commasBySemitinaZoneEntries = computeCommasBySemitinaZoneEntries(commasBySemitinaZone)
 
-    const bestCommaPerSemitinaZone: Array<[Index<Semitina>, Comma]> = commasBySemitinaZoneEntries
-        .map(([semitinaZone, commas]: [Index<Semitina>, Comma[]]): [Index<Semitina>, Comma] => {
+    const bestCommaPerSemitinaZone: [Index<Semitina>, Comma][] = commasBySemitinaZoneEntries.map(
+        ([semitinaZone, commas]: [Index<Semitina>, Comma[]]): [Index<Semitina>, Comma] => {
             let bestComma = undefined as Maybe<Comma>
             let bestGrade = Infinity
             commas.forEach((comma: Comma): void => {
@@ -27,9 +27,10 @@ const computeBestCommaPerSemitinaZone = (complexityOnly: boolean): Array<[Index<
             if (isUndefined(bestComma)) throw new Error(`No best comma for semitina zone ${semitinaZone}`)
 
             return [semitinaZone, bestComma]
-        })
+        },
+    )
 
-    saveLog(stringify(bestCommaPerSemitinaZone, {multiline: true}), LogTarget.DETAILS)
+    saveLog(stringify(bestCommaPerSemitinaZone, { multiline: true }), LogTarget.DETAILS)
     saveLog("best commas per semitina zone (names)", LogTarget.DETAILS)
     bestCommaPerSemitinaZone.forEach(([semitinaZone, comma]: [Index<Semitina>, Comma]): void => {
         saveLog(`${semitinaZone}: ${formatComma(comma)}`, LogTarget.DETAILS)
@@ -40,6 +41,4 @@ const computeBestCommaPerSemitinaZone = (complexityOnly: boolean): Array<[Index<
     return bestCommaPerSemitinaZone
 }
 
-export {
-    computeBestCommaPerSemitinaZone,
-}
+export { computeBestCommaPerSemitinaZone }

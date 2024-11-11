@@ -1,12 +1,12 @@
-import { Copfr, Max, Vector, Prime, Sopfr } from "@sagittal/general"
+import { Copfr, Max, Vector, Prime, Sopfr, Rough, Rational } from "@sagittal/general"
 import { N2D3P9 } from "@sagittal/system"
 import { compute23FreeRationalVectorsToCheck } from "../../../src/findCommas/two3FreeVectorsToCheck"
 
 describe("compute23FreeRationalVectorsToCheck", (): void => {
     it("returns the list of 2,3-free vectors to check, given all four of the maxes", (): void => {
         const maxPrimeLimit = 7 as Max<Max<Prime>>
-        const max23FreeSopfr = 15 as Max<Sopfr<{ rough: 5 }>>
-        const max23FreeCopfr = 2 as Max<Copfr<{ rough: 5 }>>
+        const max23FreeSopfr = 15 as Max<Sopfr<Rough<5>>>
+        const max23FreeCopfr = 2 as Max<Copfr<Rough<5>>>
         const maxN2D3P9 = 5 as Max<N2D3P9>
 
         const actual = compute23FreeRationalVectorsToCheck({
@@ -28,15 +28,15 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
             [0, 0, 1],
             [0, 0, 1, 1],
             [0, 0, 2],
-        ] as Array<Vector<{ rational: true; rough: 5 }>>
+        ] as Vector<Rational & Rough<5>>[]
         expect(actual).toBeArrayWithDeepEqualContents(expected)
     })
 
     describe("3 of 4", (): void => {
         it("returns the list of 2,3-free vectors to check, given a max prime limit, a max 2,3-free SoPFR, and a max 2,3-free CoPFR", (): void => {
             const maxPrimeLimit = 7 as Max<Max<Prime>>
-            const max23FreeSopfr = 15 as Max<Sopfr<{ rough: 5 }>>
-            const max23FreeCopfr = 2 as Max<Copfr<{ rough: 5 }>>
+            const max23FreeSopfr = 15 as Max<Sopfr<Rough<5>>>
+            const max23FreeCopfr = 2 as Max<Copfr<Rough<5>>>
 
             const actual = compute23FreeRationalVectorsToCheck({
                 maxPrimeLimit,
@@ -58,14 +58,14 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 1],
                 [0, 0, 1, 1],
                 [0, 0, 2],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
 
         it("returns the list of 2,3-free vectors to check, given a max prime limit, a max N2D3P9, and a max 2,3-free CoPFR", (): void => {
             const maxPrimeLimit = 7 as Max<Max<Prime>>
             const maxN2D3P9 = 5 as Max<N2D3P9>
-            const max23FreeCopfr = 2 as Max<Copfr<{ rough: 5 }>>
+            const max23FreeCopfr = 2 as Max<Copfr<Rough<5>>>
 
             const actual = compute23FreeRationalVectorsToCheck({
                 maxPrimeLimit,
@@ -85,14 +85,14 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 1],
                 [0, 0, 1, 1],
                 [0, 0, 2],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
 
         it("returns the list of 2,3-free vectors to check, given a max 2,3-free SoPFR, a max N2D3P9, and a max 2,3-free CoPFR", (): void => {
-            const max23FreeSopfr = 15 as Max<Sopfr<{ rough: 5 }>>
+            const max23FreeSopfr = 15 as Max<Sopfr<Rough<5>>>
             const maxN2D3P9 = 5 as Max<N2D3P9>
-            const max23FreeCopfr = 2 as Max<Copfr<{ rough: 5 }>>
+            const max23FreeCopfr = 2 as Max<Copfr<Rough<5>>>
 
             const actual = compute23FreeRationalVectorsToCheck({
                 max23FreeSopfr,
@@ -112,13 +112,13 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 1],
                 [0, 0, 1, 1],
                 [0, 0, 2],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
 
         it("returns the list of 2,3-free vectors to check, given a max prime limit, a max N2D3P9, and a max 2,3-free SoPFR", (): void => {
             const maxPrimeLimit = 7 as Max<Max<Prime>>
-            const max23FreeSopfr = 15 as Max<Sopfr<{ rough: 5 }>>
+            const max23FreeSopfr = 15 as Max<Sopfr<Rough<5>>>
             const maxN2D3P9 = 5 as Max<N2D3P9>
 
             const actual = compute23FreeRationalVectorsToCheck({
@@ -139,15 +139,15 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 1],
                 [0, 0, 1, 1],
                 [0, 0, 2],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
     })
 
     describe("2 of 4", (): void => {
-        it("returns the list of 2,3-free vectors to check, given a max prime limit and a max 2,3-free SoPFR               ", (): void => {
+        it("returns the list of 2,3-free vectors to check, given a max prime limit and a max 2,3-free SoPFR", (): void => {
             const maxPrimeLimit = 7 as Max<Max<Prime>>
-            const max23FreeSopfr = 15 as Max<Sopfr<{ rough: 5 }>>
+            const max23FreeSopfr = 15 as Max<Sopfr<Rough<5>>>
 
             const actual = compute23FreeRationalVectorsToCheck({ maxPrimeLimit, max23FreeSopfr })
 
@@ -167,7 +167,7 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 1, 1],
                 [0, 0, 2],
                 [0, 0, 3],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
 
@@ -193,13 +193,13 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 2, -1],
                 [0, 0, 2],
                 [0, 0, 2, 1],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
 
-        it("returns the list of 2,3-free vectors to check, given a max prime limit and a max 2,3-free CoPFR               ", (): void => {
+        it("returns the list of 2,3-free vectors to check, given a max prime limit and a max 2,3-free CoPFR", (): void => {
             const maxPrimeLimit = 7 as Max<Max<Prime>>
-            const max23FreeCopfr = 3 as Max<Copfr<{ rough: 5 }>>
+            const max23FreeCopfr = 3 as Max<Copfr<Rough<5>>>
 
             const actual = compute23FreeRationalVectorsToCheck({ maxPrimeLimit, max23FreeCopfr })
 
@@ -229,13 +229,13 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 2],
                 [0, 0, 2, 1],
                 [0, 0, 3],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
 
-        it("returns the list of 2,3-free vectors to check, given a max 2,3-free SoPFR and a max 2,3-free CoPFR                   ", (): void => {
-            const max23FreeSopfr = 20 as Max<Sopfr<{ rough: 5 }>>
-            const max23FreeCopfr = 3 as Max<Copfr<{ rough: 5 }>>
+        it("returns the list of 2,3-free vectors to check, given a max 2,3-free SoPFR and a max 2,3-free CoPFR", (): void => {
+            const max23FreeSopfr = 20 as Max<Sopfr<Rough<5>>>
+            const max23FreeCopfr = 3 as Max<Copfr<Rough<5>>>
 
             const actual = compute23FreeRationalVectorsToCheck({ max23FreeSopfr, max23FreeCopfr })
 
@@ -287,13 +287,13 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 2],
                 [0, 0, 2, 1],
                 [0, 0, 3],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
 
         it("returns the list of 2,3-free vectors to check, given a max N2D3P9 and a max 2,3-free CoPFR", (): void => {
             const maxN2D3P9 = 9 as Max<N2D3P9>
-            const max23FreeCopfr = 2 as Max<Copfr<{ rough: 5 }>>
+            const max23FreeCopfr = 2 as Max<Copfr<Rough<5>>>
 
             const actual = compute23FreeRationalVectorsToCheck({ maxN2D3P9, max23FreeCopfr })
 
@@ -320,13 +320,13 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 1, 0, 1],
                 [0, 0, 1, 1],
                 [0, 0, 2],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
 
         it("returns the list of 2,3-free vectors to check, given a max N2D3P9 and a max 2,3-free SoPFR", (): void => {
             const maxN2D3P9 = 6 as Max<N2D3P9>
-            const max23FreeSopfr = 12 as Max<Sopfr<{ rough: 5 }>>
+            const max23FreeSopfr = 12 as Max<Sopfr<Rough<5>>>
 
             const actual = compute23FreeRationalVectorsToCheck({ maxN2D3P9, max23FreeSopfr })
 
@@ -342,14 +342,14 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 1],
                 [0, 0, 1, 1],
                 [0, 0, 2],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
     })
 
     describe("1 of 4 possibilities", (): void => {
         it("returns the list of 2,3-free vectors to check, given only a max 2,3-free SoPFR", (): void => {
-            const max23FreeSopfr = 15 as Max<Sopfr<{ rough: 5 }>>
+            const max23FreeSopfr = 15 as Max<Sopfr<Rough<5>>>
 
             const actual = compute23FreeRationalVectorsToCheck({ max23FreeSopfr })
 
@@ -373,7 +373,7 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 1, 1],
                 [0, 0, 2],
                 [0, 0, 3],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
 
@@ -398,7 +398,7 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
                 [0, 0, 2, -1],
                 [0, 0, 2],
                 [0, 0, 2, 1],
-            ] as Array<Vector<{ rational: true; rough: 5 }>>
+            ] as Vector<Rational & Rough<5>>[]
             expect(actual).toBeArrayWithDeepEqualContents(expected)
         })
     })
@@ -413,7 +413,7 @@ describe("compute23FreeRationalVectorsToCheck", (): void => {
         })
 
         it("fails when given only a max 2,3-free CoPFR", (): void => {
-            const max23FreeCopfr = 3 as Max<Copfr<{ rough: 5 }>>
+            const max23FreeCopfr = 3 as Max<Copfr<Rough<5>>>
 
             expect((): void => {
                 compute23FreeRationalVectorsToCheck({ max23FreeCopfr })

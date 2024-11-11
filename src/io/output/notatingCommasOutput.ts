@@ -25,7 +25,7 @@ import { NO_RESULTS } from "./constants"
 
 const computeNotatingCommasOutput = (
     notatingCommaAnalyses: CommaAnalysis[],
-    maybeCommaClassIds: Array<Maybe<CommaClassId>>,
+    maybeCommaClassIds: Maybe<CommaClassId>[],
 ): Io => {
     if (isEmpty(notatingCommaAnalyses)) return sumTexts(NOTATING_COMMAS_TABLE_TITLE, NO_RESULTS)
 

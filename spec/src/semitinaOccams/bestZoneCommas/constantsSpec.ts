@@ -1,4 +1,4 @@
-import { ScaledVector } from "@sagittal/general"
+import { Irrational, ScaledVector } from "@sagittal/general"
 import { MAX_SIZE_PER_SEMITINA_ZONE } from "../../../../src/semitinaOccams/bestZoneCommas/constants"
 
 describe("MAX_SIZE_PER_SEMITINA_ZONE", (): void => {
@@ -814,7 +814,7 @@ describe("MAX_SIZE_PER_SEMITINA_ZONE", (): void => {
             { vector: [-11, 7], scaler: [807.5, 1618] },
             { vector: [-11, 7], scaler: [808.5, 1618] },
             { vector: [-11, 7], scaler: [809.5, 1618] },
-        ] as Array<ScaledVector<{ rational: false }>>
+        ] as ScaledVector<Irrational>[]
         expect(MAX_SIZE_PER_SEMITINA_ZONE).toEqual(expected)
     })
 })

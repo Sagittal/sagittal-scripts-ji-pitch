@@ -14,13 +14,16 @@ import {
     Range,
     Sopfr,
     PrimeCount,
+    Integer,
+    Rough,
+    negate,
 } from "@sagittal/general"
 import { PrimeCountRangeOptions } from "./types"
 
 const computePrimeCountRange = (prime: Prime, options: PrimeCountRangeOptions = {}): Range<PrimeCount> => {
     const {
-        max23FreeSopfr = Infinity as Sopfr<{ rough: 5 }>,
-        max23FreeCopfr = Infinity as Copfr<{ rough: 5 }>,
+        max23FreeSopfr = Infinity as Sopfr<Rough<5>>,
+        max23FreeCopfr = Infinity as Copfr<Rough<5>>,
         primeCountExtremaGivenMaxN2D3P9,
     } = options
 
@@ -42,8 +45,10 @@ const computePrimeCountRange = (prime: Prime, options: PrimeCountRangeOptions = 
     ) as number as Max<PrimeCount>
     const maxPrimeCountGivenMaxCopfr: Max<PrimeCount> = max23FreeCopfr as number as Max<PrimeCount>
 
-    const minPrimeCountGivenMaxSopfr: Min<PrimeCount> = -maxPrimeCountGivenMaxSopfr as Min<PrimeCount>
-    const minPrimeCountGivenMaxCopfr: Min<PrimeCount> = -max23FreeCopfr as Min<PrimeCount>
+    const minPrimeCountGivenMaxSopfr: Min<PrimeCount> = negate(
+        maxPrimeCountGivenMaxSopfr,
+    ) as number as Min<PrimeCount>
+    const minPrimeCountGivenMaxCopfr: Min<PrimeCount> = negate(max23FreeCopfr) as number as Min<PrimeCount>
 
     const maxPrimeCount: Min<Max<PrimeCount>> = min(
         maxPrimeCountGivenMaxSopfr,
@@ -58,8 +63,8 @@ const computePrimeCountRange = (prime: Prime, options: PrimeCountRangeOptions = 
     )
 
     return computeRange(
-        minPrimeCount as PrimeCount as Decimal<{ integer: true }> & PrimeCount,
-        add(maxPrimeCount, ONE as number) as Decimal<{ integer: true }> & PrimeCount,
+        minPrimeCount as PrimeCount as Decimal<Integer> & PrimeCount,
+        add(maxPrimeCount, ONE as number) as Decimal<Integer> & PrimeCount,
     )
 }
 

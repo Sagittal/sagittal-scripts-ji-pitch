@@ -1,4 +1,4 @@
-import { Filename, Io, program, setupScriptAndIo, ScaledVector } from "@sagittal/general"
+import { Filename, Io, program, setupScriptAndIo, ScaledVector, SortBy, Maybe } from "@sagittal/general"
 import { FactoringMode } from "@sagittal/system"
 import { jiPitchScriptGroupSettings } from "../../globals"
 import { parsePitch } from "../../io"
@@ -12,12 +12,12 @@ const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
         .option(
             "--lower-bound <lowerBound>",
             "lower bound",
-            (pitchIo: string): ScaledVector => parsePitch(pitchIo as Io),
+            (pitchIo: string): ScaledVector => parsePitch(pitchIo as Io) as ScaledVector,
         )
         .option(
             "--upper-bound <upperBound>",
             "upper bound",
-            (pitchIo: string): ScaledVector => parsePitch(pitchIo as Io),
+            (pitchIo: string): ScaledVector => parsePitch(pitchIo as Io) as ScaledVector,
         )
         .option("--exclusive [exclusive]", "exclusive bounds", parseExclusive)
         .option("--max-aas <maxAas>", "max AAS", parseFloat)
@@ -27,21 +27,23 @@ const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
         .option("--max-2-3-free-copfr <max23FreeCopfr>", "max 2,3-free copfr", parseInt)
         .option("--max-n2d3p9 <maxN2d3p9>", "max n2d3p9", parseFloat)
         .option("--sort-by <sortBy>", "sort by", parseSortBy)
-        .option("--undirected", "undirected comma name")
+        .option(
+            "--directed-word <directedWord>",
+            "directed word i.e. up or down (always, never, or conditionally)",
+        )
+        .option("--directed-numbers <directedNumbers>", "directed numbers (on, off, or off-with-colon)")
         .option("--factoring-mode <factoringMode>", "factoring mode (always, never, or threshold)")
         .option("--unabbreviated", "unabbreviated comma name")
         .option("--ascii", "ascii comma name")
         .option(
             "--excluded-fields <excludedFields>",
             "exclude fields",
-            (excludedFieldsIo: string): JiPitchScriptGroupField[] =>
-                parseFields(excludedFieldsIo as Io),
+            (excludedFieldsIo: string): JiPitchScriptGroupField[] => parseFields(excludedFieldsIo as Io),
         )
         .option(
             "--ordered-fields <orderedFields>",
             "specify exact ordered set of fields",
-            (orderedFieldsIo: string): JiPitchScriptGroupField[] =>
-                parseFields(orderedFieldsIo as Io),
+            (orderedFieldsIo: string): JiPitchScriptGroupField[] => parseFields(orderedFieldsIo as Io),
         )
 
     setupScriptAndIo(logDir)
@@ -50,10 +52,20 @@ const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
         sortBy,
         excludedFields,
         orderedFields,
-        undirected,
+        directedWord,
+        directedNumbers,
         factoringMode,
         unabbreviated,
         ascii,
+    }: {
+        sortBy: SortBy
+        excludedFields: JiPitchScriptGroupField[]
+        orderedFields: Maybe<JiPitchScriptGroupField[]>
+        directedWord: string
+        directedNumbers: string
+        factoringMode: FactoringMode
+        unabbreviated: boolean
+        ascii: boolean
     } = program.opts()
 
     if (sortBy) jiPitchScriptGroupSettings.sortBy = sortBy
@@ -67,7 +79,8 @@ const applySharedJiPitchScriptSetup = (logDir?: Filename): void => {
     }
 
     jiPitchScriptGroupSettings.commaNameOptions = {
-        directed: !undirected,
+        directedWord: directedWord === "always" ? 0 : directedWord === "never" ? 2 : 1,
+        directedNumbers: directedNumbers === "on" ? 0 : directedNumbers === "off" ? 1 : 2,
         factoringMode: factoringMode || FactoringMode.THRESHOLD,
         abbreviated: !unabbreviated,
         ascii,

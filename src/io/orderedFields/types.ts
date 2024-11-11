@@ -1,14 +1,4 @@
-import {
-    Column,
-    Count,
-    Exponent,
-    Index,
-    Io,
-    Max,
-    Prime,
-    Table,
-    TableAlignment,
-} from "@sagittal/general"
+import { Column, Count, Exponent, Index, Io, Max, Prime, Table, TableAlignment } from "@sagittal/general"
 import { JiPitchScriptGroupField } from "../../types"
 
 interface OrderableTableInformation<T> {
@@ -29,8 +19,7 @@ interface OrderedTableAndAlignmentOptions extends SharedOrderedFieldsOptions {
     fieldTitles: Partial<Record<JiPitchScriptGroupField, Io>>
 }
 
-interface MaybeAppendAdditionalColumnIndicesForSplitFieldOptions
-    extends SharedOrderedFieldsOptions {
+interface MaybeAppendAdditionalColumnIndicesForSplitFieldOptions extends SharedOrderedFieldsOptions {
     columnIndex: Index<Column>
     orderedField: JiPitchScriptGroupField
 }

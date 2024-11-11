@@ -18,7 +18,7 @@ describe("parseFields", (): void => {
         expect((): void => {
             parseFields(fieldsIo)
         }).toThrowError(
-            "Tried to parse field two3FreeClass but it is not a member of the list of possible fields: {quotient,vector,cents,apotomeSlope,aas,ate,commaClass,name,sizeCategory,two3FreePrimeLimit,two3FreeClassName,two3FreeCopfr,two3FreeSopfr,n2d3p9}, as well as specific terms of some fields e.g. vector2, quotientN",
+            'Tried to parse field two3FreeClass but it is not a member of the list of possible fields: {["quotient","vector","cents","apotomeSlope","aas","ate","commaClass","name","sizeCategory","two3FreePrimeLimit","two3FreeClassName","two3FreeCopfr","two3FreeSopfr","n2d3p9"]}, as well as specific terms of some fields e.g. vector2, quotientN',
         )
     })
 })
@@ -67,7 +67,9 @@ describe("parseSortBy", (): void => {
 
         const actual = parseSortBy(sortByIo)
 
-        const expected = [{ two3FreeClassAnalysis: "name" } as Record<string, string>] as KeyPath[]
+        const expected = [
+            { two3FreeClassAnalysis: "name" } as Record<string | number | symbol, string>,
+        ] as KeyPath[]
         expect(actual).toEqual(expected)
     })
 
@@ -76,7 +78,7 @@ describe("parseSortBy", (): void => {
 
         const actual = parseSortBy(sortByIo)
 
-        const expected = [{ vector: 2 } as Record<string, number>] as KeyPath[] // 5 is the 3rd prime, AKA index 2
+        const expected = [{ vector: 2 } as Record<string | number | symbol, number>] as KeyPath[] // 5 is the 3rd prime, AKA index 2
         expect(actual).toEqual(expected)
     })
 
@@ -85,7 +87,7 @@ describe("parseSortBy", (): void => {
 
         const actual = parseSortBy(sortByIo)
 
-        const expected = [{ quotient: 1 } as Record<string, number>] as KeyPath[] // Denominator is its 2nd element
+        const expected = [{ quotient: 1 } as Record<string | number | symbol, number>] as KeyPath[] // Denominator is its 2nd element
         expect(actual).toEqual(expected)
     })
 
@@ -94,9 +96,7 @@ describe("parseSortBy", (): void => {
 
         const actual = parseSortBy(sortByIo)
 
-        const expected = [
-            { two3FreeClassAnalysis: { name: 0 } } as Record<string, Record<string, number>>,
-        ] as KeyPath[]
+        const expected = [{ two3FreeClassAnalysis: { name: 0 } }] as unknown as KeyPath[]
         expect(actual).toEqual(expected)
     })
 })

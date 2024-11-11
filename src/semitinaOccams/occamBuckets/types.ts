@@ -1,10 +1,7 @@
-import {Comma, Count, Decimal} from "@sagittal/general"
+import { Comma, Count, Decimal, Integer } from "@sagittal/general"
 
-type BucketName = Decimal<{integer: true}> & {_TinaBucketBrand: boolean}
+type BucketName = Decimal<Integer> & { _TinaBucketBrand: boolean }
 
-type Occam = Count<Comma> & {_OccamBrand: boolean}
+type Occam = Count<Comma> & { _OccamBrand: boolean }
 
-export {
-    BucketName,
-    Occam,
-}
+export { BucketName, Occam }

@@ -10,9 +10,7 @@ import {
 import { Semitina } from "../types"
 import { MAX_SIZE_PER_SEMITINA_ZONE, SEMITINA_ZONES } from "./constants"
 
-const computeCommasBySemitinaZone = (
-    commas: Comma[],
-): Record<RecordKey<Index<Semitina>>, Comma[]> => {
+const computeCommasBySemitinaZone = (commas: Comma[]): Record<RecordKey<Index<Semitina>>, Comma[]> => {
     const commaBySemitinaZone: Record<RecordKey<Index<Semitina>>, Comma[]> = SEMITINA_ZONES.reduce(
         (
             commaBySemitinaZone: Record<RecordKey<Index<Semitina>>, Comma[]>,

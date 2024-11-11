@@ -29,7 +29,7 @@ describe("analyze-ji-pitches", (): void => {
         expect(actual).toEqual(expected)
     })
 
-    it("supports reordering the fields, and overrides the default excluded fields (currently only sizeCategory)            ", (): void => {
+    it("supports reordering the fields, and overrides the default excluded fields (currently only sizeCategory)", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script =

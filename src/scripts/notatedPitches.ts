@@ -338,7 +338,7 @@ const SAGITTAL_COMMA_VECTORS: Vector[] = [
 ] as Vector[]
 
 SAGITTAL_COMMA_VECTORS.forEach((commaVector: Vector): void => {
-    const notatedPitches = [] as Array<Formatted<Quotient>>
+    const notatedPitches = [] as Formatted<Quotient>[]
 
     if (isEmpty(commaVector)) {
         saveLog(BLANK)
@@ -358,7 +358,9 @@ SAGITTAL_COMMA_VECTORS.forEach((commaVector: Vector): void => {
                 notatedVector[0] = (notatedVector[0] + 1) as PrimeCount
             }
 
-            notatedPitches.push(formatQuotient(computeQuotientFromVector(notatedVector)))
+            notatedPitches.push(
+                formatQuotient(computeQuotientFromVector(notatedVector)) as Formatted<Quotient>,
+            )
         }
     })
 

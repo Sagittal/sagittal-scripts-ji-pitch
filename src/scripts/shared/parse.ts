@@ -10,6 +10,7 @@ import {
     parseBoolean,
     SortBy,
     split,
+    stringify,
 } from "@sagittal/general"
 import { JI_PITCH_SCRIPTS_FIELDS } from "../../constants"
 import { JiPitchesOrFindCommasField, JiPitchScriptGroupField } from "../../types"
@@ -25,7 +26,7 @@ const parseFields = (fieldsIo: Io): JiPitchScriptGroupField[] => {
             !field.match(/two3FreeClassName[ND]/)
         ) {
             throw new Error(
-                `Tried to parse field ${field} but it is not a member of the list of possible fields: {${JI_PITCH_SCRIPTS_FIELDS}}, as well as specific terms of some fields e.g. vector2, quotientN`,
+                `Tried to parse field ${field} but it is not a member of the list of possible fields: {${stringify(JI_PITCH_SCRIPTS_FIELDS)}}, as well as specific terms of some fields e.g. vector2, quotientN`,
             )
         }
     })

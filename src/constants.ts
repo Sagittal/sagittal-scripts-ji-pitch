@@ -1,11 +1,12 @@
-import {computeKeyPath} from "@sagittal/general"
-import {JiPitchesOrFindCommasField, JiPitchScriptGroupSettings} from "./types"
+import { computeKeyPath } from "@sagittal/general"
+import { OUTDATED_COMMA_NAME_OPTIONS_PREFERENCE } from "@sagittal/system"
+import { JiPitchesOrFindCommasField, JiPitchScriptGroupSettings } from "./types"
 
 const DEFAULT_JI_PITCH_SCRIPTS_EXCLUDED_FIELDS = [JiPitchesOrFindCommasField.SIZE_CATEGORY]
 
 const DEFAULT_JI_PITCH_SCRIPTS_SETTINGS: JiPitchScriptGroupSettings = {
     sortBy: undefined,
-    commaNameOptions: {},
+    commaNameOptions: OUTDATED_COMMA_NAME_OPTIONS_PREFERENCE,
     excludedFields: DEFAULT_JI_PITCH_SCRIPTS_EXCLUDED_FIELDS,
     orderedFields: undefined,
 }

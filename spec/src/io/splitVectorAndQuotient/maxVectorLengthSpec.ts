@@ -9,9 +9,9 @@ describe("computeMaxVectorLength", (): void => {
             { ...jiPitchAnalysisFixture, vector: EMPTY_VECTOR },
             {
                 ...jiPitchAnalysisFixture,
-                vector: [0, 3, 1, 0, 0, -1] as Vector<{ rational: true }>,
+                vector: [0, 3, 1, 0, 0, -1] as Vector,
             },
-            { ...jiPitchAnalysisFixture, vector: [5, -4, -1] as Vector<{ rational: true }> },
+            { ...jiPitchAnalysisFixture, vector: [5, -4, -1] as Vector },
         ] as JiPitchAnalysis[]
 
         const actual = computeMaxVectorLength(jiPitchAnalyses)

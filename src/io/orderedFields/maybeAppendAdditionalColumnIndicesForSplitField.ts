@@ -28,7 +28,7 @@ const computeAdditionalColumnIndexOffsets = (
     computeRange(ONE, add(additionalColumnCount, ONE)) as Range<Offset<Index<Column>>>
 
 const appendAdditionalColumnIndicesForSplitField = (
-    orderedColumnIndices: Array<Index<Column>>,
+    orderedColumnIndices: Index<Column>[],
     { columnIndex, additionalColumnCount }: AppendAdditionalColumnIndicesForSplitFieldOptions,
 ): void => {
     computeAdditionalColumnIndexOffsets(additionalColumnCount).forEach(
@@ -40,11 +40,10 @@ const appendAdditionalColumnIndicesForSplitField = (
 
 // Note the strong parallelism between this method and splitVectorAndQuotientFieldTitles
 const maybeAppendAdditionalColumnIndicesForSplitField = (
-    orderedColumnIndices: Array<Index<Column>>,
+    orderedColumnIndices: Index<Column>[],
     options: MaybeAppendAdditionalColumnIndicesForSplitFieldOptions,
 ): void => {
-    const { orderedField, maxVectorLength, columnIndex, recognizeNameTitleAsBeingFor23FreeClass } =
-        options
+    const { orderedField, maxVectorLength, columnIndex, recognizeNameTitleAsBeingFor23FreeClass } = options
 
     if (orderedField === JiPitchField.VECTOR) {
         appendAdditionalColumnIndicesForSplitField(orderedColumnIndices, {

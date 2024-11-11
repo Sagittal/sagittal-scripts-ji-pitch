@@ -9,8 +9,10 @@ describe("find-commas", (): void => {
     it("finds commas, given the finding options", (): void => {
         slowTestOnlyRunInFullSuite()
 
-        const script = `           \
+        const script = `            \
         npm run find-commas --      \
+         --directed-word never      \
+         --directed-numbers on      \
          --lower-bound 30c          \
          --upper-bound 30.5c        \
          --max-ate 2                \
@@ -47,7 +49,7 @@ describe("find-commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script =
-            `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by apotomeSlope --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+            `npm run find-commas -- --directed-word never --directed-numbers on --lower-bound 50c --upper-bound 50.31c --sort-by apotomeSlope --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -78,7 +80,7 @@ describe("find-commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script =
-            `npm run find-commas -- --sort-by n2d3p9,cents --max-prime-limit 7 --max-n2d3p9 8 --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+            `npm run find-commas -- --directed-word never --directed-numbers on --sort-by n2d3p9,cents --max-prime-limit 7 --max-n2d3p9 8 --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -118,7 +120,7 @@ describe("find-commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script =
-            `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by vector2 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+            `npm run find-commas -- --directed-word never --directed-numbers on --lower-bound 50c --upper-bound 50.31c --sort-by vector2 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -149,7 +151,7 @@ describe("find-commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script =
-            `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --undirected --factoring-mode always --unabbreviated --ascii --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+            `npm run find-commas --  --directed-word never --directed-numbers on --lower-bound 50c --upper-bound 50.31c --directed-numbers off-with-colon --factoring-mode always --unabbreviated --ascii --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -181,6 +183,8 @@ describe("find-commas", (): void => {
 
         const script = `                                            \
         npm run find-commas --                                      \
+         --directed-word never                                      \
+         --directed-numbers on                                      \
          --lower-bound 30c                                          \
          --upper-bound 30.5c                                        \
          --max-ate 2                                                \
@@ -218,7 +222,7 @@ describe("find-commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script =
-            `npm run find-commas -- --lower-bound 1594323/1548800 --upper-bound "[ -25  12   1   0   0   1 ⟩" --undirected --factoring-mode always --unabbreviated --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+            `npm run find-commas -- --directed-word never --directed-numbers on --lower-bound 1594323/1548800 --upper-bound "[ -25  12   1   0   0   1 ⟩" --directed-numbers off-with-colon --factoring-mode always --unabbreviated --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -249,7 +253,7 @@ describe("find-commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script =
-            `npm run find-commas -- --lower-bound 50c --upper-bound 50.31c --sort-by apotomeSlope --table-format spreadsheet --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS} --factoring-mode never` as Io
+            `npm run find-commas -- --directed-word never --directed-numbers on --lower-bound 50c --upper-bound 50.31c --sort-by apotomeSlope --table-format spreadsheet --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS} --factoring-mode never` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -280,7 +284,7 @@ describe("find-commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script =
-            `npm run find-commas -- --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+            `npm run find-commas --  --directed-word never --directed-numbers on --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -309,7 +313,7 @@ describe("find-commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script =
-            `npm run find-commas -- --exclusive --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+            `npm run find-commas -- --exclusive  --directed-word never --directed-numbers on --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 
@@ -334,7 +338,7 @@ describe("find-commas", (): void => {
         slowTestOnlyRunInFullSuite()
 
         const script =
-            `npm run find-commas -- --exclusive true,false --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
+            `npm run find-commas -- --exclusive true,false --directed-word never --directed-numbers on --lower-bound [] --upper-bound [-19,12] --max-prime-limit 3 --max-n2d3p9 ${OLD_MAX_N2D3P9_FOR_SHORTER_TEST_RESULTS} --max-ate ${OLD_MAX_ATE_FOR_SHORTER_TEST_RESULTS} --max-aas ${OLD_MAX_AAS_FOR_SHORTER_TEST_RESULTS}` as Io
 
         const actual = runScriptAndGetConsoleOutput(script)
 

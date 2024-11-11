@@ -4,6 +4,7 @@ import {
     Decimal,
     Exponent,
     Index,
+    Integer,
     Max,
     Offset,
     offset,
@@ -22,9 +23,7 @@ import {
 } from "./additionalColumnsForSplitFields"
 import { OffsetColumnIndexOffsetOptions, OrderedTableAndAlignmentOptions } from "./types"
 
-const offsetColumnIndexOffset = (
-    options: OffsetColumnIndexOffsetOptions,
-): Offset<Offset<Index<Column>>> => {
+const offsetColumnIndexOffset = (options: OffsetColumnIndexOffsetOptions): Offset<Offset<Index<Column>>> => {
     const {
         field,
         maxVectorLength = 0 as Max<Count<Exponent<Prime>>>,
@@ -32,22 +31,22 @@ const offsetColumnIndexOffset = (
     } = options
     switch (field) {
         case JiPitchField.VECTOR:
-            return computeAdditionalColumnCountForSplitVectorField(maxVectorLength) as Decimal<{
-                integer: true
-            }> as Offset<Offset<Index<Column>>>
+            return computeAdditionalColumnCountForSplitVectorField(
+                maxVectorLength,
+            ) as Decimal<Integer> as Offset<Offset<Index<Column>>>
         case JiPitchField.QUOTIENT:
-            return ADDITIONAL_COLUMNS_FOR_SPLIT_QUOTIENT_FIELD as Decimal<{
-                integer: true
-            }> as Offset<Offset<Index<Column>>>
+            return ADDITIONAL_COLUMNS_FOR_SPLIT_QUOTIENT_FIELD as Decimal<Integer> as Offset<
+                Offset<Index<Column>>
+            >
         case JiPitchesOrFindCommasField.TWO_3_FREE_CLASS_NAME:
-            return ADDITIONAL_COLUMNS_FOR_SPLIT_2_3_FREE_CLASS_FIELD as Decimal<{
-                integer: true
-            }> as Offset<Offset<Index<Column>>>
+            return ADDITIONAL_COLUMNS_FOR_SPLIT_2_3_FREE_CLASS_FIELD as Decimal<Integer> as Offset<
+                Offset<Index<Column>>
+            >
         case Two3FreeClassField.TWO_3_FREE_CLASS_NAME:
             return recognizeNameTitleAsBeingFor23FreeClass
-                ? (ADDITIONAL_COLUMNS_FOR_SPLIT_2_3_FREE_CLASS_FIELD as Decimal<{
-                      integer: true
-                  }> as Offset<Offset<Index<Column>>>)
+                ? (ADDITIONAL_COLUMNS_FOR_SPLIT_2_3_FREE_CLASS_FIELD as Decimal<Integer> as Offset<
+                      Offset<Index<Column>>
+                  >)
                 : (0 as Offset<Offset<Index<Column>>>)
         default:
             return 0 as Offset<Offset<Index<Column>>>

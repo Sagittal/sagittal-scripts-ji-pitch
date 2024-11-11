@@ -25,7 +25,7 @@ import { NO_RESULTS } from "./constants"
 
 const computeFindCommasOutput = (
     commaAnalyses: CommaAnalysis[],
-    maybeCommaClassIds: Array<Maybe<CommaClassId>>,
+    maybeCommaClassIds: Maybe<CommaClassId>[],
     findCommasOptions: FindCommasOptions = DEFAULT_FIND_COMMAS_OPTIONS,
 ): Io => {
     const tableTitle = computeFindCommasTableTitle(findCommasOptions)
@@ -39,15 +39,9 @@ const computeFindCommasOutput = (
 
     let findCommasTable: Table<CommaAnalysis> = [
         ...findCommasHeaderRows,
-        ...commaAnalyses.map(
-            (commaAnalysis: CommaAnalysis, index: number): Row<{ of: CommaAnalysis }> => {
-                return computeFindCommasRow(
-                    commaAnalysis,
-                    maybeCommaClassIds[index],
-                    maxVectorLength,
-                )
-            },
-        ),
+        ...commaAnalyses.map((commaAnalysis: CommaAnalysis, index: number): Row<{ of: CommaAnalysis }> => {
+            return computeFindCommasRow(commaAnalysis, maybeCommaClassIds[index], maxVectorLength)
+        }),
     ]
 
     if (!isUndefined(jiPitchScriptGroupSettings.orderedFields)) {
@@ -60,10 +54,7 @@ const computeFindCommasOutput = (
         tableAlignment = orderedTableAlignment
     }
 
-    return sumTexts(
-        tableTitle,
-        formatTableFromScript(findCommasTable, { headerRowCount, tableAlignment }),
-    )
+    return sumTexts(tableTitle, formatTableFromScript(findCommasTable, { headerRowCount, tableAlignment }))
 }
 
 export { computeFindCommasOutput }

@@ -4,6 +4,8 @@ import {
     computeSuperScaledVector,
     formatPitch,
     isScaledVectorGreater,
+    Rational,
+    Rough,
     Vector,
 } from "@sagittal/general"
 import {
@@ -30,16 +32,18 @@ const findCommas = (options: Partial<FindCommasOptions>): Comma[] => {
         maxPrimeLimit,
         maxAas = DEFAULT_MAX_AAS,
         maxN2D3P9 = DEFAULT_MAX_N2D3P9,
+        directedWord,
+        directedNumbers,
+        factoringMode,
+        abbreviated,
+        ascii,
     } = options
 
     const {
         extrema: [lowerBound = DEFAULT_LOWER_BOUND, upperBound = DEFAULT_UPPER_BOUND],
     } = zone
 
-    if (
-        isScaledVectorGreater(lowerBound, upperBound) ||
-        areScaledVectorsEqual(lowerBound, upperBound)
-    ) {
+    if (isScaledVectorGreater(lowerBound, upperBound) || areScaledVectorsEqual(lowerBound, upperBound)) {
         throw new Error(
             `Lower bound is not less than upper bound; range was ${formatPitch(
                 lowerBound,
@@ -48,10 +52,7 @@ const findCommas = (options: Partial<FindCommasOptions>): Comma[] => {
     }
 
     if (
-        isScaledVectorGreater(
-            computeSuperScaledVector(upperBound),
-            MAX_SIZE_CATEGORY_BOUND.pitch,
-        ) ||
+        isScaledVectorGreater(computeSuperScaledVector(upperBound), MAX_SIZE_CATEGORY_BOUND.pitch) ||
         isScaledVectorGreater(computeSuperScaledVector(lowerBound), MAX_SIZE_CATEGORY_BOUND.pitch)
     ) {
         throw new Error(
@@ -79,7 +80,7 @@ const findCommas = (options: Partial<FindCommasOptions>): Comma[] => {
               })
 
     two3FreeRationalVectorsToCheck.forEach(
-        (two3FreeRationalVectorToCheck: Vector<{ rational: true; rough: 5 }>): void => {
+        (two3FreeRationalVectorToCheck: Vector<Rational & Rough<5>>): void => {
             commas = commas.concat(
                 computeCommasFrom23FreeRationalVector(two3FreeRationalVectorToCheck, {
                     zone,
@@ -87,6 +88,11 @@ const findCommas = (options: Partial<FindCommasOptions>): Comma[] => {
                     maxAte,
                     maxN2D3P9,
                     maxPrimeLimit,
+                    directedWord,
+                    directedNumbers,
+                    factoringMode,
+                    abbreviated,
+                    ascii,
                 }),
             )
         },

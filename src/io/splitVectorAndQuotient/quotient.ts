@@ -1,20 +1,20 @@
-import {formatQuotient, Formatted, ioSettings, Quotient, TableFormat} from "@sagittal/general"
-import {JiPitchAnalysis} from "@sagittal/system"
+import { formatQuotient, Formatted, ioSettings, Quotient, TableFormat } from "@sagittal/general"
+import { JiPitchAnalysis } from "@sagittal/system"
 
-const formatSplitQuotient = (quotient: Quotient): Array<Formatted<JiPitchAnalysis>> => {
+const formatSplitQuotient = (quotient: Quotient): Formatted<JiPitchAnalysis>[] => {
     const formattedQuotient = formatQuotient(quotient)
     if (ioSettings.tableFormat === TableFormat.FORUM) {
-        return [formattedQuotient] as Array<Formatted> as Array<Formatted<JiPitchAnalysis>>
+        return [formattedQuotient] as Formatted[] as Formatted<JiPitchAnalysis>[]
     } else {
-        let [formattedNumerator, formattedDenominator] =
-            formattedQuotient.split("/") as Array<Formatted<JiPitchAnalysis>>
+        // eslint-disable-next-line prefer-const
+        let [formattedNumerator, formattedDenominator] = formattedQuotient.split(
+            "/",
+        ) as Formatted<JiPitchAnalysis>[]
 
-        formattedDenominator = formattedDenominator || "1" as Formatted<JiPitchAnalysis>
+        formattedDenominator = formattedDenominator || ("1" as Formatted<JiPitchAnalysis>)
 
         return [formattedNumerator, "/" as Formatted<JiPitchAnalysis>, formattedDenominator]
     }
 }
 
-export {
-    formatSplitQuotient,
-}
+export { formatSplitQuotient }

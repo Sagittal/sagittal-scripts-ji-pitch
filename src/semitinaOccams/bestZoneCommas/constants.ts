@@ -2,28 +2,25 @@ import {
     computeRange,
     Decimal,
     Index,
+    Integer,
     Max,
     ONE,
     Prime,
     Quotient,
     scaleScaledVector,
     ScaledVector,
+    Irrational,
 } from "@sagittal/general"
 import { SEMITINA } from "../constants"
 import { Semitina } from "../types"
 
-const SEMITINA_ZONES: Array<Index<Semitina>> = computeRange(
-    810 as Decimal<{ integer: true }>,
-) as number[] as Array<Index<Semitina>>
+const SEMITINA_ZONES: Index<Semitina>[] = computeRange(
+    810 as Decimal<Integer>,
+) as number[] as Index<Semitina>[]
 const SEMITINA_PLUS_MINUS_RANGE = 0.5
-const MAX_SIZE_PER_SEMITINA_ZONE: ScaledVector[] = SEMITINA_ZONES.map(
-    (semitinaZone: Index<Semitina>): ScaledVector => {
-        return scaleScaledVector(SEMITINA, [
-            semitinaZone + SEMITINA_PLUS_MINUS_RANGE,
-            ONE,
-        ] as Quotient<{
-            rational: true
-        }>)
+const MAX_SIZE_PER_SEMITINA_ZONE: ScaledVector<Irrational>[] = SEMITINA_ZONES.map(
+    (semitinaZone: Index<Semitina>): ScaledVector<Irrational> => {
+        return scaleScaledVector(SEMITINA, [semitinaZone + SEMITINA_PLUS_MINUS_RANGE, ONE] as Quotient)
     },
 )
 

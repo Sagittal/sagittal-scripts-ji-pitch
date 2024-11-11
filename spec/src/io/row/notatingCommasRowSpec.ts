@@ -4,7 +4,6 @@ import {
     Comma,
     Copfr,
     Count,
-    Direction,
     Exponent,
     Max,
     Name,
@@ -14,6 +13,9 @@ import {
     Row,
     Sopfr,
     Two3FreeClass,
+    Rational,
+    Rough,
+    Super,
 } from "@sagittal/general"
 import { ApotomeSlope, Ate, CommaAnalysis, CommaClassId, N2D3P9 } from "@sagittal/system"
 import { jiPitchScriptGroupSettings } from "../../../../src/globals"
@@ -27,23 +29,19 @@ describe("computeNotatingCommasRow", (): void => {
         ...commaAnalysisFixture,
         name: "1/5C" as Name<Comma>,
         cents: 11.2 as Cents,
-        vector: [0, -1, 1] as Vector<{ rational: true }>,
-        quotient: [5, 4] as Quotient<{ rational: true }>,
+        vector: [0, -1, 1] as Vector,
+        quotient: [5, 4] as Quotient,
         apotomeSlope: 8.2 as ApotomeSlope,
         aas: 8.2 as Abs<ApotomeSlope>,
         ate: 1 as Ate,
         two3FreeClassAnalysis: {
             ...two3FreeClassAnalysisFixture,
-            two3FreePrimeLimit: 14 as Max<Prime<{ rough: 5 }>>,
-            two3FreeCopfr: 1 as Copfr<{ rough: 5 }>,
-            two3FreeSopfr: 13 as Sopfr<{ rough: 5 }>,
+            two3FreePrimeLimit: 14 as Max<Prime<Rough<5>>>,
+            two3FreeCopfr: 1 as Copfr<Rough<5>>,
+            two3FreeSopfr: 13 as Sopfr<Rough<5>>,
             n2d3p9: 18.4567 as N2D3P9,
             two3FreeClass: {
-                vector: [0, 0, 1] as Vector<{
-                    rational: true
-                    rough: 5
-                    direction: Direction.SUPER
-                }>,
+                vector: [0, 0, 1] as Vector<Rational & Super & Rough<5>>,
             } as Two3FreeClass,
         },
     }
@@ -53,24 +51,27 @@ describe("computeNotatingCommasRow", (): void => {
     it("takes the properties of the comma and puts them in order in a row", (): void => {
         const actual = computeNotatingCommasRow(commaAnalysis, commaClassId, maxVectorLength)
 
+        /* eslint-disable prettier/prettier */
         const expected = [
-            "    /|  ", // Comma class
-            "1/5C", // Comma name
-            "5", // Quotient numerator
-            "/", // Quotient vinculum
-            "4", // Quotient denominator
-            "[", // Vector [
-            "  0    ", // Vector 2
-            " -1    ", // Vector 3
-            "  1    ", // Vector 5
-            "", // Vector 7
-            "", // Vector 11
-            "⟩", // Vector ⟩
-            "        11.200¢", // Cents
-            "  8.200", // Apotome slope
-            "  8.200", // AAS
-            "  1    ", // ATE
+            "    /|  ",         // Comma class
+            "1/5C",             // Comma name
+            "5",                // Quotient numerator
+            "/",                // Quotient vinculum
+            "4",                // Quotient denominator
+            "[",                // Vector [
+            "  0    ",          // Vector 2
+            " -1    ",          // Vector 3
+            "  1    ",          // Vector 5
+            "",                 // Vector 7
+            "",                 // Vector 11
+            "⟩",                // Vector ⟩
+            "        11.200¢",  // Cents
+            "  8.200",          // Apotome slope
+            "  8.200",          // AAS
+            "  1    ",          // ATE
         ] as Row<{ of: CommaAnalysis }>
+        /* eslint-enable prettier/prettier */
+
         expect(actual).toEqual(expected)
     })
 
@@ -79,41 +80,47 @@ describe("computeNotatingCommasRow", (): void => {
 
         const actual = computeNotatingCommasRow(commaAnalysis, commaClassId, maxVectorLength)
 
+        /* eslint-disable prettier/prettier */
         const expected = [
             "    /|  ", // Comma class
-            "1/5C", // Comma name
-            "u", // Size category (abbreviation)
-            "5", // Quotient numerator
-            "/", // Quotient vinculum
-            "4", // Quotient denominator
-            "  8.200", // Apotome slope
-            "  8.200", // AAS
-            "  1    ", // ATE
+            "1/5C",     // Comma name
+            "u",        // Size category (abbreviation)
+            "5",        // Quotient numerator
+            "/",        // Quotient vinculum
+            "4",        // Quotient denominator
+            "  8.200",  // Apotome slope
+            "  8.200",  // AAS
+            "  1    ",  // ATE
         ] as Row<{ of: CommaAnalysis }>
+        /* eslint-enable prettier/prettier */
+
         expect(actual).toEqual(expected)
     })
 
     it("can handle the situation where the row's vector is shorter than the longest vector", (): void => {
         const actual = computeNotatingCommasRow(commaAnalysis, commaClassId, maxVectorLength)
 
+        /* eslint-disable prettier/prettier */
         const expected = [
-            "    /|  ", // Comma class
-            "1/5C", // Comma name
-            "5", // Quotient denominator
-            "/", // Quotient vinculum
-            "4", // Quotient numerator
-            "[", // Vector [
-            "  0    ", // Vector 2
-            " -1    ", // Vector 3
-            "  1    ", // Vector 5
-            "", // Vector 7
-            "", // Vector 11
-            "⟩", // Vector ⟩
-            "        11.200¢", // Cents
-            "  8.200", // Apotome slope
-            "  8.200", // AAS
-            "  1    ", // ATE
+            "    /|  ",         // Comma class
+            "1/5C",             // Comma name
+            "5",                // Quotient denominator
+            "/",                // Quotient vinculum
+            "4",                // Quotient numerator
+            "[",                // Vector [
+            "  0    ",          // Vector 2
+            " -1    ",          // Vector 3
+            "  1    ",          // Vector 5
+            "",                 // Vector 7
+            "",                 // Vector 11
+            "⟩",                // Vector ⟩
+            "        11.200¢",  // Cents
+            "  8.200",          // Apotome slope
+            "  8.200",          // AAS
+            "  1    ",          // ATE
         ] as Row<{ of: CommaAnalysis }>
+        /* eslint-enable prettier/prettier */
+
         expect(actual).toEqual(expected)
     })
 })

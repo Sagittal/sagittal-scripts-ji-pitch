@@ -7,11 +7,12 @@ import {
     Prime,
     Sopfr,
     ScaledVector,
+    Rough,
 } from "@sagittal/general"
 import { findCommas } from "../../../src/findCommas"
 
 describe("findCommas", (): void => {
-    const max23FreeSopfr = 7 as Max<Sopfr<{ rough: 5 }>>
+    const max23FreeSopfr = 7 as Max<Sopfr<Rough<5>>>
 
     it("throws an error if the bounds are on the wrong side of each other, or equal", (): void => {
         expect((): void => {
@@ -43,10 +44,7 @@ describe("findCommas", (): void => {
             findCommas({
                 max23FreeSopfr,
                 zone: {
-                    extrema: [
-                        computeScaledVectorFromDecimal(0.84089641525) as Min<ScaledVector>,
-                        undefined,
-                    ],
+                    extrema: [computeScaledVectorFromDecimal(0.84089641525) as Min<ScaledVector>, undefined],
                 },
             })
         }).toThrowError(
@@ -82,10 +80,7 @@ describe("findCommas", (): void => {
             findCommas({
                 max23FreeSopfr,
                 zone: {
-                    extrema: [
-                        undefined,
-                        computeScaledVectorFromDecimal(1.189207115) as Max<ScaledVector>,
-                    ],
+                    extrema: [undefined, computeScaledVectorFromDecimal(1.189207115) as Max<ScaledVector>],
                 },
             })
         }).toThrowError(
@@ -113,9 +108,7 @@ describe("findCommas", (): void => {
 
         const actual = findCommas({ maxPrimeLimit })
 
-        const expected: Comma[] = [
-            { vector: [] as unknown[] as Vector<{ rational: true }> },
-        ] as Comma[]
+        const expected: Comma[] = [{ vector: [] as unknown[] as Vector }] as Comma[]
         expect(actual).toBeArrayWithDeepEqualContents(expected)
     })
 })

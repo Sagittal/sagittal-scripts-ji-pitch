@@ -6,22 +6,23 @@ import {
     LogTarget,
     Max,
     Prime,
+    Rough,
     saveLog,
     scriptSettings,
     Sopfr,
     stringify,
     time,
 } from "@sagittal/general"
-import {CommaAnalysis, MAX_N2D3P9_FOR_WHICH_POSSIBLE_NUMERATORS_ARE_KNOWN} from "@sagittal/system"
-import {computeFindCommasOptions, findCommas, FindCommasOptions} from "../findCommas"
-import {jiPitchScriptGroupSettings} from "../globals"
+import { CommaAnalysis, MAX_N2D3P9_FOR_WHICH_POSSIBLE_NUMERATORS_ARE_KNOWN } from "@sagittal/system"
+import { computeFindCommasOptions, findCommas, FindCommasOptions } from "../findCommas"
+import { jiPitchScriptGroupSettings } from "../globals"
 import {
     computeCommaAnalysesSortedByTinaEntries,
     computeLateCommaAnalysis,
     INFINITE_2_3_FREE_COPFR,
     TINA_COMMAS_ZONE,
 } from "../lateTinaCommas"
-import {applySharedJiPitchScriptSetup} from "./shared"
+import { applySharedJiPitchScriptSetup } from "./shared"
 
 // Per http://forum.sagittal.org/viewtopic.php?p=2395#p2395
 
@@ -29,9 +30,10 @@ applySharedJiPitchScriptSetup("lateTinaCommas" as Filename)
 
 scriptSettings.logTargets[LogTarget.ERROR] = true
 
-const MAX_POSSIBLE_2_3_FREE_SOPFR_WITHOUT_CRASHING = 127 as Max<Sopfr<{rough: 5}>>
-const MAX_POSSIBLE_PRIME_LIMIT_GIVEN_MAX_POSSIBLE_SOPFR =
-    MAX_POSSIBLE_2_3_FREE_SOPFR_WITHOUT_CRASHING as Max<Max<Prime>>
+const MAX_POSSIBLE_2_3_FREE_SOPFR_WITHOUT_CRASHING = 127 as Max<Sopfr<Rough<5>>>
+const MAX_POSSIBLE_PRIME_LIMIT_GIVEN_MAX_POSSIBLE_SOPFR = MAX_POSSIBLE_2_3_FREE_SOPFR_WITHOUT_CRASHING as Max<
+    Max<Prime>
+>
 
 const DEFAULT_OVERRIDES: Partial<FindCommasOptions> = {
     max23FreeSopfr: MAX_POSSIBLE_2_3_FREE_SOPFR_WITHOUT_CRASHING,

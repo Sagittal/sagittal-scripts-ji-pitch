@@ -1,10 +1,10 @@
-import { Io, program } from "@sagittal/general"
+import { Io, KeyValObj, program } from "@sagittal/general"
 import { PitchFormat } from "./types"
 
 const readJiPitchIoAndFormat = (): [Io, PitchFormat] => {
     const jiPitchIo = program.args[0] as Io
 
-    const programOpts = program.opts()
+    const programOpts: KeyValObj<Io> = program.opts()
 
     if (jiPitchIo) {
         return [jiPitchIo, PitchFormat.UNKNOWN]

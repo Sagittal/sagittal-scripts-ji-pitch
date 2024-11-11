@@ -12,7 +12,7 @@ import {
 
 const computeJiPitchesOutput = (
     potentiallyCommaAnalyses: PotentiallyCommaAnalysis[],
-    maybeCommaClassIds: Array<Maybe<CommaClassId>>,
+    maybeCommaClassIds: Maybe<CommaClassId>[],
 ): Io => {
     const maxVectorLength = computeMaxVectorLength(potentiallyCommaAnalyses)
     const jiPitchesHeaderRows = computeJiPitchesOrFindCommasHeaderRows(maxVectorLength)

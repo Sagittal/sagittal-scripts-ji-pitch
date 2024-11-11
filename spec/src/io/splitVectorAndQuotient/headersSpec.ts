@@ -6,14 +6,14 @@ describe("formatPrimeHeaders", (): void => {
         const headerRows = [
             ["comma", "quotient", "", "", "vector", "", "", "", "apotome"],
             ["name", "n", "/", "d", "[", "2", "3", "⟩", "slope"],
-        ] as Array<Row<{ header: true }>>
+        ] as Row<{ header: true }>[]
 
         const actual = formatPrimeHeaders(headerRows)
 
         const expected = [
             ["comma", "quotient", "", "", "vector", "", "", "", "apotome"],
             ["name", "n", "/", "d", "[", "  2    ", "  3    ", "⟩", "slope"],
-        ] as Array<Row<{ header: true }>>
+        ] as Row<{ header: true }>[]
         expect(actual).toEqual(expected)
     })
 })
