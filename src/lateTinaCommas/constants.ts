@@ -12,8 +12,7 @@ import {
     ScaledVector,
     subtract,
 } from "@sagittal/general"
-import { computeCentsFromTinas, Tinas } from "@sagittal/system"
-import { Zone } from "@sagittal/system/dist/cjs/ji"
+import { computeCentsFromTinas, Tinas, Zone } from "@sagittal/system"
 
 const INFINITE_2_3_FREE_COPFR = Infinity as Max<Copfr<Rough<5>>>
 
